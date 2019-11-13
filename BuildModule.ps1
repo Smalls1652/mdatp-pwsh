@@ -19,7 +19,10 @@ $ConfigSplat = @{
         "Start-DatpMachineScan",
         "Get-DatpUserMachines"
         );
-    "RequiredAssemblies" = @("Microsoft.Identity.Client.dll")
+    "RequiredAssemblies" = @(
+        "Microsoft.Identity.Client.dll",
+        "Newtonsoft.Json.dll"
+        )
 }
 
 dotnet clean
@@ -34,5 +37,6 @@ $null = New-Item -Type Directory -Path "./mdatp-pwsh"
 
 Copy-Item -Path "./bin/Debug/netstandard2.0/publish/mdatp_pwsh.dll" -Destination "./mdatp-pwsh/"
 Copy-Item -Path "./bin/Debug/netstandard2.0/publish/Microsoft.Identity.Client.dll" -Destination "./mdatp-pwsh/"
+Copy-Item -Path "./bin/Debug/netstandard2.0/publish/Newtonsoft.Json.dll" -Destination "./mdatp-pwsh/"
 
 New-ModuleManifest @ConfigSplat
