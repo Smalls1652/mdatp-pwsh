@@ -40,5 +40,6 @@ $null = New-Item -Type Directory -Path "./mdatp-pwsh"
 Copy-Item -Path "./bin/Debug/netstandard2.0/publish/mdatp_pwsh.dll" -Destination "./mdatp-pwsh/"
 Copy-Item -Path "./bin/Debug/netstandard2.0/publish/Microsoft.Identity.Client.dll" -Destination "./mdatp-pwsh/"
 Copy-Item -Path "./bin/Debug/netstandard2.0/publish/Newtonsoft.Json.dll" -Destination "./mdatp-pwsh/"
+Copy-Item -Path "./license.txt" -Destination "./mdatp-pwsh/License.txt"
 
 New-ModuleManifest @ConfigSplat
