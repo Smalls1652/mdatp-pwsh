@@ -8,6 +8,7 @@ $ConfigSplat = @{
     "Copyright" = 2019;
     "ModuleVersion" = "1911.00.01";
     "ProjectUri" = "https://github.com/smalls1652/mdatp-pwsh";
+    "LicenseUri" = "https://raw.githubusercontent.com/Smalls1652/mdatp-pwsh/master/license.txt";
     "CmdletsToExport" = @(
         "Set-DatpModuleConfig",
         "Connect-DatpGraph",
