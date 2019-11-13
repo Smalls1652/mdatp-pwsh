@@ -6,7 +6,7 @@ $ConfigSplat = @{
     "Author" = "Tim Small";
     "CompanyName" = "Smalls.Online";
     "Copyright" = 2019;
-    "ModuleVersion" = "1911.00.01";
+    "ModuleVersion" = "1911.00.02";
     "ProjectUri" = "https://github.com/smalls1652/mdatp-pwsh";
     "LicenseUri" = "https://raw.githubusercontent.com/Smalls1652/mdatp-pwsh/master/license.txt";
     "CmdletsToExport" = @(
@@ -19,6 +19,8 @@ $ConfigSplat = @{
         "Add-DatpMachineTag",
         "Remove-DatpMachineTag",
         "Start-DatpMachineScan",
+        "Get-DatpMachineAction",
+        "Start-DatpInvestigationPkgCollection",
         "Get-DatpUserMachines"
         );
     "RequiredAssemblies" = @(
