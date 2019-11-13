@@ -110,6 +110,8 @@ This will prompt the **Device Code Flow** with a code you must enter on the [Mic
 - `Remove-DatpMachineTag`
 - `Start-DatpMachineScan`
 - `Get-DatpUserMachines`
+- `Get-DatpMachineAction`
+- `Start-DatpInvestigationPkgCollection`
 
 ## Todo
 
@@ -124,8 +126,8 @@ This will prompt the **Device Code Flow** with a code you must enter on the [Mic
     - [x] Add/Remove machine tags
     - [ ] Find machines by IP
   - Machine Actions
-    - [ ] Get/List machine actions
-    - [ ] Collect investigation package
+    - [x] Get/List machine actions
+    - [x] Collect investigation package
     - [ ] Get investigation package
     - [x] Isolate/Uninsolate machine
     - [ ] Restrict/Remove app execution
@@ -160,7 +162,7 @@ This will prompt the **Device Code Flow** with a code you must enter on the [Mic
     - [x] Build
     - [x] Setup/Use
     - [ ] Code comments
-  - [ ] Reorganize project directory structure
+  - [x] Reorganize project directory structure
 - PowerShell Specific
   - [ ] Cmdlet help documents
 
