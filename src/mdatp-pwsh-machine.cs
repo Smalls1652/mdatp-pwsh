@@ -417,7 +417,7 @@ namespace mdatp_pwsh
             string apiJson = apiResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             WriteVerbose(apiJson);
-            DatpMachineScanResponse apiResult = JsonConvert.DeserializeObject<DatpMachineScanResponse>(apiJson);
+            DatpActivityResponse apiResult = JsonConvert.DeserializeObject<DatpActivityResponse>(apiJson);
 
             WriteObject(apiResult);
         }
@@ -461,7 +461,7 @@ namespace mdatp_pwsh
 
         private static string apiUri;
         private static string apiPost;
-        private static DatpIsolateResponse apiResult;
+        private static DatpActivityResponse apiResult;
 
         protected override void BeginProcessing()
         {
@@ -509,13 +509,146 @@ namespace mdatp_pwsh
 
             string apiJson = apiResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
-            apiResult = JsonConvert.DeserializeObject<DatpIsolateResponse>(apiJson);
+            apiResult = JsonConvert.DeserializeObject<DatpActivityResponse>(apiJson);
 
         }
 
         protected override void EndProcessing()
         {
             WriteObject(apiResult);
+        }
+    }
+
+    [Cmdlet(VerbsCommon.Get, "DatpMachineAction")]
+    [CmdletBinding(DefaultParameterSetName = "AllActivities")]
+    public class GetDatpMachineAction : PSCmdlet
+    {
+        [Parameter(Position = 0, ParameterSetName = "SingleActivity")]
+        public string ActivityId
+        {
+            get { return activityId; }
+            set { activityId = value; }
+        }
+        private static string activityId;
+
+        [Parameter(Position = 1, ParameterSetName = "AllActivities")]
+        public SwitchParameter AllActivities
+        {
+            get { return allActivities; }
+            set { allActivities = value; }
+        }
+        private static SwitchParameter allActivities;
+
+        private static string apiUri;
+
+        protected override void BeginProcessing()
+        {
+            if ((AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken") == null)
+            {
+                throw new Exception("Graph token not found.");
+            }
+
+            switch (ParameterSetName)
+            {
+                case "SingleActivity":
+                    apiUri = $"/machineactions/{activityId}";
+                    break;
+
+                case "AllActivities":
+                    apiUri = $"/machineactions";
+                    break;
+            }
+        }
+
+        protected override void ProcessRecord()
+        {
+            WriteVerbose("Getting token from session.");
+            AuthenticationResult token = (AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken");
+
+            WriteVerbose("Starting api call.");
+            HttpResponseMessage apiResponse = new ApiCaller().MakeGetApiCall(apiUri, token);
+
+            string apiJson = apiResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            WriteVerbose(apiJson);
+
+            switch (ParameterSetName)
+            {
+                case "SingleActivity":
+                    DatpActivityResponse apiResult = JsonConvert.DeserializeObject<DatpActivityResponse>(apiJson);
+                    WriteObject(apiResult);
+                    break;
+
+                case "AllActivities":
+                    DatpActivityResponseCollection apiResults = JsonConvert.DeserializeObject<DatpActivityResponseCollection>(apiJson);
+
+                    foreach (DatpActivityResponse item in apiResults.value)
+                    {
+                        WriteObject(item);
+                    }
+                    break;
+            }
+
+        }
+    }
+
+    [Cmdlet(VerbsLifecycle.Start, "DatpInvestigationPkgCollection")]
+    public class StartDatpInvestigationPkgCollection : PSCmdlet
+    {
+        [Parameter(Mandatory = true, Position = 0)]
+        public string ComputerName
+        {
+            get { return computerName; }
+            set { computerName = value; }
+        }
+        private static string computerName;
+
+        [Parameter(Mandatory = true, Position = 1)]
+        public string Comment
+        {
+            get { return cmnt; }
+            set { cmnt = value; }
+        }
+        private static string cmnt;
+
+        private static string apiUri;
+
+        private static string apiPost;
+
+        protected override void BeginProcessing()
+        {
+            if ((AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken") == null)
+            {
+                throw new Exception("Graph token not found.");
+            }
+
+            DatpCollectInvestPkgPost postObj = new DatpCollectInvestPkgPost();
+            postObj.Comment = cmnt;
+
+            apiPost = JsonConvert.SerializeObject(postObj);
+
+            apiUri = $"/machines/{computerName}/collectInvestigationPackage";
+
+            WriteVerbose($"Initiating investigaton package collection on '{computerName}'.");
+        }
+
+        protected override void ProcessRecord()
+        {
+            WriteVerbose("Getting token from session.");
+            AuthenticationResult token = (AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken");
+
+            WriteVerbose("Starting api call.");
+            HttpResponseMessage apiResponse = new ApiCaller().MakePostApiCall(apiUri, apiPost, token);
+
+            string apiJson = apiResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            DatpActivityResponse apiResult = JsonConvert.DeserializeObject<DatpActivityResponse>(apiJson);
+
+            WriteObject(apiResult);
+        }
+
+        protected override void EndProcessing()
+        {
         }
     }
 

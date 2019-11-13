@@ -75,37 +75,6 @@ namespace mdatp_pwsh
         public string ScanType { get; set; }
     }
 
-    public class DatpMachineScanResponse
-    {
-        [JsonProperty("id")]
-        public string ActivityId { get; set; }
-
-        [JsonProperty("type")]
-        public string ActivityType { get; set; }
-
-        [JsonProperty("requestor")]
-        public string Requestor { get; set; }
-
-        [JsonProperty("requestorcomment")]
-        public string RequestorComment { get; set; }
-
-        [JsonProperty("status")]
-        public string Status { get; set; }
-
-        [JsonProperty("machineId")]
-        public string MachineId { get; set; }
-
-        [JsonProperty("creationDateTimeUtc")]
-        public Nullable<DateTime> CreationDateTimeUtc { get; set; }
-
-        [JsonProperty("lastUpdateTimeUtc")]
-        public Nullable<DateTime> LastUpdateTimeUtc { get; set; }
-
-        [JsonProperty("relatedFileInfo")]
-        public string RelatedFileInfo { get; set; }
-
-    }
-
     //Alert Objects
     public class DatpAlert
     {
@@ -321,17 +290,53 @@ namespace mdatp_pwsh
         public string Comment { get; set; }
     }
 
-    public class DatpIsolateResponse
+    public class DatpCollectInvestPkgPost
     {
-        public string id {get; set;}
-        public string type {get; set;}
-        public string requestor {get; set;}
-        public string requestorComment {get; set;}
-        public string status {get; set;}
-        public string machineId {get; set;}
-        public string creationDateTimeUtc {get; set;}
-        public string lastUpdateTimeUtc {get; set;}
-        public string relatedFileInfo {get; set;}
+        public string Comment { get; set; }
+    }
+    public class DatpActivityResponse
+    {
+        [JsonProperty("id")]
+        public string ActivityId { get; set; }
+
+        [JsonProperty("type")]
+        public string ActivityType { get; set; }
+
+        [JsonProperty("requestor")]
+        public string Requestor { get; set; }
+
+        [JsonProperty("requestorcomment")]
+        public string RequestorComment { get; set; }
+
+        [JsonProperty("status")]
+        public string Status { get; set; }
+
+        [JsonProperty("machineId")]
+        public string MachineId { get; set; }
+
+        [JsonProperty("creationDateTimeUtc")]
+        public Nullable<DateTime> CreationDateTimeUtc { get; set; }
+
+        [JsonProperty("lastUpdateTimeUtc")]
+        public Nullable<DateTime> LastUpdateTimeUtc { get; set; }
+
+        [JsonProperty("relatedFileInfo")]
+        public DatpFileIdentifier RelatedFileInfo { get; set; }
+
+    }
+
+    public class DatpActivityResponseCollection
+    {
+        public List<DatpActivityResponse> value { get; set; }
+    }
+
+    public class DatpFileIdentifier
+    {
+        [JsonProperty("fileIdentifier")]
+        public string FileIdentifier { get; set; }
+
+        [JsonProperty("fileIdentifierType")]
+        public string FileIdentifierType { get; set; }
     }
 
     public class DatpError
