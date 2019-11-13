@@ -1,5 +1,5 @@
 $ConfigSplat = @{
-    "Path" = "./bin/Debug/netstandard2.0/publish/mdatp-pwsh.psd1";
+    "Path" = "./mdatp-pwsh/mdatp-pwsh.psd1";
     "RootModule" = "mdatp_pwsh.dll";
     "Guid" = [guid]"afc0e191-ffe7-4261-ba9e-d59652423d8c";
     "Description" = "MDATP PowerShell Module";
@@ -25,5 +25,14 @@ $ConfigSplat = @{
 dotnet clean
 
 dotnet publish /property:PublishWithAspNetCoreTargetManifest=false
+
+if (Test-Path -Path "./mdatp-pwsh/") {
+    Remove-Item -Path "./mdatp-pwsh" -Recurse -Force
+}
+
+$null = New-Item -Type Directory -Path "./mdatp-pwsh"
+
+Copy-Item -Path "./bin/Debug/netstandard2.0/publish/mdatp_pwsh.dll" -Destination "./mdatp-pwsh/"
+Copy-Item -Path "./bin/Debug/netstandard2.0/publish/Microsoft.Identity.Client.dll" -Destination "./mdatp-pwsh/"
 
 New-ModuleManifest @ConfigSplat
