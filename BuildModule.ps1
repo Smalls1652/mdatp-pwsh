@@ -7,6 +7,7 @@ $ConfigSplat = @{
     "CompanyName" = "Smalls.Online";
     "Copyright" = 2019;
     "ModuleVersion" = "1911.00.01";
+    "ProjectUri" = "https://github.com/smalls1652/mdatp-pwsh";
     "CmdletsToExport" = @(
         "Set-DatpModuleConfig",
         "Connect-DatpGraph",
