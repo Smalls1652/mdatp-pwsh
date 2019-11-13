@@ -8,7 +8,11 @@ This module is for interacting with the Defender ATP Graph API using delegated p
 
 ### PowerShell Gallery
 
-**At this time, the module is not on PowerShell Gallery yet.**
+```powershell
+Install-Module -Name mdatp-pwsh
+```
+
+- [PowerShell Gallery Link](https://www.powershellgallery.com/packages/mdatp-pwsh)
 
 ### Building from source
 
