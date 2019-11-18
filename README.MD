@@ -8,8 +8,16 @@ This module is for interacting with the Defender ATP Graph API using delegated p
 
 ### PowerShell Gallery
 
+#### Stable Version (master branch)
+
 ```powershell
 Install-Module -Name mdatp-pwsh
+```
+
+#### Development Version (development branch)
+
+```powershell
+Install-Module -Name mdatp-pwsh -AllowPrerelease
 ```
 
 - [PowerShell Gallery Link](https://www.powershellgallery.com/packages/mdatp-pwsh)
@@ -112,6 +120,8 @@ This will prompt the **Device Code Flow** with a code you must enter on the [Mic
 - `Get-DatpUserMachines`
 - `Get-DatpMachineAction`
 - `Start-DatpInvestigationPkgCollection`
+- `Get-DatpDomainStats`
+- `Get-DatpDomainRelated`
 
 ## Todo
 
@@ -139,9 +149,9 @@ This will prompt the **Device Code Flow** with a code you must enter on the [Mic
     - [ ] List indicators
     - [ ] Delete indicator
   - Domain
-    - [ ] Get domain related alerts
-    - [ ] Get domain related machines
-    - [ ] Get domain statistics
+    - [x] Get domain related alerts
+    - [x] Get domain related machines
+    - [x] Get domain statistics
   - File
     - [ ] Get file information
     - [ ] Get file related alerts
