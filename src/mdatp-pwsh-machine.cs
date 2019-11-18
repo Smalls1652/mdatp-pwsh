@@ -12,7 +12,7 @@ namespace mdatp_pwsh
     [CmdletBinding(DefaultParameterSetName = "AllMachines")]
     public class GetDatpMachine : PSCmdlet
     {
-        [Parameter(Position = 0, ParameterSetName = "SingleMachine")]
+        [Parameter(Position = 0, ParameterSetName = "SingleMachine", ValueFromPipelineByPropertyName = true)]
         public string MachineId
         {
             get { return machineId; }
@@ -84,7 +84,7 @@ namespace mdatp_pwsh
     [Cmdlet(VerbsCommon.Get, "DatpMachineAlerts")]
     public class GetDatpMachineAlerts : PSCmdlet
     {
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
         public string MachineId
         {
             get { return machineId; }
@@ -133,7 +133,7 @@ namespace mdatp_pwsh
     [Cmdlet(VerbsCommon.Get, "DatpMachineUsers")]
     public class GetDatpMachineUsers : PSCmdlet
     {
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
         public string MachineId
         {
             get { return machineId; }
@@ -236,7 +236,7 @@ namespace mdatp_pwsh
     [Cmdlet(VerbsCommon.Add, "DatpMachineTag")]
     public class AddDatpMachineTag : PSCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0)]
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipelineByPropertyName = true)]
         public string MachineId
         {
             get { return machineId; }
@@ -297,7 +297,7 @@ namespace mdatp_pwsh
     [Cmdlet(VerbsCommon.Remove, "DatpMachineTag")]
     public class RemoveDatpMachineTag : PSCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0)]
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipelineByPropertyName = true)]
         public string MachineId
         {
             get { return machineId; }
@@ -358,7 +358,7 @@ namespace mdatp_pwsh
     [Cmdlet(VerbsLifecycle.Start, "DatpMachineScan")]
     public class StartDatpMachineScan : PSCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0)]
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipelineByPropertyName = true)]
         public string MachineId
         {
             get { return machineId; }
@@ -430,7 +430,7 @@ namespace mdatp_pwsh
     [Cmdlet(VerbsCommon.Set, "DatpMachineIsolation")]
     public class SetDatpMachineIsolation : PSCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0)]
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipelineByPropertyName = true)]
         public string MachineId
         {
             get { return machineId; }
@@ -595,7 +595,7 @@ namespace mdatp_pwsh
     [Cmdlet(VerbsLifecycle.Start, "DatpInvestigationPkgCollection")]
     public class StartDatpInvestigationPkgCollection : PSCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0)]
+        [Parameter(Mandatory = true, Position = 0, ValueFromPipelineByPropertyName = true)]
         public string MachineId
         {
             get { return machineId; }
