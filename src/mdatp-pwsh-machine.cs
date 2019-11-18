@@ -13,12 +13,12 @@ namespace mdatp_pwsh
     public class GetDatpMachine : PSCmdlet
     {
         [Parameter(Position = 0, ParameterSetName = "SingleMachine")]
-        public string ComputerName
+        public string MachineId
         {
-            get { return computerName; }
-            set { computerName = value; }
+            get { return machineId; }
+            set { machineId = value; }
         }
-        private static string computerName;
+        private static string machineId;
 
         [Parameter(Position = 1, ParameterSetName = "AllMachines")]
         public SwitchParameter AllMachines
@@ -40,7 +40,7 @@ namespace mdatp_pwsh
             switch (ParameterSetName)
             {
                 case "SingleMachine":
-                    apiUri = $"/machines/{computerName}";
+                    apiUri = $"/machines/{machineId}";
                     break;
 
                 case "AllMachines":
@@ -85,12 +85,12 @@ namespace mdatp_pwsh
     public class GetDatpMachineAlerts : PSCmdlet
     {
         [Parameter(Mandatory = true)]
-        public string ComputerName
+        public string MachineId
         {
-            get { return computerName; }
-            set { computerName = value; }
+            get { return machineId; }
+            set { machineId = value; }
         }
-        private static string computerName;
+        private static string machineId;
 
         private static string apiUri;
 
@@ -101,9 +101,9 @@ namespace mdatp_pwsh
                 throw new Exception("Graph token not found.");
             }
 
-            apiUri = $"/machines/{computerName}/alerts";
+            apiUri = $"/machines/{machineId}/alerts";
 
-            WriteVerbose($"Getting alerts triggered by '{computerName}'.");
+            WriteVerbose($"Getting alerts triggered by '{machineId}'.");
         }
 
         protected override void ProcessRecord()
@@ -134,12 +134,12 @@ namespace mdatp_pwsh
     public class GetDatpMachineUsers : PSCmdlet
     {
         [Parameter(Mandatory = true)]
-        public string ComputerName
+        public string MachineId
         {
-            get { return computerName; }
-            set { computerName = value; }
+            get { return machineId; }
+            set { machineId = value; }
         }
-        private static string computerName;
+        private static string machineId;
 
         private static string apiUri;
 
@@ -150,9 +150,9 @@ namespace mdatp_pwsh
                 throw new Exception("Graph token not found.");
             }
 
-            apiUri = $"/machines/{computerName}/logonusers";
+            apiUri = $"/machines/{machineId}/logonusers";
 
-            WriteVerbose($"Getting users who have logged onto '{computerName}'.");
+            WriteVerbose($"Getting users who have logged onto '{machineId}'.");
         }
 
         protected override void ProcessRecord()
@@ -237,12 +237,12 @@ namespace mdatp_pwsh
     public class AddDatpMachineTag : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0)]
-        public string ComputerName
+        public string MachineId
         {
-            get { return computerName; }
-            set { computerName = value; }
+            get { return machineId; }
+            set { machineId = value; }
         }
-        private static string computerName;
+        private static string machineId;
 
         [Parameter(Mandatory = true, Position = 1)]
         public string TagName
@@ -269,9 +269,9 @@ namespace mdatp_pwsh
 
             apiPost = JsonConvert.SerializeObject(postObj);
 
-            apiUri = $"/machines/{computerName}/tags";
+            apiUri = $"/machines/{machineId}/tags";
 
-            WriteVerbose($"Adding tag, '{tagName}', to '{computerName}'.");
+            WriteVerbose($"Adding tag, '{tagName}', to '{machineId}'.");
         }
 
         protected override void ProcessRecord()
@@ -298,12 +298,12 @@ namespace mdatp_pwsh
     public class RemoveDatpMachineTag : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0)]
-        public string ComputerName
+        public string MachineId
         {
-            get { return computerName; }
-            set { computerName = value; }
+            get { return machineId; }
+            set { machineId = value; }
         }
-        private static string computerName;
+        private static string machineId;
 
         [Parameter(Mandatory = true, Position = 1)]
         public string TagName
@@ -330,9 +330,9 @@ namespace mdatp_pwsh
 
             apiPost = JsonConvert.SerializeObject(postObj);
 
-            apiUri = $"/machines/{computerName}/tags";
+            apiUri = $"/machines/{machineId}/tags";
 
-            WriteVerbose($"Adding tag, '{tagName}', to '{computerName}'.");
+            WriteVerbose($"Adding tag, '{tagName}', to '{machineId}'.");
         }
 
         protected override void ProcessRecord()
@@ -359,12 +359,12 @@ namespace mdatp_pwsh
     public class StartDatpMachineScan : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0)]
-        public string ComputerName
+        public string MachineId
         {
-            get { return computerName; }
-            set { computerName = value; }
+            get { return machineId; }
+            set { machineId = value; }
         }
-        private static string computerName;
+        private static string machineId;
 
         [Parameter(Position = 1)]
         [ValidateSet("Quick", "Full")]
@@ -401,9 +401,9 @@ namespace mdatp_pwsh
 
             apiPost = JsonConvert.SerializeObject(postObj);
 
-            apiUri = $"/machines/{computerName}/runAntiVirusScan";
+            apiUri = $"/machines/{machineId}/runAntiVirusScan";
 
-            WriteVerbose($"Starting a '{scanType} Scan' on '{computerName}'.");
+            WriteVerbose($"Starting a '{scanType} Scan' on '{machineId}'.");
         }
 
         protected override void ProcessRecord()
@@ -431,12 +431,12 @@ namespace mdatp_pwsh
     public class SetDatpMachineIsolation : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0)]
-        public string ComputerName
+        public string MachineId
         {
-            get { return computerName; }
-            set { computerName = value; }
+            get { return machineId; }
+            set { machineId = value; }
         }
-        private static string computerName;
+        private static string machineId;
 
         [Parameter(Mandatory = true, Position = 1)]
         public string Comment
@@ -473,7 +473,7 @@ namespace mdatp_pwsh
             switch (isoType)
             {
                 case "Full Isolation":
-                    apiUri = $"/machines/{computerName}/isolate";
+                    apiUri = $"/machines/{machineId}/isolate";
                     DatpIsolatePost isoFullPostObj = new DatpIsolatePost();
                     isoFullPostObj.Comment = cmnt;
                     isoFullPostObj.IsolationType = "Full";
@@ -481,7 +481,7 @@ namespace mdatp_pwsh
                     break;
 
                 case "Selective Isolation":
-                    apiUri = $"/machines/{computerName}/isolate";
+                    apiUri = $"/machines/{machineId}/isolate";
                     DatpIsolatePost isoSelPostObj = new DatpIsolatePost();
                     isoSelPostObj.Comment = cmnt;
                     isoSelPostObj.IsolationType = "Selective";
@@ -489,14 +489,14 @@ namespace mdatp_pwsh
                     break;
 
                 case "Release Isolation":
-                    apiUri = $"/machines/{computerName}/unisolate";
+                    apiUri = $"/machines/{machineId}/unisolate";
                     DatpUnIsolatePost unIsoPost = new DatpUnIsolatePost();
                     unIsoPost.Comment = cmnt;
                     apiPost = JsonConvert.SerializeObject(unIsoPost);
                     break;
             }
 
-            WriteVerbose($"Getting machine info for {computerName}");
+            WriteVerbose($"Getting machine info for {machineId}");
         }
 
         protected override void ProcessRecord()
@@ -596,12 +596,12 @@ namespace mdatp_pwsh
     public class StartDatpInvestigationPkgCollection : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0)]
-        public string ComputerName
+        public string MachineId
         {
-            get { return computerName; }
-            set { computerName = value; }
+            get { return machineId; }
+            set { machineId = value; }
         }
-        private static string computerName;
+        private static string machineId;
 
         [Parameter(Mandatory = true, Position = 1)]
         public string Comment
@@ -627,9 +627,9 @@ namespace mdatp_pwsh
 
             apiPost = JsonConvert.SerializeObject(postObj);
 
-            apiUri = $"/machines/{computerName}/collectInvestigationPackage";
+            apiUri = $"/machines/{machineId}/collectInvestigationPackage";
 
-            WriteVerbose($"Initiating investigaton package collection on '{computerName}'.");
+            WriteVerbose($"Initiating investigaton package collection on '{machineId}'.");
         }
 
         protected override void ProcessRecord()
