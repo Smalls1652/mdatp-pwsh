@@ -24,7 +24,8 @@ $ConfigSplat = @{
         "Start-DatpInvestigationPkgCollection",
         "Get-DatpDomainStats",
         "Get-DatpDomainRelated",
-        "Get-DatpUserMachines"
+        "Get-DatpUserMachines",
+        "Get-DatpUserAlerts"
         );
     "RequiredAssemblies" = @(
         "Microsoft.Identity.Client.dll",
