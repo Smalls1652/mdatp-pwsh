@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+
+namespace mdatp_pwsh
+{
+    namespace Classes
+    {
+        public class IpAddress
+        {
+            [JsonProperty("ipAddress")]
+            public string Ipv4Address { get; set; }
+
+            [JsonProperty("orgPrevalence")]
+            public Int64 Prevalence { get; set; }
+
+            [JsonProperty("orgFirstSeen")]
+            public DateTime FirstSeen { get; set; }
+
+            [JsonProperty("orgLastSeen")]
+            public DateTime LastSeen { get; set; }
+        }
+    }
+}
