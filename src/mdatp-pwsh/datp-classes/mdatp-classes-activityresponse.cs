@@ -33,7 +33,7 @@ namespace mdatp_pwsh
             public Nullable<DateTime> LastUpdateTimeUtc { get; set; }
 
             [JsonProperty("relatedFileInfo")]
-            public DatpFileIdentifier RelatedFileInfo { get; set; }
+            public FileIdentifierData RelatedFileInfo { get; set; }
 
         }
 
