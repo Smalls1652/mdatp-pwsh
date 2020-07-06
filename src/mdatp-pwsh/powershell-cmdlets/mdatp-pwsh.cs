@@ -4,7 +4,7 @@ using System.Management.Automation;
 using Newtonsoft.Json;
 using Microsoft.Identity.Client;
 
-namespace mdatp_pwsh
+namespace MdatpPwsh
 {
     [Cmdlet(VerbsCommunications.Connect, "DatpGraph")]
     public class ConnectDatpGraph : PSCmdlet

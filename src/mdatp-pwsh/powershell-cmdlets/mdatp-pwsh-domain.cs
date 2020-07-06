@@ -5,9 +5,9 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Identity.Client;
-using mdatp_pwsh.Classes;
+using MdatpPwsh.Classes;
 
-namespace mdatp_pwsh
+namespace MdatpPwsh
 {
     [Cmdlet(VerbsCommon.Get, "DatpDomainStats")]
     public class GetDatpDomainStats : PSCmdlet

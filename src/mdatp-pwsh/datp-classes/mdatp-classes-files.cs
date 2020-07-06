@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace mdatp_pwsh
+namespace MdatpPwsh
 {
     namespace Classes
     {

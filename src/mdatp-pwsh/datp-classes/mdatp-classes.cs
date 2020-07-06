@@ -1,4 +1,4 @@
-namespace mdatp_pwsh
+namespace MdatpPwsh
 {
     public class DatpModuleConfig
     {

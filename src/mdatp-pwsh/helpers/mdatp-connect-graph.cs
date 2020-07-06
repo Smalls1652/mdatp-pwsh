@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.Identity.Client;
 
-namespace mdatp_pwsh
+namespace MdatpPwsh
 {
     public class PublicAuthenticationHelper
     {

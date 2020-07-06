@@ -6,10 +6,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Identity.Client;
 
-using mdatp_pwsh.Classes;
-using mdatp_pwsh.Classes.Post;
+using MdatpPwsh.Classes;
+using MdatpPwsh.Classes.Post;
 
-namespace mdatp_pwsh
+namespace MdatpPwsh
 {
     [Cmdlet(VerbsCommon.Get, "DatpMachine")]
     [CmdletBinding(DefaultParameterSetName = "AllMachines")]

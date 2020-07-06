@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 using System.Runtime.InteropServices;
 using System.Text;
 
-using mdatp_pwsh.Classes;
+using MdatpPwsh.Classes;
 
-namespace mdatp_pwsh
+namespace MdatpPwsh
 {
     public class ApiCaller
     {
