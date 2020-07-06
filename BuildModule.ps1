@@ -1,16 +1,21 @@
+[CmdletBinding()]
+param(
+
+)
+
 $ConfigSplat = @{
-    "Path" = "./build/mdatp-pwsh/mdatp-pwsh.psd1";
-    "RootModule" = "MdatpPwsh.dll";
-    "Guid" = [guid]"afc0e191-ffe7-4261-ba9e-d59652423d8c";
-    "Description" = "MDATP PowerShell Module";
-    "Author" = "Tim Small";
-    "CompanyName" = "Smalls.Online";
-    "Copyright" = 2019;
-    "ModuleVersion" = "2020.7.0";
-    "Prerelease" = "alpha1";
-    "ProjectUri" = "https://github.com/smalls1652/mdatp-pwsh";
-    "LicenseUri" = "https://raw.githubusercontent.com/Smalls1652/mdatp-pwsh/master/license.txt";
-    "CmdletsToExport" = @(
+    "Path"               = "./build/mdatp-pwsh/mdatp-pwsh.psd1";
+    "RootModule"         = "MdatpPwsh.dll";
+    "Guid"               = [guid]"afc0e191-ffe7-4261-ba9e-d59652423d8c";
+    "Description"        = "MDATP PowerShell Module";
+    "Author"             = "Tim Small";
+    "CompanyName"        = "Smalls.Online";
+    "Copyright"          = 2019;
+    "ModuleVersion"      = "2020.7.0";
+    "Prerelease"         = "alpha1";
+    "ProjectUri"         = "https://github.com/smalls1652/mdatp-pwsh";
+    "LicenseUri"         = "https://raw.githubusercontent.com/Smalls1652/mdatp-pwsh/master/license.txt";
+    "CmdletsToExport"    = @(
         "Set-DatpModuleConfig",
         "Connect-DatpGraph",
         "Get-DatpMachine",
@@ -26,20 +31,22 @@ $ConfigSplat = @{
         "Get-DatpDomainRelated",
         "Get-DatpUserMachines",
         "Get-DatpUserAlerts"
-        );
+    );
     "RequiredAssemblies" = @(
         "Microsoft.Identity.Client.dll",
         "Newtonsoft.Json.dll"
-        )
+    )
 }
 
 Push-Location -Path "./src/"
 
-Start-Process -FilePath "dotnet" -ArgumentList @("clean") -Wait
-Start-Sleep -Seconds 5
-Start-Process -FilePath "dotnet" -ArgumentList @("publish", "/property:PublishWithAspNetCoreTargetManifest=false") -Wait
-
-Pop-Location
+try {
+    Start-Process -FilePath "dotnet" -ArgumentList @("clean") -Wait -NoNewWindow -ErrorAction Stop
+    Start-Process -FilePath "dotnet" -ArgumentList @("publish", "/property:PublishWithAspNetCoreTargetManifest=false") -Wait -NoNewWindow -ErrorAction Stop
+}
+finally {
+    Pop-Location
+}
 
 if (Test-Path -Path "./build") {
     Remove-Item -Path "./build" -Recurse -Force
