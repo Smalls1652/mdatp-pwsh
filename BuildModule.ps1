@@ -1,13 +1,13 @@
 $ConfigSplat = @{
-    "Path" = "./build-out/mdatp-pwsh/mdatp-pwsh.psd1";
+    "Path" = "./build/mdatp-pwsh/mdatp-pwsh.psd1";
     "RootModule" = "mdatp_pwsh.dll";
     "Guid" = [guid]"afc0e191-ffe7-4261-ba9e-d59652423d8c";
     "Description" = "MDATP PowerShell Module";
     "Author" = "Tim Small";
     "CompanyName" = "Smalls.Online";
     "Copyright" = 2019;
-    "ModuleVersion" = "1911.01.00";
-    "Prerelease" = "alpha4";
+    "ModuleVersion" = "2020.7.0";
+    "Prerelease" = "alpha1";
     "ProjectUri" = "https://github.com/smalls1652/mdatp-pwsh";
     "LicenseUri" = "https://raw.githubusercontent.com/Smalls1652/mdatp-pwsh/master/license.txt";
     "CmdletsToExport" = @(
@@ -41,8 +41,8 @@ Start-Process -FilePath "dotnet" -ArgumentList @("publish", "/property:PublishWi
 
 Pop-Location
 
-if (Test-Path -Path "./build-out") {
-    Remove-Item -Path "./build-out" -Recurse -Force
+if (Test-Path -Path "./build") {
+    Remove-Item -Path "./build" -Recurse -Force
 }
 
 $null = New-Item -Type Directory -Path "./build"
