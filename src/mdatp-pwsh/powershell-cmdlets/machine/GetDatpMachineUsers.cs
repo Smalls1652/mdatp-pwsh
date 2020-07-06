@@ -12,17 +12,16 @@ using MdatpPwsh.Classes.Post;
 
 namespace MdatpPwsh
 {
-    /*
-    [Cmdlet(VerbsCommon.Get, "DatpMachineByIp")]
-    public class GetDatpMachineByIp : PSCmdlet
+    [Cmdlet(VerbsCommon.Get, "DatpMachineUsers")]
+    public class GetDatpMachineUsers : PSCmdlet
     {
-        [Parameter(Mandatory = true)]
-        public string IpAddress
+        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
+        public string MachineId
         {
-            get { return ipAddress; }
-            set { ipAddress = value; }
+            get { return machineId; }
+            set { machineId = value; }
         }
-        private static string ipAddress;
+        private static string machineId;
 
         private static string apiUri;
 
@@ -33,12 +32,9 @@ namespace MdatpPwsh
                 throw new Exception("Graph token not found.");
             }
 
-            DateTime currentDate = DateTime.Now;
-            string lastMonth = currentDate.AddDays(-30).ToUniversalTime().ToString("s");
+            apiUri = $"/machines/{machineId}/logonusers";
 
-            apiUri = $"/machines/findbyip(ip='{ipAddress},timestamp={lastMonth}Z)";
-
-            WriteVerbose($"Getting machines with the Ip Address of '{ipAddress}' in the last 30 days.");
+            WriteVerbose($"Getting users who have logged onto '{machineId}'.");
         }
 
         protected override void ProcessRecord()
@@ -51,9 +47,9 @@ namespace MdatpPwsh
 
             string apiJson = apiResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
-            DatpMachineCollection apiResult = JsonConvert.DeserializeObject<DatpMachineCollection>(apiJson);
+            UserCollection apiResult = JsonConvert.DeserializeObject<UserCollection>(apiJson);
 
-            foreach (DatpMachine item in apiResult.value)
+            foreach (User item in apiResult.value)
             {
                 WriteObject(item);
             }
@@ -64,5 +60,4 @@ namespace MdatpPwsh
         {
         }
     }
-    */
 }

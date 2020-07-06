@@ -1,28 +1,23 @@
 using System;
-using System.Collections.Generic;
 using System.Management.Automation;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Microsoft.Identity.Client;
 
 using MdatpPwsh.Classes;
-using MdatpPwsh.Classes.Post;
 
 namespace MdatpPwsh
 {
-    /*
-    [Cmdlet(VerbsCommon.Get, "DatpMachineByIp")]
-    public class GetDatpMachineByIp : PSCmdlet
+    [Cmdlet(VerbsCommon.Get, "DatpMachineAlerts")]
+    public class GetDatpMachineAlerts : PSCmdlet
     {
-        [Parameter(Mandatory = true)]
-        public string IpAddress
+        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
+        public string MachineId
         {
-            get { return ipAddress; }
-            set { ipAddress = value; }
+            get { return machineId; }
+            set { machineId = value; }
         }
-        private static string ipAddress;
+        private static string machineId;
 
         private static string apiUri;
 
@@ -33,12 +28,9 @@ namespace MdatpPwsh
                 throw new Exception("Graph token not found.");
             }
 
-            DateTime currentDate = DateTime.Now;
-            string lastMonth = currentDate.AddDays(-30).ToUniversalTime().ToString("s");
+            apiUri = $"/machines/{machineId}/alerts";
 
-            apiUri = $"/machines/findbyip(ip='{ipAddress},timestamp={lastMonth}Z)";
-
-            WriteVerbose($"Getting machines with the Ip Address of '{ipAddress}' in the last 30 days.");
+            WriteVerbose($"Getting alerts triggered by '{machineId}'.");
         }
 
         protected override void ProcessRecord()
@@ -51,9 +43,9 @@ namespace MdatpPwsh
 
             string apiJson = apiResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
-            DatpMachineCollection apiResult = JsonConvert.DeserializeObject<DatpMachineCollection>(apiJson);
+            AlertCollection apiResult = JsonConvert.DeserializeObject<AlertCollection>(apiJson);
 
-            foreach (DatpMachine item in apiResult.value)
+            foreach (Alert item in apiResult.value)
             {
                 WriteObject(item);
             }
@@ -64,5 +56,4 @@ namespace MdatpPwsh
         {
         }
     }
-    */
 }
