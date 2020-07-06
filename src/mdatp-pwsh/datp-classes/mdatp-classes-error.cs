@@ -11,6 +11,7 @@ namespace MdatpPwsh
         {
             public string code { get; set; }
             public string message { get; set; }
+            public string target { get; set; }
         }
     }
 }
