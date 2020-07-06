@@ -42,8 +42,7 @@ namespace mdatp_pwsh
             var TokenFlow = new PublicAuthenticationHelper(app);
 
             string[] scopes = new string[] {
-                "User.Read",
-                "https://securitycenter.microsoft.com/mtp/Machine.ReadWrite"
+                "https://securitycenter.microsoft.com/mtp/.default"
                 };
 
             AuthenticationResult result = null;
