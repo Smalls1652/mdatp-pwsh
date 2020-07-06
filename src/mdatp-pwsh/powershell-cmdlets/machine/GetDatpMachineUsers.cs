@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Management.Automation;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Microsoft.Identity.Client;
 
 using MdatpPwsh.Classes;
-using MdatpPwsh.Classes.Post;
 
 namespace MdatpPwsh
 {

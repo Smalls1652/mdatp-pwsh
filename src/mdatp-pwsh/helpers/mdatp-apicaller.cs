@@ -2,11 +2,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Microsoft.Identity.Client;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.Runtime.InteropServices;
-using System.Text;
-
-using MdatpPwsh.Classes;
 
 namespace MdatpPwsh
 {

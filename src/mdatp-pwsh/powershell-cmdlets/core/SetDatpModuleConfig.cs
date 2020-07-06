@@ -1,8 +1,6 @@
-using System;
 using System.IO;
 using System.Management.Automation;
 using Newtonsoft.Json;
-using Microsoft.Identity.Client;
 
 namespace MdatpPwsh
 {
