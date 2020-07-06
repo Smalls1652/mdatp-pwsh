@@ -12,6 +12,7 @@ namespace MdatpPwsh
 {
     public class ApiCaller
     {
+        private ErrorHandler errorHandler = new ErrorHandler();
         private static string baseApiUri = "https://api.securitycenter.windows.com/api";
 
         public HttpResponseMessage MakeGetApiCall(string apiUri, AuthenticationResult graphToken)
@@ -28,18 +29,8 @@ namespace MdatpPwsh
             apiRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", graphToken.AccessToken);
 
             HttpResponseMessage apiResponse = SendApiCall(apiCaller, apiRequest).GetAwaiter().GetResult();
-
-            switch (apiResponse.StatusCode)
-            {
-                
-                case System.Net.HttpStatusCode.BadRequest:
-                case System.Net.HttpStatusCode.NotFound:
-                    ErrorMessage errorResponse = JsonConvert.DeserializeObject<ErrorMessage>(apiResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-                    throw new System.ArgumentException(errorResponse.error.message, errorResponse.error.code);
-
-                default:
-                    break;
-            }
+            
+            errorHandler.ParseApiResponse(apiResponse);
 
             return apiResponse;
 
@@ -61,17 +52,7 @@ namespace MdatpPwsh
 
             HttpResponseMessage apiResponse = SendApiCall(apiCaller, apiRequest).GetAwaiter().GetResult();
 
-            switch (apiResponse.StatusCode)
-            {
-                
-                case System.Net.HttpStatusCode.BadRequest:
-                case System.Net.HttpStatusCode.NotFound:
-                    ErrorMessage errorResponse = JsonConvert.DeserializeObject<ErrorMessage>(apiResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-                    throw new System.ArgumentException(errorResponse.error.message, errorResponse.error.code);
-
-                default:
-                    break;
-            }
+            errorHandler.ParseApiResponse(apiResponse);
 
             return apiResponse;
 
