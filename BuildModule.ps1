@@ -1,6 +1,6 @@
 $ConfigSplat = @{
     "Path" = "./build/mdatp-pwsh/mdatp-pwsh.psd1";
-    "RootModule" = "mdatp_pwsh.dll";
+    "RootModule" = "MdatpPwsh.dll";
     "Guid" = [guid]"afc0e191-ffe7-4261-ba9e-d59652423d8c";
     "Description" = "MDATP PowerShell Module";
     "Author" = "Tim Small";
