@@ -36,7 +36,16 @@ namespace MdatpPwsh
             AuthenticationResult token = (AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken");
 
             WriteVerbose("Starting api call.");
-            HttpResponseMessage apiResponse = new ApiCaller().MakeGetApiCall(apiUri, token);
+            HttpResponseMessage apiResponse = null;
+
+            InvokeDatpGetApiCall invokeDatpGetApiCall = new InvokeDatpGetApiCall();
+            invokeDatpGetApiCall.Uri = apiUri;
+            invokeDatpGetApiCall.Token = token;
+
+            foreach (HttpResponseMessage r in invokeDatpGetApiCall.Invoke<HttpResponseMessage>())
+            {
+                apiResponse = r;
+            }
 
             string apiJson = apiResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
