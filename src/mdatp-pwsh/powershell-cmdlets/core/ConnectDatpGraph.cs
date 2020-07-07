@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Management.Automation;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Identity.Client;
 
@@ -34,33 +36,28 @@ namespace MdatpPwsh
             }
 
             WriteVerbose("Building PublicClient app object.");
-            var app = PublicClientApplicationBuilder.Create(moduleConfig.PublicClientAppId)
+            IPublicClientApplication app = PublicClientApplicationBuilder.Create(moduleConfig.PublicClientAppId)
                 .WithAuthority($"https://login.microsoftonline.com/{moduleConfig.TenantId}")
                 .WithDefaultRedirectUri()
                 .Build();
 
-            var TokenFlow = new PublicAuthenticationHelper(app);
+            PublicAuthenticationHelper TokenFlow = new PublicAuthenticationHelper(app);
 
             string[] scopes = new string[] {
                 "https://securitycenter.microsoft.com/mtp/.default"
                 };
 
             AuthenticationResult result = null;
-            WriteVerbose("Starting token flow.");
-            result = TokenFlow.SilentAcquire(scopes).GetAwaiter().GetResult();
 
-            if (result == null)
+            try
             {
-                WriteVerbose("Attempting to get token through device code...");
-                try
-                {
-                    result = TokenFlow.GetDeviceCode(scopes).GetAwaiter().GetResult();
-                }
-                catch (System.Exception e)
-                {
-                    throw e;
-                }
+                result = TokenFlow.GetDeviceCode(scopes).GetAwaiter().GetResult();
             }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+
             SessionState.PSVariable.Set(new PSVariable("DatpGraphToken", result, ScopedItemOptions.Private));
             WriteObject(result);
         }
