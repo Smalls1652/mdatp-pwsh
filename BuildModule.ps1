@@ -11,8 +11,8 @@ $ConfigSplat = @{
     "Author"             = "Tim Small";
     "CompanyName"        = "Smalls.Online";
     "Copyright"          = 2019;
-    "ModuleVersion"      = "2020.7.0";
-    "Prerelease"         = "alpha1";
+    "ModuleVersion"      = "2020.7.1";
+    "Prerelease"         = "alpha2";
     "ProjectUri"         = "https://github.com/smalls1652/mdatp-pwsh";
     "LicenseUri"         = "https://raw.githubusercontent.com/Smalls1652/mdatp-pwsh/master/license.txt";
     "CmdletsToExport"    = @(
@@ -30,7 +30,8 @@ $ConfigSplat = @{
         "Get-DatpDomainStats",
         "Get-DatpDomainRelated",
         "Get-DatpUserMachines",
-        "Get-DatpUserAlerts"
+        "Get-DatpUserAlerts",
+        "Get-DatpAlerts"
     );
     "RequiredAssemblies" = @(
         "Microsoft.Identity.Client.dll",
