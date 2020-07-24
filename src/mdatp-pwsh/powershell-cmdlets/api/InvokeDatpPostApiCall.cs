@@ -2,6 +2,8 @@ using System.Management.Automation;
 using System.Net.Http;
 using Microsoft.Identity.Client;
 
+using MdatpPwsh.ApiHelper;
+
 namespace MdatpPwsh
 {
     [Cmdlet(VerbsLifecycle.Invoke, "DatpPostApiCall")]
@@ -38,7 +40,9 @@ namespace MdatpPwsh
 
             try
             {
-                apiResponse = new ApiCaller().MakePostApiCall(uri, postBody, token);
+                ApiCaller apiCaller = new ApiCaller(uri, postBody, token);
+                apiResponse = apiCaller.MakeApiCall();
+                apiCaller.CLose();
             }
             catch (DatpException e)
             {

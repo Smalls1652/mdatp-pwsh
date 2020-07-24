@@ -6,61 +6,67 @@ using System.Threading.Tasks;
 
 namespace MdatpPwsh
 {
-    public class ApiCaller
+    namespace ApiHelper
     {
-        private ErrorHandler errorHandler = new ErrorHandler();
-        private Uri baseApiUri = new Uri("https://api.securitycenter.windows.com/api/");
-
-        public HttpResponseMessage MakeGetApiCall(string apiUri, AuthenticationResult graphToken)
+        public class ApiCaller
         {
+            public ApiCaller(string _apiUri, AuthenticationResult _graphToken)
+            {
+                fullApiUri = BuildApiUri(_apiUri);
+                apiRequest = BuildRequestMessage(fullApiUri, HttpMethod.Get, _graphToken);
+            }
 
-            HttpMethod requestMethod = HttpMethod.Get;
+            public ApiCaller(string _apiUri, string _apiPostBody, AuthenticationResult _graphToken)
+            {
+                fullApiUri = BuildApiUri(_apiUri);
+                apiRequest = BuildRequestMessage(fullApiUri, HttpMethod.Post, _graphToken);
+                apiRequest.Content = new StringContent(_apiPostBody);
+            }
 
-            HttpClient apiCaller = new HttpClient();
+            private HttpClient apiCaller = new HttpClient();
+            private ErrorHandler errorHandler = new ErrorHandler();
+            private Uri baseApiUri = new Uri("https://api.securitycenter.windows.com/api/");
+            private Uri fullApiUri;
+            private HttpRequestMessage apiRequest;
 
-            Uri fullApiUri = new Uri(baseApiUri, apiUri);
+            public HttpResponseMessage MakeApiCall()
+            {
+                HttpResponseMessage apiResponse = SendApiCall(apiCaller, apiRequest).GetAwaiter().GetResult();
 
-            var apiRequest = new HttpRequestMessage(requestMethod, fullApiUri);
+                errorHandler.ParseApiResponse(apiResponse);
 
-            apiRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", graphToken.AccessToken);
+                return apiResponse;
+            }
 
-            HttpResponseMessage apiResponse = SendApiCall(apiCaller, apiRequest).GetAwaiter().GetResult();
-            
-            errorHandler.ParseApiResponse(apiResponse);
+            public void CLose()
+            {
+                apiCaller.Dispose();
+            }
 
-            return apiResponse;
+            private Uri BuildApiUri(string apiUri)
+            {
+                Uri fullUri = new Uri(baseApiUri, apiUri);
 
-        }
+                return fullUri;
+            }
 
-        public HttpResponseMessage MakePostApiCall(string apiUri, string apiPostBody, AuthenticationResult graphToken)
-        {
+            private HttpRequestMessage BuildRequestMessage(Uri uri, HttpMethod httpMethod, AuthenticationResult graphToken)
+            {
+                HttpRequestMessage httpRequestMessage = new HttpRequestMessage(httpMethod, uri);
 
-            HttpMethod requestMethod = HttpMethod.Post;
+                httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", graphToken.AccessToken);
 
-            HttpClient apiCaller = new HttpClient();
+                return httpRequestMessage;
+            }
 
-            Uri fullApiUri = new Uri(baseApiUri, apiUri);
-            var apiRequest = new HttpRequestMessage(requestMethod, fullApiUri);
+            private async Task<HttpResponseMessage> SendApiCall(HttpClient c, HttpRequestMessage m)
+            {
 
-            apiRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", graphToken.AccessToken);
+                HttpResponseMessage r = await c.SendAsync(m);
 
-            apiRequest.Content = new StringContent(apiPostBody);
+                return r;
 
-            HttpResponseMessage apiResponse = SendApiCall(apiCaller, apiRequest).GetAwaiter().GetResult();
-
-            errorHandler.ParseApiResponse(apiResponse);
-
-            return apiResponse;
-
-        }
-
-        private async Task<HttpResponseMessage> SendApiCall(HttpClient c, HttpRequestMessage m)
-        {
-
-            HttpResponseMessage r = await c.SendAsync(m);
-
-            return r;
-
+            }
         }
     }
 }
