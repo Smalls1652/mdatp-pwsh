@@ -40,7 +40,7 @@ namespace MdatpPwsh
                 throw new Exception("Graph token not found.");
             }
 
-            apiUri = $"/domains/{domainName}/{searchType.ToLower()}";
+            apiUri = $"domains/{domainName}/{searchType.ToLower()}";
         }
 
         protected override void ProcessRecord()

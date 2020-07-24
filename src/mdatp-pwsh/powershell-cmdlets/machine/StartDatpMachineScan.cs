@@ -55,7 +55,7 @@ namespace MdatpPwsh
 
             apiPost = JsonConvert.SerializeObject(postObj);
 
-            apiUri = $"/machines/{machineId}/runAntiVirusScan";
+            apiUri = $"machines/{machineId}/runAntiVirusScan";
 
             WriteVerbose($"Starting a '{scanType} Scan' on '{machineId}'.");
         }

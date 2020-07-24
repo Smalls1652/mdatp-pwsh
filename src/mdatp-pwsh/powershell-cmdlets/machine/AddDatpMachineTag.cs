@@ -45,7 +45,7 @@ namespace MdatpPwsh
 
             apiPost = JsonConvert.SerializeObject(postObj);
 
-            apiUri = $"/machines/{machineId}/tags";
+            apiUri = $"machines/{machineId}/tags";
 
             WriteVerbose($"Adding tag, '{tagName}', to '{machineId}'.");
         }

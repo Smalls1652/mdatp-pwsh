@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Microsoft.Identity.Client;
@@ -8,7 +9,7 @@ namespace MdatpPwsh
     public class ApiCaller
     {
         private ErrorHandler errorHandler = new ErrorHandler();
-        private static string baseApiUri = "https://api.securitycenter.windows.com/api";
+        private Uri baseApiUri = new Uri("https://api.securitycenter.windows.com/api/");
 
         public HttpResponseMessage MakeGetApiCall(string apiUri, AuthenticationResult graphToken)
         {
@@ -17,7 +18,7 @@ namespace MdatpPwsh
 
             HttpClient apiCaller = new HttpClient();
 
-            string fullApiUri = $"{baseApiUri}{apiUri}";
+            Uri fullApiUri = new Uri(baseApiUri, apiUri);
 
             var apiRequest = new HttpRequestMessage(requestMethod, fullApiUri);
 
@@ -38,7 +39,7 @@ namespace MdatpPwsh
 
             HttpClient apiCaller = new HttpClient();
 
-            string fullApiUri = $"{baseApiUri}{apiUri}";
+            Uri fullApiUri = new Uri(baseApiUri, apiUri);
             var apiRequest = new HttpRequestMessage(requestMethod, fullApiUri);
 
             apiRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", graphToken.AccessToken);

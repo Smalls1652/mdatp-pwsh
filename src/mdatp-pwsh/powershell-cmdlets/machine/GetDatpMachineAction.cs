@@ -40,11 +40,11 @@ namespace MdatpPwsh
             switch (ParameterSetName)
             {
                 case "SingleActivity":
-                    apiUri = $"/machineactions/{activityId}";
+                    apiUri = $"machineactions/{activityId}";
                     break;
 
                 case "AllActivities":
-                    apiUri = $"/machineactions";
+                    apiUri = $"machineactions";
                     break;
             }
         }

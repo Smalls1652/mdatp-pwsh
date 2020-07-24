@@ -55,7 +55,7 @@ namespace MdatpPwsh
             switch (isoType)
             {
                 case "Full Isolation":
-                    apiUri = $"/machines/{machineId}/isolate";
+                    apiUri = $"machines/{machineId}/isolate";
                     IsolateMachine isoFullPostObj = new IsolateMachine();
                     isoFullPostObj.Comment = cmnt;
                     isoFullPostObj.IsolationType = "Full";
@@ -63,7 +63,7 @@ namespace MdatpPwsh
                     break;
 
                 case "Selective Isolation":
-                    apiUri = $"/machines/{machineId}/isolate";
+                    apiUri = $"machines/{machineId}/isolate";
                     IsolateMachine isoSelPostObj = new IsolateMachine();
                     isoSelPostObj.Comment = cmnt;
                     isoSelPostObj.IsolationType = "Selective";
@@ -71,7 +71,7 @@ namespace MdatpPwsh
                     break;
 
                 case "Release Isolation":
-                    apiUri = $"/machines/{machineId}/unisolate";
+                    apiUri = $"machines/{machineId}/unisolate";
                     UnIsolateMachine unIsoPost = new UnIsolateMachine();
                     unIsoPost.Comment = cmnt;
                     apiPost = JsonConvert.SerializeObject(unIsoPost);

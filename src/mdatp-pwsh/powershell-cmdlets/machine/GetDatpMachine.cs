@@ -40,11 +40,11 @@ namespace MdatpPwsh
             switch (ParameterSetName)
             {
                 case "SingleMachine":
-                    apiUri = $"/machines/{machineId}";
+                    apiUri = $"machines/{machineId}";
                     break;
 
                 case "AllMachines":
-                    apiUri = $"/machines";
+                    apiUri = $"machines";
                     break;
             }
         }

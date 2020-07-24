@@ -44,7 +44,7 @@ namespace MdatpPwsh
 
             apiPost = JsonConvert.SerializeObject(postObj);
 
-            apiUri = $"/machines/{machineId}/collectInvestigationPackage";
+            apiUri = $"machines/{machineId}/collectInvestigationPackage";
 
             WriteVerbose($"Initiating investigaton package collection on '{machineId}'.");
         }

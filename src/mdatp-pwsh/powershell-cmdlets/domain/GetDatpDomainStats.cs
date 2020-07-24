@@ -27,7 +27,7 @@ namespace MdatpPwsh
                 throw new Exception("Graph token not found.");
             }
 
-            apiUri = $"/domains/{domainName}/stats";
+            apiUri = $"domains/{domainName}/stats";
         }
 
         protected override void ProcessRecord()

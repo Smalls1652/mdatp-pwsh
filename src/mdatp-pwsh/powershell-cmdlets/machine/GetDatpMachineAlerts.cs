@@ -28,7 +28,7 @@ namespace MdatpPwsh
                 throw new Exception("Graph token not found.");
             }
 
-            apiUri = $"/machines/{machineId}/alerts";
+            apiUri = $"machines/{machineId}/alerts";
 
             WriteVerbose($"Getting alerts triggered by '{machineId}'.");
         }

@@ -28,7 +28,7 @@ namespace MdatpPwsh
                 throw new Exception("Graph token not found.");
             }
 
-            apiUri = $"/users/{userName}/machines";
+            apiUri = $"users/{userName}/machines";
 
             WriteVerbose($"Getting machines '{userName}' has logged into.");
         }
