@@ -10,6 +10,20 @@ namespace MdatpPwsh
     [Cmdlet(VerbsCommon.Get, "DatpAlerts")]
     public class GetDatpAlerts : PSCmdlet
     {
+        [Parameter(Position = 0)]
+        [ValidateSet(
+            "All",
+            "InProgress",
+            "New",
+            "Resolved",
+            "Unknown"
+        )]
+        public string AlertStatus {
+            get { return alertStatus; }
+            set { alertStatus = value; }
+        }
+        private string alertStatus = "New";
+
         private static string apiUri;
 
         protected override void BeginProcessing()
@@ -19,7 +33,29 @@ namespace MdatpPwsh
                 throw new Exception("Graph token not found.");
             }
 
-            apiUri = $"/alerts";
+            switch (alertStatus)
+            {
+                case "InProgress":
+                    apiUri = $"alerts?$filter=status eq 'InProgress'";
+                    break;
+
+                case "New":
+                    apiUri = $"alerts?$filter=status eq 'New'";
+                    break;
+
+                case "Resolved":
+                    apiUri = $"alerts?$filter=status eq 'Resolved'";
+                    break;
+
+                case "Unknown":
+                    apiUri = $"alerts?$filter=status eq 'Unknown'";
+                    break;
+
+                default:
+                    apiUri = $"alerts";
+                    break;
+
+            }
         }
 
         protected override void ProcessRecord()
