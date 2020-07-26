@@ -31,7 +31,8 @@ $ConfigSplat = @{
         "Get-DatpDomainRelated",
         "Get-DatpUserMachines",
         "Get-DatpUserAlerts",
-        "Get-DatpAlerts"
+        "Get-DatpAlert",
+        "Update-DatpAlert"
     );
     "RequiredAssemblies" = @(
         "Microsoft.Identity.Client.dll",
@@ -56,9 +57,9 @@ if (Test-Path -Path "./build") {
 $null = New-Item -Type Directory -Path "./build"
 $null = New-Item -Type Directory -Path "./build/mdatp-pwsh"
 
-Copy-Item -Path "./src/bin/Debug/netstandard2.0/publish/MdatpPwsh.dll" -Destination "./build/mdatp-pwsh/"
-Copy-Item -Path "./src/bin/Debug/netstandard2.0/publish/Microsoft.Identity.Client.dll" -Destination "./build/mdatp-pwsh/"
-Copy-Item -Path "./src/bin/Debug/netstandard2.0/publish/Newtonsoft.Json.dll" -Destination "./build/mdatp-pwsh/"
+Copy-Item -Path "./src/bin/Debug/netstandard2.1/publish/MdatpPwsh.dll" -Destination "./build/mdatp-pwsh/"
+Copy-Item -Path "./src/bin/Debug/netstandard2.1/publish/Microsoft.Identity.Client.dll" -Destination "./build/mdatp-pwsh/"
+Copy-Item -Path "./src/bin/Debug/netstandard2.1/publish/Newtonsoft.Json.dll" -Destination "./build/mdatp-pwsh/"
 Copy-Item -Path "./license.txt" -Destination "./build/mdatp-pwsh/License.txt"
 
 New-ModuleManifest @ConfigSplat
