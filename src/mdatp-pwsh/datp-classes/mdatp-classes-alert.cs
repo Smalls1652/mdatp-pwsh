@@ -66,7 +66,7 @@ namespace MdatpPwsh
             public Nullable<InvestigationState> InvestigationState { get; set; }
 
             [JsonProperty("category")]
-            public string Category { get; set; }
+            public AlertCategory Category { get; set; }
 
             [JsonProperty("detectionSource")]
             public string DetectionSource { get; set; }
@@ -129,6 +129,49 @@ namespace MdatpPwsh
 
             [JsonProperty("comment")]
             public string Comment { get; set; }
+        }
+
+        public class NewAlert
+        {
+            public NewAlert() { }
+
+            public NewAlert(DateTime eventTime, string reportId, string machineId, AlertSeverity severity, string title, string description, string recommendedAction, AlertCategory category)
+            {
+                EventTime = eventTime;
+                ReportId = reportId;
+                MachineId = machineId;
+                Severity = severity;
+                Title = title;
+                Description = description;
+                RecommendedAction = recommendedAction;
+                Category = category;
+            }
+
+            [JsonProperty("eventTime")]
+            public DateTime EventTime { get; set; }
+
+            [JsonProperty("reportId")]
+            public string ReportId { get; set; }
+
+            [JsonProperty("machineId")]
+            public string MachineId { get; set; }
+
+            [JsonProperty("severity")]
+            [JsonConverter(typeof(StringEnumConverter))]
+            public AlertSeverity Severity { get; set; }
+
+            [JsonProperty("title")]
+            public string Title { get; set; }
+
+            [JsonProperty("description")]
+            public string Description { get; set; }
+
+            [JsonProperty("recommendedAction")]
+            public string RecommendedAction { get; set; }
+
+            [JsonProperty("category")]
+            [JsonConverter(typeof(StringEnumConverter))]
+            public AlertCategory Category { get; set; }
         }
     }
 }
