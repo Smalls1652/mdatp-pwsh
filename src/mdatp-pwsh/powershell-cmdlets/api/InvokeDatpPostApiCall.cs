@@ -40,9 +40,9 @@ namespace MdatpPwsh
 
             try
             {
-                ApiCaller apiCaller = new ApiCaller(uri, postBody, token);
+                ApiCaller apiCaller = new ApiCaller(uri, postBody, token, HttpMethod.Post);
                 apiResponse = apiCaller.MakeApiCall();
-                apiCaller.CLose();
+                apiCaller.Close();
             }
             catch (DatpException e)
             {

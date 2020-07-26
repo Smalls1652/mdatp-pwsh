@@ -34,7 +34,7 @@ namespace MdatpPwsh
             {
                 ApiCaller apiCaller = new ApiCaller(uri, token);
                 apiResponse = apiCaller.MakeApiCall();
-                apiCaller.CLose();
+                apiCaller.Close();
                 
             }
             catch (DatpException e)

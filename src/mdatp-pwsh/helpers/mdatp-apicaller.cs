@@ -16,10 +16,10 @@ namespace MdatpPwsh
                 apiRequest = BuildRequestMessage(fullApiUri, HttpMethod.Get, _graphToken);
             }
 
-            public ApiCaller(string _apiUri, string _apiPostBody, AuthenticationResult _graphToken)
+            public ApiCaller(string _apiUri, string _apiPostBody, AuthenticationResult _graphToken, HttpMethod _httpMethod)
             {
                 fullApiUri = BuildApiUri(_apiUri);
-                apiRequest = BuildRequestMessage(fullApiUri, HttpMethod.Post, _graphToken);
+                apiRequest = BuildRequestMessage(fullApiUri, _httpMethod, _graphToken);
                 apiRequest.Content = new StringContent(_apiPostBody);
             }
 
@@ -38,7 +38,7 @@ namespace MdatpPwsh
                 return apiResponse;
             }
 
-            public void CLose()
+            public void Close()
             {
                 apiCaller.Dispose();
             }
