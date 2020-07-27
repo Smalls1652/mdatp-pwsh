@@ -56,7 +56,8 @@ namespace MdatpPwsh
                 Persistence,
                 PrivilegeEscalation,
                 Ransomware,
-                SuspiciousActivity
+                SuspiciousActivity,
+                UnwantedSoftware
             }
         }
     }
