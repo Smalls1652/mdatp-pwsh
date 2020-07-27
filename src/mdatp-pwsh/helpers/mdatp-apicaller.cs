@@ -21,10 +21,9 @@ namespace MdatpPwsh
                 fullApiUri = BuildApiUri(apiUri);
                 apiRequest = BuildRequestMessage(fullApiUri, httpMethod, graphToken);
 
-                switch (httpMethod.Method)
+                switch (String.IsNullOrEmpty(apiPostBody))
                 {
-                    case "Post":
-                    case "Patch":
+                    case false:
                         apiRequest.Content = new StringContent(apiPostBody);
                         break;
 
