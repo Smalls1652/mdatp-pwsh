@@ -49,7 +49,11 @@
         "Get-DatpUserAlerts",
         "Get-DatpAlert", 
         "Update-DatpAlert",
-        "Out-DatpInvestigationPkg"
+        "Out-DatpInvestigationPkg",
+        "Get-DatpFile",
+        "Get-DatpFileAlerts",
+        "Get-DatpFileMachines",
+        "Get-DatpFileStats"
     )
 
     VariablesToExport  = "*"
