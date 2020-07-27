@@ -13,7 +13,7 @@
   - Machine Actions
     - [x] Get/List machine actions
     - [x] Collect investigation package
-    - [ ] Get investigation package
+    - [x] Get investigation package
     - [x] Isolate/Uninsolate machine
     - [ ] Restrict/Remove app execution
     - [x] Run antivirus scan
