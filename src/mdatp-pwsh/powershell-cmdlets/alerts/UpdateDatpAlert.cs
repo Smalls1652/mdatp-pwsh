@@ -85,17 +85,13 @@ namespace MdatpPwsh
                 Determination = alertDetermination,
                 Comment = comment
             );
-            string apiPatchBody = JsonConvert.SerializeObject(updateAlert);
+            string apiPatch = JsonConvert.SerializeObject(updateAlert);
 
             WriteVerbose("Starting api call.");
             HttpResponseMessage apiResponse = null;
 
-            InvokeDatpPatchApiCall invokeDatpPatchApiCall = new InvokeDatpPatchApiCall();
-            invokeDatpPatchApiCall.Uri = apiUri;
-            invokeDatpPatchApiCall.PostBody = apiPatchBody;
-            invokeDatpPatchApiCall.Token = token;
-
-            foreach (HttpResponseMessage r in invokeDatpPatchApiCall.Invoke<HttpResponseMessage>())
+            InvokeDatpApiCall invokeDatpApiCall = new InvokeDatpApiCall(apiUri, token, HttpMethod.Post, apiPatch);
+            foreach (HttpResponseMessage r in invokeDatpApiCall.Invoke<HttpResponseMessage>())
             {
                 apiResponse = r;
             }

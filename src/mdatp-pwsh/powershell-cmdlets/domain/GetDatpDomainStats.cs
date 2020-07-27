@@ -38,11 +38,8 @@ namespace MdatpPwsh
             WriteVerbose("Starting api call.");
             HttpResponseMessage apiResponse = null;
 
-            InvokeDatpGetApiCall invokeDatpGetApiCall = new InvokeDatpGetApiCall();
-            invokeDatpGetApiCall.Uri = apiUri;
-            invokeDatpGetApiCall.Token = token;
-
-            foreach (HttpResponseMessage r in invokeDatpGetApiCall.Invoke<HttpResponseMessage>())
+            InvokeDatpApiCall invokeDatpApiCall = new InvokeDatpApiCall(apiUri, token, HttpMethod.Get);
+            foreach (HttpResponseMessage r in invokeDatpApiCall.Invoke<HttpResponseMessage>())
             {
                 apiResponse = r;
             }

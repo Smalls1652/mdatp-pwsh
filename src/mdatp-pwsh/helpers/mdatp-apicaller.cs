@@ -16,11 +16,20 @@ namespace MdatpPwsh
                 apiRequest = BuildRequestMessage(fullApiUri, HttpMethod.Get, _graphToken);
             }
 
-            public ApiCaller(string _apiUri, string _apiPostBody, AuthenticationResult _graphToken, HttpMethod _httpMethod)
+            public ApiCaller(string apiUri, string apiPostBody, AuthenticationResult graphToken, HttpMethod httpMethod)
             {
-                fullApiUri = BuildApiUri(_apiUri);
-                apiRequest = BuildRequestMessage(fullApiUri, _httpMethod, _graphToken);
-                apiRequest.Content = new StringContent(_apiPostBody);
+                fullApiUri = BuildApiUri(apiUri);
+                apiRequest = BuildRequestMessage(fullApiUri, httpMethod, graphToken);
+
+                switch (String.IsNullOrEmpty(apiPostBody))
+                {
+                    case false:
+                        apiRequest.Content = new StringContent(apiPostBody);
+                        break;
+
+                    default:
+                        break;
+                }
             }
 
             private HttpClient apiCaller = new HttpClient();
