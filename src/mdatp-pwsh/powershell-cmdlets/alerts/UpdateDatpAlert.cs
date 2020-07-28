@@ -10,7 +10,7 @@ namespace MdatpPwsh
     using Classes.Enums;
 
     [Cmdlet(VerbsData.Update, "DatpAlert")]
-    public class UpdateDatpAlert : PSCmdlet
+    public class UpdateDatpAlert : DatpCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
         public string AlertId
@@ -65,19 +65,11 @@ namespace MdatpPwsh
 
         protected override void BeginProcessing()
         {
-            if ((AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken") == null)
-            {
-                throw new Exception("Graph token not found.");
-            }
-
             apiUri = $"alerts/{alertId}";
         }
 
         protected override void ProcessRecord()
         {
-            WriteVerbose("Getting token from session.");
-            AuthenticationResult token = (AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken");
-
             UpdateAlert updateAlert = new UpdateAlert(
                 Status = alertStatus,
                 AssignedTo = assignedTo,
@@ -88,13 +80,7 @@ namespace MdatpPwsh
             string apiPatch = JsonConvert.SerializeObject(updateAlert);
 
             WriteVerbose("Starting api call.");
-            HttpResponseMessage apiResponse = null;
-
-            InvokeDatpApiCall invokeDatpApiCall = new InvokeDatpApiCall(apiUri, token, HttpMethod.Post, apiPatch);
-            foreach (HttpResponseMessage r in invokeDatpApiCall.Invoke<HttpResponseMessage>())
-            {
-                apiResponse = r;
-            }
+            string apiJson = SendApiCall(apiUri, apiPatch, HttpMethod.Patch);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace MdatpPwsh
     using Classes;
 
     [Cmdlet(VerbsCommon.Get, "DatpFileMachines")]
-    public class GetDatpFileMachines : PSCmdlet
+    public class GetDatpFileMachines : DatpCmdlet
     {
         [Parameter(Position = 0, Mandatory = true)]
         public string FileIdentifier
@@ -21,32 +21,13 @@ namespace MdatpPwsh
         private string fileIdentifier;
 
         private string apiUri;
-
-        protected override void BeginProcessing()
-        {
-            if ((AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken") == null)
-            {
-                throw new Exception("Graph token not found.");
-            }
-        }
-
+        
         protected override void ProcessRecord()
         {
             apiUri = $"files/{fileIdentifier}/machines";
 
-            WriteVerbose("Getting token from session.");
-            AuthenticationResult token = (AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken");
-
             WriteVerbose("Starting api call.");
-            HttpResponseMessage apiResponse = null;
-
-            InvokeDatpApiCall invokeDatpApiCall = new InvokeDatpApiCall(apiUri, token, HttpMethod.Get);
-            foreach (HttpResponseMessage r in invokeDatpApiCall.Invoke<HttpResponseMessage>())
-            {
-                apiResponse = r;
-            }
-
-            string apiJson = apiResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
             MachineCollection apiResult = JsonConvert.DeserializeObject<MachineCollection>(apiJson);
             foreach (Machine item in apiResult.value)

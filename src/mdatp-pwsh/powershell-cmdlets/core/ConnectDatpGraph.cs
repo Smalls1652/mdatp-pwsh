@@ -8,6 +8,8 @@ using Microsoft.Identity.Client;
 
 namespace MdatpPwsh
 {
+    using Session;
+
     [Cmdlet(VerbsCommunications.Connect, "DatpGraph")]
     public class ConnectDatpGraph : PSCmdlet
     {
@@ -58,8 +60,10 @@ namespace MdatpPwsh
                 throw e;
             }
 
-            SessionState.PSVariable.Set(new PSVariable("DatpGraphToken", result, ScopedItemOptions.Private));
-            WriteObject(result);
+            DatpSessionClient sessionClient = new DatpSessionClient(new Uri("https://api.securitycenter.microsoft.com/api/v1.0/"), result);
+
+            SessionState.PSVariable.Set(new PSVariable("DatpSessionClient", sessionClient, ScopedItemOptions.Private));
+            WriteObject("You are now connected to the Defender ATP API.");
         }
 
     }

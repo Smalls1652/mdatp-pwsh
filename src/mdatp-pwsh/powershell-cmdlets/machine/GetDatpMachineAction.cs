@@ -10,7 +10,7 @@ namespace MdatpPwsh
 {
     [Cmdlet(VerbsCommon.Get, "DatpMachineAction")]
     [CmdletBinding(DefaultParameterSetName = "AllActivities")]
-    public class GetDatpMachineAction : PSCmdlet
+    public class GetDatpMachineAction : DatpCmdlet
     {
         [Parameter(Position = 0, ParameterSetName = "SingleActivity")]
         public string ActivityId
@@ -32,11 +32,6 @@ namespace MdatpPwsh
 
         protected override void BeginProcessing()
         {
-            if ((AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken") == null)
-            {
-                throw new Exception("Graph token not found.");
-            }
-
             switch (ParameterSetName)
             {
                 case "SingleActivity":
@@ -51,21 +46,8 @@ namespace MdatpPwsh
 
         protected override void ProcessRecord()
         {
-            WriteVerbose("Getting token from session.");
-            AuthenticationResult token = (AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken");
-
             WriteVerbose("Starting api call.");
-            HttpResponseMessage apiResponse = null;
-
-            InvokeDatpApiCall invokeDatpApiCall = new InvokeDatpApiCall(apiUri, token, HttpMethod.Get);
-            foreach (HttpResponseMessage r in invokeDatpApiCall.Invoke<HttpResponseMessage>())
-            {
-                apiResponse = r;
-            }
-
-            string apiJson = apiResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-
-            WriteVerbose(apiJson);
+            string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
             switch (ParameterSetName)
             {

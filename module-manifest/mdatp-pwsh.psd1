@@ -34,6 +34,7 @@
     CmdletsToExport    = @(
         "Set-DatpModuleConfig",
         "Connect-DatpGraph",
+        "Get-DatpSessionClient",
         "Get-DatpMachine", 
         "Get-DatpMachineAlerts",
         "Get-DatpMachineUsers", 

@@ -10,7 +10,7 @@ using MdatpPwsh.Classes.Post;
 namespace MdatpPwsh
 {
     [Cmdlet(VerbsCommon.Add, "DatpMachineTag")]
-    public class AddDatpMachineTag : PSCmdlet
+    public class AddDatpMachineTag : DatpCmdlet
     {
         [Parameter(Mandatory = true, Position = 0, ValueFromPipelineByPropertyName = true)]
         public string MachineId
@@ -34,11 +34,6 @@ namespace MdatpPwsh
 
         protected override void BeginProcessing()
         {
-            if ((AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken") == null)
-            {
-                throw new Exception("Graph token not found.");
-            }
-
             MachineTag postObj = new MachineTag();
             postObj.Value = tagName;
             postObj.Action = "Add";
@@ -52,19 +47,8 @@ namespace MdatpPwsh
 
         protected override void ProcessRecord()
         {
-            WriteVerbose("Getting token from session.");
-            AuthenticationResult token = (AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken");
-
             WriteVerbose("Starting api call.");
-            HttpResponseMessage apiResponse = null;
-
-            InvokeDatpApiCall invokeDatpApiCall = new InvokeDatpApiCall(apiUri, token, HttpMethod.Post, apiPost);
-            foreach (HttpResponseMessage r in invokeDatpApiCall.Invoke<HttpResponseMessage>())
-            {
-                apiResponse = r;
-            }
-
-            string apiJson = apiResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            string apiJson = SendApiCall(apiUri, apiPost, HttpMethod.Post);
 
             Machine apiResult = JsonConvert.DeserializeObject<Machine>(apiJson);
 

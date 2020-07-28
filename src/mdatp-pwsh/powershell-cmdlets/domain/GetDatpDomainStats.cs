@@ -8,7 +8,7 @@ using MdatpPwsh.Classes;
 namespace MdatpPwsh
 {
     [Cmdlet(VerbsCommon.Get, "DatpDomainStats")]
-    public class GetDatpDomainStats : PSCmdlet
+    public class GetDatpDomainStats : DatpCmdlet
     {
         [Parameter(Position = 0)]
         public string DomainName
@@ -22,31 +22,13 @@ namespace MdatpPwsh
 
         protected override void BeginProcessing()
         {
-            if ((AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken") == null)
-            {
-                throw new Exception("Graph token not found.");
-            }
-
             apiUri = $"domains/{domainName}/stats";
         }
 
         protected override void ProcessRecord()
         {
-            WriteVerbose("Getting token from session.");
-            AuthenticationResult token = (AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken");
-
             WriteVerbose("Starting api call.");
-            HttpResponseMessage apiResponse = null;
-
-            InvokeDatpApiCall invokeDatpApiCall = new InvokeDatpApiCall(apiUri, token, HttpMethod.Get);
-            foreach (HttpResponseMessage r in invokeDatpApiCall.Invoke<HttpResponseMessage>())
-            {
-                apiResponse = r;
-            }
-
-            string apiJson = apiResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-
-            WriteVerbose(apiJson);
+            string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
             DomainStats apiResult = JsonConvert.DeserializeObject<DomainStats>(apiJson);
 
