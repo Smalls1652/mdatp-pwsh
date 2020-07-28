@@ -9,7 +9,7 @@ using MdatpPwsh.Classes;
 namespace MdatpPwsh
 {
     [Cmdlet(VerbsCommon.Get, "DatpMachineAlerts")]
-    public class GetDatpMachineAlerts : PSCmdlet
+    public class GetDatpMachineAlerts : DatpCmdlet
     {
         [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
         public string MachineId
@@ -23,11 +23,6 @@ namespace MdatpPwsh
 
         protected override void BeginProcessing()
         {
-            if ((AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken") == null)
-            {
-                throw new Exception("Graph token not found.");
-            }
-
             apiUri = $"machines/{machineId}/alerts";
 
             WriteVerbose($"Getting alerts triggered by '{machineId}'.");
@@ -35,19 +30,8 @@ namespace MdatpPwsh
 
         protected override void ProcessRecord()
         {
-            WriteVerbose("Getting token from session.");
-            AuthenticationResult token = (AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken");
-
             WriteVerbose("Starting api call.");
-            HttpResponseMessage apiResponse = null;
-
-            InvokeDatpApiCall invokeDatpApiCall = new InvokeDatpApiCall(apiUri, token, HttpMethod.Get);
-            foreach (HttpResponseMessage r in invokeDatpApiCall.Invoke<HttpResponseMessage>())
-            {
-                apiResponse = r;
-            }
-
-            string apiJson = apiResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
             AlertCollection apiResult = JsonConvert.DeserializeObject<AlertCollection>(apiJson);
 

@@ -10,7 +10,7 @@ namespace MdatpPwsh
     using Classes;
 
     [Cmdlet(VerbsData.Out, "DatpInvestigationPkg")]
-    public class OutDatpInvestigationPkg : PSCmdlet
+    public class OutDatpInvestigationPkg : DatpCmdlet
     {
 
         [Parameter(Position = 0, Mandatory = true)]
@@ -34,11 +34,6 @@ namespace MdatpPwsh
 
         protected override void BeginProcessing()
         {
-            if ((AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken") == null)
-            {
-                throw new Exception("Graph token not found.");
-            }
-
             apiUri = $"machineactions/{activityId}/GetPackageUri";
 
             WriteVerbose($"Getting package for activity '{activityId}'.");
@@ -47,19 +42,8 @@ namespace MdatpPwsh
 
         protected override void ProcessRecord()
         {
-            WriteVerbose("Getting token from session.");
-            AuthenticationResult token = (AuthenticationResult)SessionState.PSVariable.GetValue("DatpGraphToken");
-
             WriteVerbose("Starting api call.");
-            HttpResponseMessage apiResponse = null;
-
-            InvokeDatpApiCall invokeDatpApiCall = new InvokeDatpApiCall(apiUri, token, HttpMethod.Get);
-            foreach (HttpResponseMessage r in invokeDatpApiCall.Invoke<HttpResponseMessage>())
-            {
-                apiResponse = r;
-            }
-
-            string apiJson = apiResponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
             InvestigationPkgDownload apiResult = JsonConvert.DeserializeObject<InvestigationPkgDownload>(apiJson);
             apiResult.ActivityId = ActivityId;
