@@ -15,16 +15,17 @@ namespace MdatpPwsh
         {
             public DatpSessionClient() { }
 
-            public DatpSessionClient(Uri baseApiUri, AuthenticationResult graphToken)
+            public DatpSessionClient(Uri baseApiUri, AuthenticationResult graphToken, IPublicClientApplication app)
             {
                 BaseApiUri = baseApiUri;
                 GraphToken = graphToken;
-
+                App = app;
                 Connect();
             }
 
             public Uri BaseApiUri { get; set; }
             public AuthenticationResult GraphToken { get; set; }
+            public IPublicClientApplication App { get; set; }
             public HttpClient GraphClient { get; set; }
 
             public void Connect()

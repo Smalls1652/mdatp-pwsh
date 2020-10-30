@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Management.Automation;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Identity.Client;
@@ -11,7 +12,7 @@ namespace MdatpPwsh
     using Session;
 
     [Cmdlet(VerbsCommunications.Connect, "DatpGraph")]
-    public class ConnectDatpGraph : PSCmdlet
+    public class ConnectDatpGraph : DatpCmdlet
     {
         protected override void ProcessRecord()
         {
@@ -37,11 +38,21 @@ namespace MdatpPwsh
                 configReader.Close();
             }
 
-            WriteVerbose("Building PublicClient app object.");
-            IPublicClientApplication app = PublicClientApplicationBuilder.Create(moduleConfig.PublicClientAppId)
-                .WithAuthority($"https://login.microsoftonline.com/{moduleConfig.TenantId}")
-                .WithDefaultRedirectUri()
-                .Build();
+            IPublicClientApplication app = null;
+
+            try
+            {
+                app = GetSessionClient().App;
+                WriteVerbose("PublicClient already in memory.");
+            }
+            catch
+            {
+                WriteVerbose("Building PublicClient app object.");
+                app = PublicClientApplicationBuilder.Create(moduleConfig.PublicClientAppId)
+                    .WithAuthority($"https://login.microsoftonline.com/{moduleConfig.TenantId}")
+                    .WithDefaultRedirectUri()
+                    .Build();
+            }
 
             PublicAuthenticationHelper TokenFlow = new PublicAuthenticationHelper(app);
 
@@ -50,17 +61,19 @@ namespace MdatpPwsh
                 };
 
             AuthenticationResult result = null;
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
             try
             {
-                result = TokenFlow.GetDeviceCode(scopes).GetAwaiter().GetResult();
+                result = TokenFlow.StartAcquire(scopes).GetAwaiter().GetResult();
             }
             catch (System.Exception e)
             {
                 throw e;
             }
+            cancellationTokenSource = null;
 
-            DatpSessionClient sessionClient = new DatpSessionClient(new Uri("https://api.securitycenter.microsoft.com/api/v1.0/"), result);
+            DatpSessionClient sessionClient = new DatpSessionClient(new Uri("https://api.securitycenter.microsoft.com/api/v1.0/"), result, app);
 
             SessionState.PSVariable.Set(new PSVariable("DatpSessionClient", sessionClient, ScopedItemOptions.Private));
             WriteObject("You are now connected to the Defender ATP API.");
