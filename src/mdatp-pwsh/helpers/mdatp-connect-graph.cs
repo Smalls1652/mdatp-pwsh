@@ -12,34 +12,22 @@ namespace MdatpPwsh
         {
             App = app;
         }
-        protected IPublicClientApplication App { get; private set; }
+        private IPublicClientApplication App { get; set; }
 
-        public async Task<AuthenticationResult> SilentAcquire(IEnumerable<string> scopes)
+        public async Task<AuthenticationResult> StartAcquire(IEnumerable<string> scopes)
         {
             AuthenticationResult result = null;
 
             var accounts = await App.GetAccountsAsync();
-
             if (accounts.Any())
             {
-                try
-                {
-                    result = await App.AcquireTokenSilent(scopes, accounts.FirstOrDefault())
-                                        .ExecuteAsync();
-                }
-                catch (MsalUiRequiredException)
-                {
-                }
+                result = await App.AcquireTokenSilent(scopes, accounts.FirstOrDefault())
+                    .ExecuteAsync();
             }
-
-            return result;
-        }
-
-        public async Task<AuthenticationResult> GetInteractive(IEnumerable<string> scopes)
-        {
-            AuthenticationResult result = null;
-
-            result = await App.AcquireTokenInteractive(scopes).ExecuteAsync();
+            else
+            {
+                result = await GetDeviceCode(scopes);
+            }
 
             return result;
         }
@@ -48,12 +36,23 @@ namespace MdatpPwsh
         {
             AuthenticationResult result = null;
 
-            result = await App.AcquireTokenWithDeviceCode(scopes,
-                deviceCodeCallback =>
-                {
-                    Console.WriteLine(deviceCodeCallback.Message);
-                    return Task.FromResult(0);
-                }).ExecuteAsync();
+            try
+            {
+                result = await App.AcquireTokenWithDeviceCode(scopes,
+                    deviceCodeCallback =>
+                    {
+                        Console.WriteLine(deviceCodeCallback.Message);
+                        return Task.FromResult(0);
+                    }).ExecuteAsync();
+            }
+            catch (MsalServiceException e)
+            {
+                throw e;
+            }
+            catch (MsalClientException e)
+            {
+                throw e;
+            }
 
             return result;
         }
