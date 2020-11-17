@@ -29,7 +29,7 @@
     # FormatsToProcess = @()
     # NestedModules = @()
 
-    FunctionsToExport  = "*"
+    # FunctionsToExport  = "*"
 
     CmdletsToExport    = @(
         "Set-DatpModuleConfig",
@@ -57,9 +57,9 @@
         "Get-DatpFileStats"
     )
 
-    VariablesToExport  = "*"
+    # VariablesToExport  = "*"
 
-    AliasesToExport    = "*"
+    # AliasesToExport    = "*"
 
     # DscResourcesToExport = @()
     # ModuleList = @()
