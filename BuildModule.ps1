@@ -3,7 +3,25 @@ param(
 
 )
 
-Push-Location -Path "./src/"
+$ScriptLocation = $PSScriptRoot
+
+$csProjectDir = [System.IO.Path]::Combine($ScriptLocation, "src\")
+$csProjectPublishDir = [System.IO.Path]::Combine($csProjectDir, "bin\", "Debug\", "netstandard2.1\", "publish\")
+
+$buildDir = [System.IO.Path]::Combine($ScriptLocation, "build\")
+$buildModuleDir = [System.IO.Path]::Combine($buildDir, "mdatp-pwsh\")
+
+$sourceLicensePath = [System.IO.Path]::Combine($ScriptLocation, "license.txt")
+$destinationLicensePath = [System.IO.Path]::Combine($buildModuleDir, "License.txt")
+
+$filesToCopy = [System.Collections.Generic.List[string[]]]@(
+            ([System.IO.Path]::Combine($ScriptLocation, "module-manifest\", "mdatp-pwsh.psd1")),
+            ([System.IO.Path]::Combine($csProjectPublishDir, "MdatpPwsh.dll")),
+            ([System.IO.Path]::Combine($csProjectPublishDir, "Microsoft.Identity.Client.dll")),
+            ([System.IO.Path]::Combine($csProjectPublishDir, "Newtonsoft.Json.dll"))
+)
+
+Push-Location -Path $csProjectDir
 
 try {
     dotnet clean
@@ -15,16 +33,16 @@ finally {
     Pop-Location
 }
 
-if (Test-Path -Path "./build") {
-    Remove-Item -Path "./build" -Recurse -Force
+
+if (Test-Path -Path $buildDir) {
+    Remove-Item -Path $buildDir -Recurse -Force
 }
 
-$null = New-Item -Type Directory -Path "./build"
-$null = New-Item -Type Directory -Path "./build/mdatp-pwsh"
+$null = New-Item -Type Directory -Path $buildDir
+$null = New-Item -Type Directory -Path $buildModuleDir
 
-Copy-Item -Path "./src/bin/Debug/netstandard2.1/publish/MdatpPwsh.dll" -Destination "./build/mdatp-pwsh/"
-Copy-Item -Path "./src/bin/Debug/netstandard2.1/publish/Microsoft.Identity.Client.dll" -Destination "./build/mdatp-pwsh/"
-Copy-Item -Path "./src/bin/Debug/netstandard2.1/publish/Newtonsoft.Json.dll" -Destination "./build/mdatp-pwsh/"
-Copy-Item -Path "./license.txt" -Destination "./build/mdatp-pwsh/License.txt"
+foreach ($item in $filesToCopy) {
+    Copy-Item -Path $item -Destination $buildModuleDir
+}
 
-Copy-Item -Path "./module-manifest/mdatp-pwsh.psd1" -Destination "./build/mdatp-pwsh/"
+Copy-Item -Path $sourceLicensePath -Destination $destinationLicensePath
