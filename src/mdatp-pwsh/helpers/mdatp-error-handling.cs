@@ -1,12 +1,13 @@
 using System;
 using System.Net;
 using System.Net.Http;
-using Newtonsoft.Json;
 
-using MdatpPwsh.Classes;
+using System.Text.Json;
 
 namespace MdatpPwsh
 {
+    using MdatpPwsh.Models.Errors;
+
     [Serializable]
     public class DatpException : Exception
     {
@@ -24,7 +25,7 @@ namespace MdatpPwsh
     {
         private ErrorMessage ConvertErrorToClass(HttpContent content)
         {
-            ErrorMessage errorResponse = JsonConvert.DeserializeObject<ErrorMessage>(content.ReadAsStringAsync().GetAwaiter().GetResult());
+            ErrorMessage errorResponse = JsonSerializer.Deserialize<ErrorMessage>(content.ReadAsStringAsync().GetAwaiter().GetResult());
 
             return errorResponse;
         }
@@ -59,7 +60,7 @@ namespace MdatpPwsh
             {
                 case true:
                     ErrorMessage errorMsg = ConvertErrorToClass(response.Content);
-                    throw new DatpException(errorMsg.error.message, errorMsg);
+                    throw new DatpException(errorMsg.ErrorDetails.ErrorMessage, errorMsg);
 
                 default:
                     break;

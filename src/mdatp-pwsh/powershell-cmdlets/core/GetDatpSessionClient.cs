@@ -1,9 +1,9 @@
 using System;
 using System.Management.Automation;
 
-namespace MdatpPwsh
+namespace MdatpPwsh.Cmdlets
 {
-    using Session;
+    using MdatpPwsh.Session;
 
     [Cmdlet(VerbsCommon.Get, "DatpSessionClient")]
     public class GetDatpSessionClient : DatpCmdlet

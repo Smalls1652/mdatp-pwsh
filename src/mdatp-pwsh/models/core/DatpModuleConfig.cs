@@ -1,4 +1,8 @@
-namespace MdatpPwsh
+using System;
+
+using System.Text.Json.Serialization;
+
+namespace MdatpPwsh.Models.Core
 {
     public class DatpModuleConfig
     {

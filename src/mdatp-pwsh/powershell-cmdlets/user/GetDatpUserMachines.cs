@@ -1,13 +1,13 @@
 using System;
 using System.Management.Automation;
 using System.Net.Http;
-using Newtonsoft.Json;
-using Microsoft.Identity.Client;
 
-using MdatpPwsh.Classes;
+using System.Text.Json;
 
-namespace MdatpPwsh
+namespace MdatpPwsh.Cmdlets
 {
+    using MdatpPwsh.Models;
+
     [Cmdlet(VerbsCommon.Get, "DatpUserMachines")]
     public class GetDatpUserMachines : DatpCmdlet
     {
@@ -33,9 +33,9 @@ namespace MdatpPwsh
             WriteVerbose("Starting api call.");
             string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
-            MachineCollection apiResult = JsonConvert.DeserializeObject<MachineCollection>(apiJson);
+            ResponseCollection<Machine> apiResult = JsonSerializer.Deserialize<ResponseCollection<Machine>>(apiJson);
 
-            foreach (Machine item in apiResult.value)
+            foreach (Machine item in apiResult.Value)
             {
                 WriteObject(item);
             }

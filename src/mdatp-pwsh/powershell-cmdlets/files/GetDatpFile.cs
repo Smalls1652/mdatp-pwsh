@@ -1,12 +1,12 @@
 using System;
 using System.Management.Automation;
 using System.Net.Http;
-using Newtonsoft.Json;
-using Microsoft.Identity.Client;
 
-namespace MdatpPwsh
+using System.Text.Json;
+
+namespace MdatpPwsh.Cmdlets
 {
-    using Classes;
+    using MdatpPwsh.Models;
 
     [Cmdlet(VerbsCommon.Get, "DatpFile")]
     public class GetDatpFile : DatpCmdlet
@@ -29,7 +29,7 @@ namespace MdatpPwsh
             WriteVerbose("Starting api call.");
             string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
-            FileProperties apiResult = JsonConvert.DeserializeObject<FileProperties>(apiJson);
+            FileProperties apiResult = JsonSerializer.Deserialize<FileProperties>(apiJson);
 
             WriteObject(apiResult);
         }

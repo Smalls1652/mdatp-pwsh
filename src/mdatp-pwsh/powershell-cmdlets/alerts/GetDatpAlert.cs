@@ -1,14 +1,13 @@
 using System;
 using System.Management.Automation;
 using System.Net.Http;
-using Newtonsoft.Json;
-using Microsoft.Identity.Client;
 
-namespace MdatpPwsh
+using System.Text.Json;
+
+namespace MdatpPwsh.Cmdlets
 {
-    using Classes;
-    using Classes.Enums;
-    using Session;
+    using MdatpPwsh.Models;
+    using MdatpPwsh.Enums.Alerts;
 
     [Cmdlet(VerbsCommon.Get, "DatpAlert")]
     [CmdletBinding(DefaultParameterSetName = "ListAlerts")]
@@ -77,12 +76,12 @@ namespace MdatpPwsh
             switch (ParameterSetName)
             {
                 case "GetAlert":
-                    apiResult = JsonConvert.DeserializeObject<Alert>(apiJson);
+                    apiResult = JsonSerializer.Deserialize<Alert>(apiJson);
                     WriteObject(apiResult);
                     break;
 
                 default:
-                    apiResult = JsonConvert.DeserializeObject<AlertCollection>(apiJson);
+                    apiResult = JsonSerializer.Deserialize<ResponseCollection<Alert>>(apiJson);
 
                     foreach (Alert obj in apiResult.value)
                     {

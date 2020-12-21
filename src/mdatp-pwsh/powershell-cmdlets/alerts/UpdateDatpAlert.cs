@@ -1,13 +1,13 @@
 using System;
 using System.Management.Automation;
 using System.Net.Http;
-using Newtonsoft.Json;
-using Microsoft.Identity.Client;
 
-namespace MdatpPwsh
+using System.Text.Json;
+
+namespace MdatpPwsh.Cmdlets
 {
-    using Classes;
-    using Classes.Enums;
+    using MdatpPwsh.Models;
+    using MdatpPwsh.Enums.Alerts;
 
     [Cmdlet(VerbsData.Update, "DatpAlert")]
     public class UpdateDatpAlert : DatpCmdlet
@@ -77,7 +77,7 @@ namespace MdatpPwsh
                 Determination = alertDetermination,
                 Comment = comment
             );
-            string apiPatch = JsonConvert.SerializeObject(updateAlert);
+            string apiPatch = JsonSerializer.Serialize<UpdateAlert>(updateAlert);
 
             WriteVerbose("Starting api call.");
             string apiJson = SendApiCall(apiUri, apiPatch, HttpMethod.Patch);

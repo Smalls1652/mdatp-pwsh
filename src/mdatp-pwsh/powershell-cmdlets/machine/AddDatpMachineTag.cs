@@ -1,14 +1,14 @@
 using System;
 using System.Management.Automation;
 using System.Net.Http;
-using Newtonsoft.Json;
-using Microsoft.Identity.Client;
 
-using MdatpPwsh.Classes;
-using MdatpPwsh.Classes.Post;
+using System.Text.Json;
 
-namespace MdatpPwsh
+
+namespace MdatpPwsh.Cmdlets
 {
+    using MdatpPwsh.Models;
+
     [Cmdlet(VerbsCommon.Add, "DatpMachineTag")]
     public class AddDatpMachineTag : DatpCmdlet
     {
@@ -38,7 +38,7 @@ namespace MdatpPwsh
             postObj.Value = tagName;
             postObj.Action = "Add";
 
-            apiPost = JsonConvert.SerializeObject(postObj);
+            apiPost = JsonSerializer.Serialize<MachineTag>(postObj);
 
             apiUri = $"machines/{machineId}/tags";
 
@@ -50,7 +50,7 @@ namespace MdatpPwsh
             WriteVerbose("Starting api call.");
             string apiJson = SendApiCall(apiUri, apiPost, HttpMethod.Post);
 
-            Machine apiResult = JsonConvert.DeserializeObject<Machine>(apiJson);
+            Machine apiResult = JsonSerializer.Deserialize<Machine>(apiJson);
 
             WriteObject(apiResult);
         }

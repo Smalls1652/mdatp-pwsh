@@ -1,9 +1,12 @@
 using System.IO;
 using System.Management.Automation;
-using Newtonsoft.Json;
 
-namespace MdatpPwsh
+using System.Text.Json;
+
+namespace MdatpPwsh.Cmdlets
 {
+    using MdatpPwsh.Models.Core;
+
     [Cmdlet(VerbsCommon.Set, "DatpModuleConfig")]
     public class SetDatpModuleConfig : PSCmdlet
     {
@@ -29,7 +32,7 @@ namespace MdatpPwsh
             configObj.PublicClientAppId = publicClientAppId;
             configObj.TenantId = tenantId;
 
-            string configContents = JsonConvert.SerializeObject(configObj);
+            string configContents = JsonSerializer.Serialize<DatpModuleConfig>(configObj);
 
             string userProfilePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
 

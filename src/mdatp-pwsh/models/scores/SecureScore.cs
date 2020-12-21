@@ -1,27 +1,22 @@
 using System;
 using System.Collections.Generic;
 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace MdatpPwsh
 {
-    namespace Classes
+    namespace Models
     {
         public class SecureScore
         {
-            [JsonProperty("time")]
+            [JsonPropertyName("time")]
             public Nullable<DateTime> ApiTimeStamp { get; set; }
 
-            [JsonProperty("rbacGroupName")]
+            [JsonPropertyName("rbacGroupName")]
             public string RbacGroupName { get; set; }
 
-            [JsonProperty("score")]
+            [JsonPropertyName("score")]
             public double Score { get; set; }
-        }
-
-        public class ScoreCollection
-        {
-            public List<SecureScore> value { get; set; }
         }
     }
 }

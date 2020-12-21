@@ -2,12 +2,12 @@ using System;
 using System.IO;
 using System.Management.Automation;
 using System.Net.Http;
-using Newtonsoft.Json;
-using Microsoft.Identity.Client;
 
-namespace MdatpPwsh
+using System.Text.Json;
+
+namespace MdatpPwsh.Cmdlets
 {
-    using Classes;
+    using MdatpPwsh.Models;
 
     [Cmdlet(VerbsData.Out, "DatpInvestigationPkg")]
     public class OutDatpInvestigationPkg : DatpCmdlet
@@ -45,7 +45,7 @@ namespace MdatpPwsh
             WriteVerbose("Starting api call.");
             string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
-            InvestigationPkgDownload apiResult = JsonConvert.DeserializeObject<InvestigationPkgDownload>(apiJson);
+            InvestigationPkgDownload apiResult = JsonSerializer.Deserialize<InvestigationPkgDownload>(apiJson);
             apiResult.ActivityId = ActivityId;
 
             WriteVerbose("Downloading investigation package.");

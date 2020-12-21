@@ -1,13 +1,13 @@
 using System;
 using System.Management.Automation;
 using System.Net.Http;
-using Newtonsoft.Json;
-using Microsoft.Identity.Client;
 
-using MdatpPwsh.Classes;
+using System.Text.Json;
 
-namespace MdatpPwsh
+namespace MdatpPwsh.Cmdlets
 {
+    using MdatpPwsh.Models;
+
     [Cmdlet(VerbsCommon.Get, "DatpMachineAction")]
     [CmdletBinding(DefaultParameterSetName = "AllActivities")]
     public class GetDatpMachineAction : DatpCmdlet
@@ -52,14 +52,14 @@ namespace MdatpPwsh
             switch (ParameterSetName)
             {
                 case "SingleActivity":
-                    ActivityResponse apiResult = JsonConvert.DeserializeObject<ActivityResponse>(apiJson);
+                    ActivityResponse apiResult = JsonSerializer.Deserialize<ActivityResponse>(apiJson);
                     WriteObject(apiResult);
                     break;
 
                 case "AllActivities":
-                    ActivityResponseCollection apiResults = JsonConvert.DeserializeObject<ActivityResponseCollection>(apiJson);
+                    ResponseCollection<ActivityResponse> apiResults = JsonSerializer.Deserialize<ResponseCollection<ActivityResponse>>(apiJson);
 
-                    foreach (ActivityResponse item in apiResults.value)
+                    foreach (ActivityResponse item in apiResults.Value)
                     {
                         WriteObject(item);
                     }

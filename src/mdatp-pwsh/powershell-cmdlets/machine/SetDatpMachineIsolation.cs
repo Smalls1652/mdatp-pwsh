@@ -1,14 +1,13 @@
 using System;
 using System.Management.Automation;
 using System.Net.Http;
-using Newtonsoft.Json;
-using Microsoft.Identity.Client;
 
-using MdatpPwsh.Classes;
-using MdatpPwsh.Classes.Post;
+using System.Text.Json;
 
-namespace MdatpPwsh
+namespace MdatpPwsh.Cmdlets
 {
+    using MdatpPwsh.Models;
+
     [Cmdlet(VerbsCommon.Set, "DatpMachineIsolation")]
     public class SetDatpMachineIsolation : DatpCmdlet
     {
@@ -54,7 +53,7 @@ namespace MdatpPwsh
                     IsolateMachine isoFullPostObj = new IsolateMachine();
                     isoFullPostObj.Comment = cmnt;
                     isoFullPostObj.IsolationType = "Full";
-                    apiPost = JsonConvert.SerializeObject(isoFullPostObj);
+                    apiPost = JsonSerializer.Serialize<IsolateMachine>(isoFullPostObj);
                     break;
 
                 case "Selective Isolation":
@@ -62,14 +61,14 @@ namespace MdatpPwsh
                     IsolateMachine isoSelPostObj = new IsolateMachine();
                     isoSelPostObj.Comment = cmnt;
                     isoSelPostObj.IsolationType = "Selective";
-                    apiPost = JsonConvert.SerializeObject(isoSelPostObj);
+                    apiPost = JsonSerializer.Serialize<IsolateMachine>(isoSelPostObj);
                     break;
 
                 case "Release Isolation":
                     apiUri = $"machines/{machineId}/unisolate";
                     UnIsolateMachine unIsoPost = new UnIsolateMachine();
                     unIsoPost.Comment = cmnt;
-                    apiPost = JsonConvert.SerializeObject(unIsoPost);
+                    apiPost = JsonSerializer.Serialize<UnIsolateMachine>(unIsoPost);
                     break;
             }
 
@@ -81,7 +80,7 @@ namespace MdatpPwsh
             WriteVerbose("Starting api call.");
             string apiJson = SendApiCall(apiUri, apiPost, HttpMethod.Post);
 
-            apiResult = JsonConvert.DeserializeObject<ActivityResponse>(apiJson);
+            apiResult = JsonSerializer.Deserialize<ActivityResponse>(apiJson);
 
         }
 

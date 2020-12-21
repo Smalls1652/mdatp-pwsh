@@ -4,12 +4,14 @@ using System.IO;
 using System.Management.Automation;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+
+using System.Text.Json;
 using Microsoft.Identity.Client;
 
-namespace MdatpPwsh
+namespace MdatpPwsh.Cmdlets
 {
-    using Session;
+    using MdatpPwsh.Models.Core;
+    using MdatpPwsh.Session;
 
     [Cmdlet(VerbsCommunications.Connect, "DatpGraph")]
     public class ConnectDatpGraph : DatpCmdlet
@@ -33,7 +35,7 @@ namespace MdatpPwsh
             {
                 StreamReader configReader = new StreamReader(configFilePath);
 
-                moduleConfig = JsonConvert.DeserializeObject<DatpModuleConfig>(configReader.ReadToEnd());
+                moduleConfig = JsonSerializer.Deserialize<DatpModuleConfig>(configReader.ReadToEnd());
 
                 configReader.Close();
             }
