@@ -13,7 +13,10 @@ namespace MdatpPwsh.Cmdlets
     [Cmdlet(VerbsCommon.Get, "DatpUserMachines")]
     public class GetDatpUserMachines : DatpCmdlet
     {
-        [Parameter(Mandatory = true)]
+        [Parameter(
+            Position = 0,
+            Mandatory = true
+        )]
         public List<string> UserName
         {
             get { return userName; }
@@ -30,9 +33,9 @@ namespace MdatpPwsh.Cmdlets
         {
             foreach (string user in userName)
             {
-                string apiUri = $"users/{userName}/machines";
+                string apiUri = $"users/{user}/machines";
 
-                WriteVerbose($"Getting machines '{userName}' has logged into.");
+                WriteVerbose($"Getting machines '{user}' has logged into.");
                 string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
                 ResponseCollection<Machine> apiResult = new JsonConverter<ResponseCollection<Machine>>(apiJson).Value;
