@@ -7,31 +7,41 @@ using System.Text.Json;
 namespace MdatpPwsh.Cmdlets
 {
     using MdatpPwsh.Models;
+    using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpFileStats")]
     public class GetDatpFileStats : DatpCmdlet
     {
-        [Parameter(Position = 0, Mandatory = true)]
+        [Parameter(
+            Position = 0,
+            Mandatory = true
+        )]
         public string FileIdentifier
         {
             get { return fileIdentifier; }
             set { fileIdentifier = value; }
         }
-
         private string fileIdentifier;
 
-        private string apiUri;
+        protected override void BeginProcessing()
+        {
+            base.BeginProcessing();
+        }
 
         protected override void ProcessRecord()
         {
-            apiUri = $"files/{fileIdentifier}/stats";
+            string apiUri = $"files/{fileIdentifier}/stats";
 
-            WriteVerbose("Starting api call.");
+            WriteVerbose($"Getting stats for file identifier '{fileIdentifier}'.");
             string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
-            FileStats apiResult = JsonSerializer.Deserialize<FileStats>(apiJson);
-
+            FileStats apiResult = new JsonConverter<FileStats>(apiJson).Value;
             WriteObject(apiResult);
+        }
+
+        protected override void EndProcessing()
+        {
+            base.EndProcessing();
         }
     }
 }

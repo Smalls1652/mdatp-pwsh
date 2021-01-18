@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 using System.Net.Http;
 
@@ -7,43 +8,48 @@ using System.Text.Json;
 namespace MdatpPwsh.Cmdlets
 {
     using MdatpPwsh.Models;
+    using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpUserAlerts")]
     public class GetDatpUserAlerts : DatpCmdlet
     {
-        [Parameter(Mandatory = true)]
-        public string UserName
+        [Parameter(
+            Position = 0,
+            Mandatory = true
+        )]
+        public List<string> UserName
         {
             get { return userName; }
             set { userName = value; }
         }
-        private static string userName;
-
-        private static string apiUri;
+        private List<string> userName;
 
         protected override void BeginProcessing()
         {
-            apiUri = $"users/{userName}/alerts";
-
-            WriteVerbose($"Getting alerts triggered by '{userName}'.");
+            base.BeginProcessing();
         }
 
         protected override void ProcessRecord()
         {
-            WriteVerbose("Starting api call.");
-            string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
-
-            ResponseCollection<Alert> apiResult = JsonSerializer.Deserialize<ResponseCollection<Alert>>(apiJson);
-
-            foreach (Alert item in apiResult.Value)
+            foreach (string user in userName)
             {
-                WriteObject(item);
-            }
+                string apiUri = $"users/{user}/alerts";
 
+                WriteVerbose($"Getting alerts triggered by '{user}'.");
+                string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
+
+                ResponseCollection<Alert> apiResult = new JsonConverter<ResponseCollection<Alert>>(apiJson).Value;
+
+                foreach (Alert item in apiResult.Value)
+                {
+                    WriteObject(item);
+                }
+            }
         }
 
         protected override void EndProcessing()
         {
+            base.EndProcessing();
         }
     }
 }

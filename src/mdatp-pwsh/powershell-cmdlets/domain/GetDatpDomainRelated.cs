@@ -7,20 +7,25 @@ using System.Text.Json;
 namespace MdatpPwsh.Cmdlets
 {
     using MdatpPwsh.Models;
-    using MdatpPwsh.Models.Core;
+    using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpDomainRelated")]
     public class GetDatpDomainRelated : DatpCmdlet
     {
-        [Parameter(Position = 0)]
+        [Parameter(
+            Position = 0,
+            Mandatory = true
+        )]
         public string DomainName
         {
             get { return domainName; }
             set { domainName = value; }
         }
-        private static string domainName;
+        private string domainName;
 
-        [Parameter(Position = 1)]
+        [Parameter(
+            Position = 1
+        )]
         [ValidateSet(
             "Alerts",
             "Machines"
@@ -30,31 +35,30 @@ namespace MdatpPwsh.Cmdlets
             get { return searchType; }
             set { searchType = value; }
         }
-        private static string searchType = "Machines";
-
-        private static string apiUri;
+        private string searchType = "Machines";
 
 
         protected override void BeginProcessing()
         {
-            apiUri = $"domains/{domainName}/{searchType.ToLower()}";
+            base.BeginProcessing();
         }
 
         protected override void ProcessRecord()
         {
-            WriteVerbose("Starting api call.");
+            string apiUri = $"domains/{domainName}/{searchType.ToLower()}";
+
+            WriteVerbose($"Getting related info for domain '{domainName}'.");
             string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
             dynamic apiResult = null;
-
             switch (searchType)
             {
                 case "Alerts":
-                    apiResult = JsonSerializer.Deserialize<ResponseCollection<Alert>>(apiJson);
+                    apiResult = new JsonConverter<ResponseCollection<Alert>>(apiJson).Value;
                     break;
 
                 case "Machines":
-                    apiResult = JsonSerializer.Deserialize<ResponseCollection<Machine>>(apiJson);
+                    apiResult = new JsonConverter<ResponseCollection<Machine>>(apiJson).Value;
                     break;
 
             }

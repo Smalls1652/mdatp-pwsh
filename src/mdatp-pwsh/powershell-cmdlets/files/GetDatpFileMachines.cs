@@ -7,29 +7,35 @@ using System.Text.Json;
 namespace MdatpPwsh.Cmdlets
 {
     using MdatpPwsh.Models;
+    using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpFileMachines")]
     public class GetDatpFileMachines : DatpCmdlet
     {
-        [Parameter(Position = 0, Mandatory = true)]
+        [Parameter(
+            Position = 0,
+            Mandatory = true
+        )]
         public string FileIdentifier
         {
             get { return fileIdentifier; }
             set { fileIdentifier = value; }
         }
-
         private string fileIdentifier;
 
-        private string apiUri;
-        
+        protected override void BeginProcessing()
+        {
+            base.BeginProcessing();
+        }
+
         protected override void ProcessRecord()
         {
-            apiUri = $"files/{fileIdentifier}/machines";
+            string apiUri = $"files/{fileIdentifier}/machines";
 
-            WriteVerbose("Starting api call.");
+            WriteVerbose($"Getting machines reporting to have seen file identifier '{fileIdentifier}'.");
             string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
-            ResponseCollection<Machine> apiResult = JsonSerializer.Deserialize<ResponseCollection<Machine>>(apiJson);
+            ResponseCollection<Machine> apiResult = new JsonConverter<ResponseCollection<Machine>>(apiJson).Value;
             foreach (Machine item in apiResult.Value)
             {
                 WriteObject(item);

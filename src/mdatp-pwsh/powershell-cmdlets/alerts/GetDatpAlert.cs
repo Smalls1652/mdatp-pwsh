@@ -14,7 +14,10 @@ namespace MdatpPwsh.Cmdlets
     [CmdletBinding(DefaultParameterSetName = "ListAlerts")]
     public class GetDatpAlert : DatpCmdlet
     {
-        [Parameter(Position = 0, ParameterSetName = "ListAlerts")]
+        [Parameter(
+            Position = 0,
+            ParameterSetName = "ListAlerts"
+        )]
         public AlertStatus AlertStatus
         {
             get { return alertStatus; }
@@ -22,7 +25,10 @@ namespace MdatpPwsh.Cmdlets
         }
         private AlertStatus alertStatus = AlertStatus.New;
 
-        [Parameter(Position = 1, ParameterSetName = "GetAlert")]
+        [Parameter(
+            Position = 1,
+            ParameterSetName = "GetAlert"
+        )]
         public string AlertId
         {
             get { return alertId; }
@@ -30,10 +36,14 @@ namespace MdatpPwsh.Cmdlets
         }
         private string alertId;
 
-        private static string apiUri;
-
         protected override void BeginProcessing()
         {
+            base.BeginProcessing();
+        }
+
+        protected override void ProcessRecord()
+        {
+            string apiUri;
             switch (ParameterSetName)
             {
                 case "GetAlert":
@@ -65,11 +75,8 @@ namespace MdatpPwsh.Cmdlets
                     }
                     break;
             }
-        }
 
-        protected override void ProcessRecord()
-        {
-            WriteVerbose("Starting api call.");
+            WriteVerbose("Getting alerts.");
             string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
             dynamic apiResult = null;
@@ -90,6 +97,11 @@ namespace MdatpPwsh.Cmdlets
                     }
                     break;
             }
+        }
+
+        protected override void EndProcessing()
+        {
+            base.EndProcessing();
         }
     }
 }
