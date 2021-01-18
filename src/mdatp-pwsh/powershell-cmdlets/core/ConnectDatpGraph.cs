@@ -16,6 +16,11 @@ namespace MdatpPwsh.Cmdlets
     [Cmdlet(VerbsCommunications.Connect, "DatpGraph")]
     public class ConnectDatpGraph : DatpCmdlet
     {
+        protected override void BeginProcessing()
+        {
+            base.BeginProcessing();
+        }
+
         protected override void ProcessRecord()
         {
 
@@ -81,5 +86,9 @@ namespace MdatpPwsh.Cmdlets
             WriteObject("You are now connected to the Defender ATP API.");
         }
 
+        protected override void EndProcessing()
+        {
+            base.EndProcessing();
+        }
     }
 }
