@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 using System.Net.Http;
 
@@ -7,65 +8,74 @@ using System.Text.Json;
 namespace MdatpPwsh.Cmdlets
 {
     using MdatpPwsh.Models;
+    using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsLifecycle.Start, "DatpMachineScan")]
     public class StartDatpMachineScan : DatpCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0, ValueFromPipelineByPropertyName = true)]
-        public string MachineId
+        [Parameter(
+            Position = 0,
+            Mandatory = true,
+            ValueFromPipelineByPropertyName = true
+        )]
+        public List<string> MachineId
         {
             get { return machineId; }
             set { machineId = value; }
         }
-        private static string machineId;
+        private List<string> machineId;
 
-        [Parameter(Position = 1)]
+        [Parameter(
+            Position = 1
+        )]
         [ValidateSet("Quick", "Full")]
         public string ScanType
         {
             get { return scanType; }
             set { scanType = value; }
         }
-        private static string scanType = "Quick";
+        private string scanType = "Quick";
 
-        [Parameter(Mandatory = true, Position = 2)]
+        [Parameter(
+            Position = 2,
+            Mandatory = true
+        )]
         [ValidateNotNullOrEmpty()]
         public string Comment
         {
             get { return cmnt; }
             set { cmnt = value; }
         }
-        private static string cmnt;
-
-        private static string apiUri;
-
-        private static string apiPost;
+        private string cmnt;
 
         protected override void BeginProcessing()
         {
-            MachineScan postObj = new MachineScan();
-            postObj.Comment = cmnt;
-            postObj.ScanType = scanType;
-
-            apiPost = JsonSerializer.Serialize<MachineScan>(postObj);
-
-            apiUri = $"machines/{machineId}/runAntiVirusScan";
-
-            WriteVerbose($"Starting a '{scanType} Scan' on '{machineId}'.");
+            base.BeginProcessing();
         }
 
         protected override void ProcessRecord()
         {
-            WriteVerbose("Starting api call.");
-            string apiJson = SendApiCall(apiUri, apiPost, HttpMethod.Post);
+            foreach (string machine in machineId)
+            {
+                MachineScan postObj = new MachineScan();
+                postObj.Comment = cmnt;
+                postObj.ScanType = scanType;
 
-            ActivityResponse apiResult = JsonSerializer.Deserialize<ActivityResponse>(apiJson);
+                string apiPost = JsonSerializer.Serialize<MachineScan>(postObj);
+                string apiUri = $"machines/{machine}/runAntiVirusScan";
 
-            WriteObject(apiResult);
+                WriteVerbose($"Starting a '{scanType} Scan' on '{machine}'.");
+                string apiJson = SendApiCall(apiUri, apiPost, HttpMethod.Post);
+
+                ActivityResponse apiResult = new JsonConverter<ActivityResponse>(apiJson).Value;
+
+                WriteObject(apiResult);
+            }
         }
 
         protected override void EndProcessing()
         {
+            base.EndProcessing();
         }
     }
 }

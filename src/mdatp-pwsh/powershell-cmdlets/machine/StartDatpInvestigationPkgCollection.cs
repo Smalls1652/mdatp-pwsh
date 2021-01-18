@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 using System.Net.Http;
 
@@ -7,54 +8,61 @@ using System.Text.Json;
 namespace MdatpPwsh.Cmdlets
 {
     using MdatpPwsh.Models;
+    using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsLifecycle.Start, "DatpInvestigationPkgCollection")]
     public class StartDatpInvestigationPkgCollection : DatpCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0, ValueFromPipelineByPropertyName = true)]
-        public string MachineId
+        [Parameter(
+            Position = 0,
+            Mandatory = true,
+            ValueFromPipelineByPropertyName = true
+        )]
+        public List<string> MachineId
         {
             get { return machineId; }
             set { machineId = value; }
         }
-        private static string machineId;
+        private List<string> machineId;
 
-        [Parameter(Mandatory = true, Position = 1)]
+        [Parameter(
+            Position = 1,
+            Mandatory = true
+        )]
         public string Comment
         {
             get { return cmnt; }
             set { cmnt = value; }
         }
-        private static string cmnt;
+        private string cmnt;
 
-        private static string apiUri;
-
-        private static string apiPost;
 
         protected override void BeginProcessing()
         {
-            CollectInvestigationPackage postObj = new CollectInvestigationPackage();
-            postObj.Comment = cmnt;
-
-            apiPost = JsonSerializer.Serialize<CollectInvestigationPackage>(postObj);
-
-            apiUri = $"machines/{machineId}/collectInvestigationPackage";
-
-            WriteVerbose($"Initiating investigaton package collection on '{machineId}'.");
+            base.BeginProcessing();
         }
 
         protected override void ProcessRecord()
         {
-            WriteVerbose("Starting api call.");
-            string apiJson = SendApiCall(apiUri, apiPost, HttpMethod.Post);
+            foreach (string machine in machineId)
+            {
+                CollectInvestigationPackage postObj = new CollectInvestigationPackage();
+                postObj.Comment = cmnt;
 
-            ActivityResponse apiResult = JsonSerializer.Deserialize<ActivityResponse>(apiJson);
+                string apiPost = JsonSerializer.Serialize<CollectInvestigationPackage>(postObj);
+                string apiUri = $"machines/{machine}/collectInvestigationPackage";
 
-            WriteObject(apiResult);
+                WriteVerbose($"Initiating investigaton package collection on '{machine}'.");
+                string apiJson = SendApiCall(apiUri, apiPost, HttpMethod.Post);
+
+                ActivityResponse apiResult = new JsonConverter<ActivityResponse>(apiJson).Value;
+                WriteObject(apiResult);
+            }
         }
 
         protected override void EndProcessing()
         {
+            base.EndProcessing();
         }
     }
 }

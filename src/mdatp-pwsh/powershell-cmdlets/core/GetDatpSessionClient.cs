@@ -8,11 +8,21 @@ namespace MdatpPwsh.Cmdlets
     [Cmdlet(VerbsCommon.Get, "DatpSessionClient")]
     public class GetDatpSessionClient : DatpCmdlet
     {
+        protected override void BeginProcessing()
+        {
+            base.BeginProcessing();
+        }
+
         protected override void ProcessRecord()
         {
             DatpSessionClient sessionClient = GetSessionClient();
 
             WriteObject(sessionClient);
+        }
+
+        protected override void EndProcessing()
+        {
+            base.EndProcessing();
         }
     }
 }

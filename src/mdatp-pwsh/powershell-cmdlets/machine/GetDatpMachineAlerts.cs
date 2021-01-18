@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 using System.Net.Http;
 
@@ -7,22 +8,23 @@ using System.Text.Json;
 namespace MdatpPwsh.Cmdlets
 {
     using MdatpPwsh.Models;
+    using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpMachineAlerts")]
     public class GetDatpMachineAlerts : DatpCmdlet
     {
         [Parameter(
+            Position = 0,
             Mandatory = true,
             ValueFromPipelineByPropertyName = true
         )]
-        public string MachineId
+        public List<string> MachineId
         {
             get { return machineId; }
             set { machineId = value; }
         }
-        private static string machineId;
+        private List<string> machineId;
 
-        private static string apiUri;
 
         protected override void BeginProcessing()
         {
@@ -31,20 +33,21 @@ namespace MdatpPwsh.Cmdlets
 
         protected override void ProcessRecord()
         {
-            apiUri = $"machines/{machineId}/alerts";
-
-            WriteVerbose($"Getting alerts triggered by '{machineId}'.");
-
-            WriteVerbose("Starting api call.");
-            string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
-
-            ResponseCollection<Alert> apiResult = JsonSerializer.Deserialize<ResponseCollection<Alert>>(apiJson);
-
-            foreach (Alert item in apiResult.Value)
+            foreach (string machine in machineId)
             {
-                WriteObject(item);
-            }
+                string apiUri = $"machines/{machine}/alerts";
 
+                WriteVerbose($"Getting alerts triggered by '{machine}'.");
+
+                string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
+
+                ResponseCollection<Alert> apiResult = new JsonConverter<ResponseCollection<Alert>>(apiJson).Value;
+
+                foreach (Alert item in apiResult.Value)
+                {
+                    WriteObject(item);
+                }
+            }
         }
 
         protected override void EndProcessing()

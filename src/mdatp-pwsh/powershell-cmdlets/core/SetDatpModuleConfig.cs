@@ -10,21 +10,32 @@ namespace MdatpPwsh.Cmdlets
     [Cmdlet(VerbsCommon.Set, "DatpModuleConfig")]
     public class SetDatpModuleConfig : PSCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0)]
+        [Parameter(
+            Position = 0,
+            Mandatory = true
+        )]
         public string PublicClientAppId
         {
             get { return publicClientAppId; }
             set { publicClientAppId = value; }
         }
-        private static string publicClientAppId;
+        private string publicClientAppId;
 
-        [Parameter(Mandatory = true, Position = 1)]
+        [Parameter(
+            Position = 1,
+            Mandatory = true
+        )]
         public string TenantId
         {
             get { return tenantId; }
             set { tenantId = value; }
         }
-        private static string tenantId;
+        private string tenantId;
+
+        protected override void BeginProcessing()
+        {
+            base.BeginProcessing();
+        }
 
         protected override void ProcessRecord()
         {
@@ -66,6 +77,11 @@ namespace MdatpPwsh.Cmdlets
             configWriter.Close();
 
             WriteObject(configObj);
+        }
+
+        protected override void EndProcessing()
+        {
+            base.EndProcessing();
         }
     }
 }

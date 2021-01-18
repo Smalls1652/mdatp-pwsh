@@ -7,33 +7,44 @@ using System.Text.Json;
 namespace MdatpPwsh.Cmdlets
 {
     using MdatpPwsh.Models;
+    using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpFileAlerts")]
     public class GetDatpFileAlerts : DatpCmdlet
     {
-        [Parameter(Position = 0, Mandatory = true)]
+        [Parameter(
+            Position = 0,
+            Mandatory = true
+        )]
         public string FileIdentifier
         {
             get { return fileIdentifier; }
             set { fileIdentifier = value; }
         }
-
         private string fileIdentifier;
 
-        private string apiUri;
+        protected override void BeginProcessing()
+        {
+            base.BeginProcessing();
+        }
 
         protected override void ProcessRecord()
         {
-            apiUri = $"files/{fileIdentifier}/alerts";
+            string apiUri = $"files/{fileIdentifier}/alerts";
             
-            WriteVerbose("Starting api call.");
+            WriteVerbose($"Getting alerts for file identifier '{fileIdentifier}'.");
             string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
-            ResponseCollection<Alert> apiResult = JsonSerializer.Deserialize<ResponseCollection<Alert>>(apiJson);
+            ResponseCollection<Alert> apiResult = new JsonConverter<ResponseCollection<Alert>>(apiJson).Value;
             foreach (Alert item in apiResult.Value)
             {
                 WriteObject(item);
             }
+        }
+
+        protected override void EndProcessing()
+        {
+            base.EndProcessing();
         }
     }
 }

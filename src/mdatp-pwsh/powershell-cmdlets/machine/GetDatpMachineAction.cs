@@ -7,6 +7,7 @@ using System.Text.Json;
 namespace MdatpPwsh.Cmdlets
 {
     using MdatpPwsh.Models;
+    using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpMachineAction")]
     [CmdletBinding(DefaultParameterSetName = "AllActivities")]
@@ -22,7 +23,7 @@ namespace MdatpPwsh.Cmdlets
             get { return activityId; }
             set { activityId = value; }
         }
-        private static string activityId;
+        private string activityId;
 
         [Parameter(Position = 1, ParameterSetName = "AllActivities")]
         public SwitchParameter AllActivities
@@ -30,9 +31,7 @@ namespace MdatpPwsh.Cmdlets
             get { return allActivities; }
             set { allActivities = value; }
         }
-        private static SwitchParameter allActivities;
-
-        private static string apiUri;
+        private SwitchParameter allActivities;
 
         protected override void BeginProcessing()
         {
@@ -41,14 +40,15 @@ namespace MdatpPwsh.Cmdlets
 
         protected override void ProcessRecord()
         {
+            string apiUri;
             switch (ParameterSetName)
             {
-                case "SingleActivity":
-                    apiUri = $"machineactions/{activityId}";
-                    break;
-
                 case "AllActivities":
                     apiUri = $"machineactions";
+                    break;
+
+                default:
+                    apiUri = $"machineactions/{activityId}";
                     break;
             }
             
@@ -57,12 +57,12 @@ namespace MdatpPwsh.Cmdlets
             switch (ParameterSetName)
             {
                 case "SingleActivity":
-                    ActivityResponse apiResult = JsonSerializer.Deserialize<ActivityResponse>(apiJson);
+                    ActivityResponse apiResult = new JsonConverter<ActivityResponse>(apiJson).Value;
                     WriteObject(apiResult);
                     break;
 
                 case "AllActivities":
-                    ResponseCollection<ActivityResponse> apiResults = JsonSerializer.Deserialize<ResponseCollection<ActivityResponse>>(apiJson);
+                    ResponseCollection<ActivityResponse> apiResults = new JsonConverter<ResponseCollection<ActivityResponse>>(apiJson).Value;
 
                     foreach (ActivityResponse item in apiResults.Value)
                     {
