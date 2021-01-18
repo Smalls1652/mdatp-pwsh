@@ -9,13 +9,13 @@
 @{
 
     RootModule         = "MdatpPwsh.dll"
-    ModuleVersion      = "2020.7.1"
+    ModuleVersion      = "2021.01.00"
     # CompatiblePSEditions = @()
     GUID               = "afc0e191-ffe7-4261-ba9e-d59652423d8c"
     Author             = "Tim Small"
     CompanyName        = "Smalls.Online"
     Copyright          = "2020"
-    Description        = "MDATP PowerShell Module"
+    Description        = "Defender for Endpoint PowerShell Module"
     # PowerShellVersion = ''
     # PowerShellHostName = ''
     # PowerShellHostVersion = ''
@@ -23,7 +23,9 @@
     # ClrVersion = ''
     # ProcessorArchitecture = ''
     # RequiredModules = @()
-    RequiredAssemblies = "Microsoft.Identity.Client.dll", "Newtonsoft.Json.dll"
+    RequiredAssemblies = @(
+        "Microsoft.Identity.Client.dll"
+    )
     # ScriptsToProcess = @()
     # TypesToProcess = @()
     # FormatsToProcess = @()
@@ -80,7 +82,7 @@
 
             # ReleaseNotes = ''
 
-            Prerelease = "alpha2"
+            Prerelease = "alpha01"
 
             RequireLicenseAcceptance = $false
 
