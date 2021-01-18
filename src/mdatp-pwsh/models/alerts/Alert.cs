@@ -47,24 +47,30 @@ namespace MdatpPwsh.Models
         public string AssignedTo { get; set; }
 
         [JsonPropertyName("severity")]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public AlertSeverity Severity { get; set; }
 
         [JsonPropertyName("status")]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public Nullable<AlertStatus> Status { get; set; }
 
         [JsonPropertyName("classification")]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public Nullable<AlertClassification> Classification { get; set; }
 
         [JsonPropertyName("determination")]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public Nullable<AlertDetermination> Determination { get; set; }
 
         [JsonPropertyName("investigationId")]
         public Nullable<Int64> InvestigationId { get; set; }
 
         [JsonPropertyName("investigationState")]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public Nullable<InvestigationState> InvestigationState { get; set; }
 
         [JsonPropertyName("category")]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public AlertCategory Category { get; set; }
 
         [JsonPropertyName("detectionSource")]

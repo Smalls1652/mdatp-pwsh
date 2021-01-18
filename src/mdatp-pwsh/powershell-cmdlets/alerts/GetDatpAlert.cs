@@ -6,6 +6,7 @@ using System.Text.Json;
 
 namespace MdatpPwsh.Cmdlets
 {
+    using MdatpPwsh.Helpers;
     using MdatpPwsh.Models;
     using MdatpPwsh.Enums.Alerts;
 
@@ -76,14 +77,14 @@ namespace MdatpPwsh.Cmdlets
             switch (ParameterSetName)
             {
                 case "GetAlert":
-                    apiResult = JsonSerializer.Deserialize<Alert>(apiJson);
+                    apiResult = new JsonConverter<Alert>(apiJson).Value;
                     WriteObject(apiResult);
                     break;
 
                 default:
-                    apiResult = JsonSerializer.Deserialize<ResponseCollection<Alert>>(apiJson);
+                    apiResult = new JsonConverter<ResponseCollection<Alert>>(apiJson).Value;
 
-                    foreach (Alert obj in apiResult.value)
+                    foreach (Alert obj in apiResult.Value)
                     {
                         WriteObject(obj);
                     }

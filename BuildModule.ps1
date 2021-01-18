@@ -18,7 +18,7 @@ $filesToCopy = [System.Collections.Generic.List[string[]]]@(
             ([System.IO.Path]::Combine($ScriptLocation, "module-manifest\", "mdatp-pwsh.psd1")),
             ([System.IO.Path]::Combine($csProjectPublishDir, "MdatpPwsh.dll")),
             ([System.IO.Path]::Combine($csProjectPublishDir, "Microsoft.Identity.Client.dll")),
-            ([System.IO.Path]::Combine($csProjectPublishDir, "Newtonsoft.Json.dll"))
+            ([System.IO.Path]::Combine($csProjectPublishDir, "System.Text.Json.dll"))
 )
 
 Push-Location -Path $csProjectDir

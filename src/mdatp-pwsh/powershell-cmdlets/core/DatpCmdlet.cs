@@ -5,6 +5,8 @@ using System.Net.Http;
 namespace MdatpPwsh.Cmdlets
 {
     using MdatpPwsh.Session;
+    using MdatpPwsh.Helpers;
+
     public abstract class DatpCmdlet : PSCmdlet
     {
         protected DatpSessionClient GetSessionClient()

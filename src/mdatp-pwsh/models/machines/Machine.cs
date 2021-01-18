@@ -6,11 +6,6 @@ namespace MdatpPwsh.Models
 {
     public class Machine
     {
-        public Machine()
-        {
-            GenerateMachinePageUri();
-        }
-
         [JsonPropertyName("computerDnsName")]
         public string ComputerName { get; set; }
 
@@ -21,13 +16,23 @@ namespace MdatpPwsh.Models
         public string AadDeviceId { get; set; }
 
         [JsonPropertyName("machineTags")]
-        public string[] MachineTags { get; set; }
+        public List<string> MachineTags { get; set; }
 
         [JsonPropertyName("firstSeen")]
-        public DateTime FirstSeen { get; set; }
+        public DateTime FirstSeen
+        {
+            get { return this.firstSeen; }
+            set { firstSeen = value.ToLocalTime(); }
+        }
+        private DateTime firstSeen;
 
-        [JsonPropertyName("LastSeen")]
-        public DateTime LastSeen { get; set; }
+        [JsonPropertyName("lastSeen")]
+        public DateTime LastSeen
+        {
+            get { return this.lastSeen; }
+            set { lastSeen = value.ToLocalTime(); }
+        }
+        private DateTime lastSeen;
 
         [JsonPropertyName("OsPlatform")]
         public string OsPlatform { get; set; }
@@ -45,7 +50,7 @@ namespace MdatpPwsh.Models
         public string LastExternalIpAddress { get; set; }
 
         [JsonPropertyName("agentVersion")]
-        public Version AgentVersion { get; set; }
+        public string AgentVersion { get; set; }
 
         [JsonPropertyName("healthStatus")]
         public string HealthStatus { get; set; }
@@ -59,15 +64,9 @@ namespace MdatpPwsh.Models
         [JsonPropertyName("riskScore")]
         public string RiskScore { get; set; }
 
-        public Uri MachinePage
+        public string MachinePage
         {
-            get { return machinePage; }
-        }
-        private Uri machinePage;
-
-        private void GenerateMachinePageUri()
-        {
-            machinePage = new Uri($"https://securitycenter.windows.com/machines/{this.MachineId}");
+            get { return $"https://securitycenter.windows.com/machines/{this.MachineId}"; }
         }
 
     }

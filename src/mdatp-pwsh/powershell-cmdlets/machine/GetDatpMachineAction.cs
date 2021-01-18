@@ -12,7 +12,11 @@ namespace MdatpPwsh.Cmdlets
     [CmdletBinding(DefaultParameterSetName = "AllActivities")]
     public class GetDatpMachineAction : DatpCmdlet
     {
-        [Parameter(Position = 0, ParameterSetName = "SingleActivity")]
+        [Parameter(
+            Position = 0,
+            ParameterSetName = "SingleActivity",
+            ValueFromPipelineByPropertyName = true
+        )]
         public string ActivityId
         {
             get { return activityId; }
@@ -32,6 +36,11 @@ namespace MdatpPwsh.Cmdlets
 
         protected override void BeginProcessing()
         {
+            base.BeginProcessing();
+        }
+
+        protected override void ProcessRecord()
+        {
             switch (ParameterSetName)
             {
                 case "SingleActivity":
@@ -42,11 +51,7 @@ namespace MdatpPwsh.Cmdlets
                     apiUri = $"machineactions";
                     break;
             }
-        }
-
-        protected override void ProcessRecord()
-        {
-            WriteVerbose("Starting api call.");
+            
             string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
             switch (ParameterSetName)

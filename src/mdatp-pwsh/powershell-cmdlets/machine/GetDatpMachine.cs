@@ -8,6 +8,7 @@ using System.Text.Json;
 namespace MdatpPwsh.Cmdlets
 {
     using MdatpPwsh.Models;
+    using MdatpPwsh.Helpers;
     
     [Cmdlet(VerbsCommon.Get, "DatpMachine")]
     [CmdletBinding(DefaultParameterSetName = "AllMachines")]
@@ -53,12 +54,12 @@ namespace MdatpPwsh.Cmdlets
             switch (ParameterSetName)
             {
                 case "SingleMachine":
-                    Machine apiResult = JsonSerializer.Deserialize<Machine>(apiJson);
+                    Machine apiResult = new JsonConverter<Machine>(apiJson).Value;
                     WriteObject(apiResult);
                     break;
 
                 case "AllMachines":
-                    ResponseCollection<Machine> apiResults = JsonSerializer.Deserialize<ResponseCollection<Machine>>(apiJson);
+                    ResponseCollection<Machine> apiResults = new JsonConverter<ResponseCollection<Machine>>(apiJson).Value;
 
                     foreach (Machine item in apiResults.Value)
                     {

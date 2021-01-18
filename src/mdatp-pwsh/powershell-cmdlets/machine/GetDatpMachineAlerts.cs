@@ -11,7 +11,10 @@ namespace MdatpPwsh.Cmdlets
     [Cmdlet(VerbsCommon.Get, "DatpMachineAlerts")]
     public class GetDatpMachineAlerts : DatpCmdlet
     {
-        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
+        [Parameter(
+            Mandatory = true,
+            ValueFromPipelineByPropertyName = true
+        )]
         public string MachineId
         {
             get { return machineId; }
@@ -23,13 +26,15 @@ namespace MdatpPwsh.Cmdlets
 
         protected override void BeginProcessing()
         {
-            apiUri = $"machines/{machineId}/alerts";
-
-            WriteVerbose($"Getting alerts triggered by '{machineId}'.");
+            base.BeginProcessing();
         }
 
         protected override void ProcessRecord()
         {
+            apiUri = $"machines/{machineId}/alerts";
+
+            WriteVerbose($"Getting alerts triggered by '{machineId}'.");
+
             WriteVerbose("Starting api call.");
             string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
@@ -44,6 +49,7 @@ namespace MdatpPwsh.Cmdlets
 
         protected override void EndProcessing()
         {
+            base.EndProcessing();
         }
     }
 }
