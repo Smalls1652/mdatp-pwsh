@@ -1,8 +1,10 @@
-# Microsoft Defender ATP PowerShell Module
+# Microsoft Defender for Endpoint PowerShell Module
+
+**⚠️ This module is not affiliated with Microsoft and is a purely community-built resource. It is not an official module. ⚠️**
 
 **This module is still a work in progress. Documentation is not fully created and unknown errors may occur while using.**
 
-This module is for interacting with the Defender ATP Graph API using delegated permissions. The primary goal of this project was to create a cross-platform module that works on Windows, macOS, and Linux. To keep it simple for cross-platform use, the authentication mechanism is using the *device code flow* in the **Microsoft Authentication Library**.
+This module is for interacting with the Defender for Endpoint Graph API using delegated permissions. The primary goal of this project was to create a cross-platform module that works on Windows, macOS, and Linux. To keep it simple for cross-platform use, the authentication mechanism is using the *device code flow* in the **Microsoft Authentication Library**.
 
 ## Install
 
@@ -70,7 +72,7 @@ This module is for interacting with the Defender ATP Graph API using delegated p
     1. Application (client) ID
     2. Directory (tenant) ID
 
-### Configure the Defender ATP PowerShell module
+### Configure the Defender for Endpoint PowerShell module
 
 After importing the `mdatp-pwsh` module, run the following command:
 
@@ -116,7 +118,3 @@ This will prompt the **Device Code Flow** with a code you must enter on the [Mic
 - **MSAL for .NET**
   - GitHub - [Link](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet)
   - Nuget - [Link](https://www.nuget.org/packages/Microsoft.Identity.Client)
-- **Newtonsoft.Json**
-  - GitHub - [Link](https://github.com/JamesNK/Newtonsoft.Json)
-  - Nuget - [Link](https://www.nuget.org/packages/Newtonsoft.Json/)
-  - Website - [Link](https://www.newtonsoft.com/json)
