@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 using System.Net.Http;
 
@@ -7,17 +8,21 @@ using System.Text.Json;
 namespace MdatpPwsh.Cmdlets
 {
     using MdatpPwsh.Models;
+    using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpMachineByIp")]
     public class GetDatpMachineByIp : DatpCmdlet
     {
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName = true)]
-        public string IpAddress
+        [Parameter(
+            Position = 0,
+            ValueFromPipelineByPropertyName = true
+        )]
+        public List<string> IpAddress
         {
             get { return ipAddress; }
             set { ipAddress = value; }
         }
-        private string ipAddress;
+        private List<string> ipAddress;
 
         public DateTime TimeStamp
         {
@@ -26,22 +31,30 @@ namespace MdatpPwsh.Cmdlets
         }
         private DateTime timeStamp = DateTime.Now;
 
-        private string apiUri;
+        protected override void BeginProcessing()
+        {
+            base.BeginProcessing();
+        }
 
         protected override void ProcessRecord()
         {
-            apiUri = $"machines/findbyip(ip='{ipAddress}',timestamp={timeStamp.ToString("yyyy-MM-ddTHH:mm:ssZ")})";
-
-            WriteVerbose("Starting api call.");
-            string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
-
-            
-            ResponseCollection<Machine> apiResults = JsonSerializer.Deserialize<ResponseCollection<Machine>>(apiJson);
-
-            foreach (Machine item in apiResults.Value)
+            foreach (string ipAddr in ipAddress)
             {
-                WriteObject(item);
+                string apiUri = $"machines/findbyip(ip='{ipAddr}',timestamp={timeStamp.ToString("yyyy-MM-ddTHH:mm:ssZ")})";
+
+                string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
+                ResponseCollection<Machine> apiResults = new JsonConverter<ResponseCollection<Machine>>(apiJson).Value;
+                
+                foreach (Machine item in apiResults.Value)
+                {
+                    WriteObject(item);
+                }
             }
+        }
+
+        protected override void EndProcessing()
+        {
+            base.EndProcessing();
         }
     }
 }

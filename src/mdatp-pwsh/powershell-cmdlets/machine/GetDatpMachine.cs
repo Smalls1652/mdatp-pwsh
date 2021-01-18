@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 using System.Net.Http;
 
@@ -9,56 +10,61 @@ namespace MdatpPwsh.Cmdlets
 {
     using MdatpPwsh.Models;
     using MdatpPwsh.Helpers;
-    
+
     [Cmdlet(VerbsCommon.Get, "DatpMachine")]
     [CmdletBinding(DefaultParameterSetName = "AllMachines")]
     public class GetDatpMachine : DatpCmdlet
     {
-        [Parameter(Position = 0, ParameterSetName = "SingleMachine", ValueFromPipelineByPropertyName = true)]
-        public string MachineId
+        [Parameter(
+            Position = 0,
+            ParameterSetName = "SingleMachine",
+            ValueFromPipelineByPropertyName = true
+        )]
+        public List<string> MachineId
         {
             get { return machineId; }
             set { machineId = value; }
         }
-        private static string machineId;
+        private List<string> machineId;
 
-        [Parameter(Position = 1, ParameterSetName = "AllMachines")]
+        [Parameter(
+            Position = 1,
+            ParameterSetName = "AllMachines"
+        )]
         public SwitchParameter AllMachines
         {
             get { return allMachines; }
             set { allMachines = value; }
         }
-        private static SwitchParameter allMachines = true;
-
-        private static string apiUri;
+        private SwitchParameter allMachines = true;
 
         protected override void BeginProcessing()
         {
-            switch (ParameterSetName)
-            {
-                case "SingleMachine":
-                    apiUri = $"machines/{machineId}";
-                    break;
-
-                case "AllMachines":
-                    apiUri = $"machines";
-                    break;
-            }
+            base.BeginProcessing();
         }
 
         protected override void ProcessRecord()
         {
-            WriteVerbose("Starting api call.");
-            string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
+            string apiUri;
+            string apiJson;
 
+            WriteVerbose("Starting api call.");
             switch (ParameterSetName)
             {
                 case "SingleMachine":
-                    Machine apiResult = new JsonConverter<Machine>(apiJson).Value;
-                    WriteObject(apiResult);
+                    foreach (string machine in machineId)
+                    {
+                        apiUri = $"machines/{machine}";
+                        apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
+                        Machine apiResult = new JsonConverter<Machine>(apiJson).Value;
+
+                        WriteObject(apiResult);
+                    }
                     break;
 
                 case "AllMachines":
+                    apiUri = $"machines";
+                    apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
                     ResponseCollection<Machine> apiResults = new JsonConverter<ResponseCollection<Machine>>(apiJson).Value;
 
                     foreach (Machine item in apiResults.Value)
@@ -67,7 +73,11 @@ namespace MdatpPwsh.Cmdlets
                     }
                     break;
             }
+        }
 
+        protected override void EndProcessing()
+        {
+            base.EndProcessing();
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 using System.Net.Http;
 
@@ -7,55 +8,64 @@ using System.Text.Json;
 namespace MdatpPwsh.Cmdlets
 {
     using MdatpPwsh.Models;
+    using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Remove, "DatpMachineTag")]
     public class RemoveDatpMachineTag : DatpCmdlet
     {
-        [Parameter(Mandatory = true, Position = 0, ValueFromPipelineByPropertyName = true)]
-        public string MachineId
+        [Parameter(
+            Position = 0,
+            Mandatory = true,
+            ValueFromPipelineByPropertyName = true
+        )]
+        public List<string> MachineId
         {
             get { return machineId; }
             set { machineId = value; }
         }
-        private static string machineId;
+        private List<string> machineId;
 
-        [Parameter(Mandatory = true, Position = 1)]
+        [Parameter(
+            Position = 1,
+            Mandatory = true
+        )]
         public string TagName
         {
             get { return tagName; }
             set { tagName = value; }
         }
-        private static string tagName;
+        private string tagName;
 
-        private static string apiUri;
-
-        private static string apiPost;
 
         protected override void BeginProcessing()
         {
-            MachineTag postObj = new MachineTag();
-            postObj.Value = tagName;
-            postObj.Action = "Remove";
-
-            apiPost = JsonSerializer.Serialize<MachineTag>(postObj);
-
-            apiUri = $"machines/{machineId}/tags";
-
-            WriteVerbose($"Adding tag, '{tagName}', to '{machineId}'.");
+            base.BeginProcessing();
         }
 
         protected override void ProcessRecord()
         {
-            WriteVerbose("Starting api call.");
-            string apiJson = SendApiCall(apiUri, apiPost, HttpMethod.Post);
+            foreach (string machine in machineId)
+            {
+                MachineTag postObj = new MachineTag();
+                postObj.Value = tagName;
+                postObj.Action = "Remove";
 
-            Machine apiResult = JsonSerializer.Deserialize<Machine>(apiJson);
+                string apiPost = JsonSerializer.Serialize<MachineTag>(postObj);
 
-            WriteObject(apiResult);
+                string apiUri = $"machines/{machine}/tags";
+
+                WriteVerbose($"Adding tag, '{tagName}', to '{machine}'.");
+                string apiJson = SendApiCall(apiUri, apiPost, HttpMethod.Post);
+
+                Machine apiResult = new JsonConverter<Machine>(apiJson).Value;
+
+                WriteObject(apiResult);
+            }
         }
 
         protected override void EndProcessing()
         {
+            base.EndProcessing();
         }
     }
 }
