@@ -1,14 +1,13 @@
 using System;
 using System.Management.Automation;
 using System.Net.Http;
-using Newtonsoft.Json;
-using Microsoft.Identity.Client;
 
-using MdatpPwsh.Classes;
-using MdatpPwsh.Classes.Post;
+using System.Text.Json;
 
-namespace MdatpPwsh
+namespace MdatpPwsh.Cmdlets
 {
+    using MdatpPwsh.Models;
+
     [Cmdlet(VerbsLifecycle.Start, "DatpMachineScan")]
     public class StartDatpMachineScan : DatpCmdlet
     {
@@ -48,7 +47,7 @@ namespace MdatpPwsh
             postObj.Comment = cmnt;
             postObj.ScanType = scanType;
 
-            apiPost = JsonConvert.SerializeObject(postObj);
+            apiPost = JsonSerializer.Serialize<MachineScan>(postObj);
 
             apiUri = $"machines/{machineId}/runAntiVirusScan";
 
@@ -60,7 +59,7 @@ namespace MdatpPwsh
             WriteVerbose("Starting api call.");
             string apiJson = SendApiCall(apiUri, apiPost, HttpMethod.Post);
 
-            ActivityResponse apiResult = JsonConvert.DeserializeObject<ActivityResponse>(apiJson);
+            ActivityResponse apiResult = JsonSerializer.Deserialize<ActivityResponse>(apiJson);
 
             WriteObject(apiResult);
         }

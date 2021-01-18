@@ -1,17 +1,20 @@
 using System;
 using System.Management.Automation;
 using System.Net.Http;
-using Newtonsoft.Json;
-using Microsoft.Identity.Client;
 
-using MdatpPwsh.Classes;
+using System.Text.Json;
 
-namespace MdatpPwsh
+namespace MdatpPwsh.Cmdlets
 {
+    using MdatpPwsh.Models;
+
     [Cmdlet(VerbsCommon.Get, "DatpMachineAlerts")]
     public class GetDatpMachineAlerts : DatpCmdlet
     {
-        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
+        [Parameter(
+            Mandatory = true,
+            ValueFromPipelineByPropertyName = true
+        )]
         public string MachineId
         {
             get { return machineId; }
@@ -23,19 +26,21 @@ namespace MdatpPwsh
 
         protected override void BeginProcessing()
         {
-            apiUri = $"machines/{machineId}/alerts";
-
-            WriteVerbose($"Getting alerts triggered by '{machineId}'.");
+            base.BeginProcessing();
         }
 
         protected override void ProcessRecord()
         {
+            apiUri = $"machines/{machineId}/alerts";
+
+            WriteVerbose($"Getting alerts triggered by '{machineId}'.");
+
             WriteVerbose("Starting api call.");
             string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
-            AlertCollection apiResult = JsonConvert.DeserializeObject<AlertCollection>(apiJson);
+            ResponseCollection<Alert> apiResult = JsonSerializer.Deserialize<ResponseCollection<Alert>>(apiJson);
 
-            foreach (Alert item in apiResult.value)
+            foreach (Alert item in apiResult.Value)
             {
                 WriteObject(item);
             }
@@ -44,6 +49,7 @@ namespace MdatpPwsh
 
         protected override void EndProcessing()
         {
+            base.EndProcessing();
         }
     }
 }

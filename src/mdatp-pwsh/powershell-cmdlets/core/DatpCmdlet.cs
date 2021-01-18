@@ -2,9 +2,11 @@ using System;
 using System.Management.Automation;
 using System.Net.Http;
 
-namespace MdatpPwsh
+namespace MdatpPwsh.Cmdlets
 {
-    using Session;
+    using MdatpPwsh.Session;
+    using MdatpPwsh.Helpers;
+
     public abstract class DatpCmdlet : PSCmdlet
     {
         protected DatpSessionClient GetSessionClient()

@@ -1,13 +1,15 @@
 using System;
 using System.Management.Automation;
 using System.Net.Http;
-using Newtonsoft.Json;
-using Microsoft.Identity.Client;
 
-using MdatpPwsh.Classes;
+using System.Text.Json;
 
-namespace MdatpPwsh
+
+namespace MdatpPwsh.Cmdlets
 {
+    using MdatpPwsh.Models;
+    using MdatpPwsh.Helpers;
+    
     [Cmdlet(VerbsCommon.Get, "DatpMachine")]
     [CmdletBinding(DefaultParameterSetName = "AllMachines")]
     public class GetDatpMachine : DatpCmdlet
@@ -52,14 +54,14 @@ namespace MdatpPwsh
             switch (ParameterSetName)
             {
                 case "SingleMachine":
-                    Machine apiResult = JsonConvert.DeserializeObject<Machine>(apiJson);
+                    Machine apiResult = new JsonConverter<Machine>(apiJson).Value;
                     WriteObject(apiResult);
                     break;
 
                 case "AllMachines":
-                    MachineCollection apiResults = JsonConvert.DeserializeObject<MachineCollection>(apiJson);
+                    ResponseCollection<Machine> apiResults = new JsonConverter<ResponseCollection<Machine>>(apiJson).Value;
 
-                    foreach (Machine item in apiResults.value)
+                    foreach (Machine item in apiResults.Value)
                     {
                         WriteObject(item);
                     }

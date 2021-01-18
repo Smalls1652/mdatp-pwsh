@@ -1,12 +1,13 @@
 using System;
 using System.Management.Automation;
 using System.Net.Http;
-using Newtonsoft.Json;
-using Microsoft.Identity.Client;
-using MdatpPwsh.Classes;
 
-namespace MdatpPwsh
+using System.Text.Json;
+
+namespace MdatpPwsh.Cmdlets
 {
+    using MdatpPwsh.Models;
+
     [Cmdlet(VerbsCommon.Get, "DatpDomainStats")]
     public class GetDatpDomainStats : DatpCmdlet
     {
@@ -30,7 +31,7 @@ namespace MdatpPwsh
             WriteVerbose("Starting api call.");
             string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
-            DomainStats apiResult = JsonConvert.DeserializeObject<DomainStats>(apiJson);
+            DomainStats apiResult = JsonSerializer.Deserialize<DomainStats>(apiJson);
 
             WriteObject(apiResult);
 

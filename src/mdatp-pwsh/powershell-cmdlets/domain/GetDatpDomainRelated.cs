@@ -1,12 +1,14 @@
 using System;
 using System.Management.Automation;
 using System.Net.Http;
-using Newtonsoft.Json;
-using Microsoft.Identity.Client;
-using MdatpPwsh.Classes;
 
-namespace MdatpPwsh
+using System.Text.Json;
+
+namespace MdatpPwsh.Cmdlets
 {
+    using MdatpPwsh.Models;
+    using MdatpPwsh.Models.Core;
+
     [Cmdlet(VerbsCommon.Get, "DatpDomainRelated")]
     public class GetDatpDomainRelated : DatpCmdlet
     {
@@ -48,11 +50,11 @@ namespace MdatpPwsh
             switch (searchType)
             {
                 case "Alerts":
-                    apiResult = JsonConvert.DeserializeObject<AlertCollection>(apiJson);
+                    apiResult = JsonSerializer.Deserialize<ResponseCollection<Alert>>(apiJson);
                     break;
 
                 case "Machines":
-                    apiResult = JsonConvert.DeserializeObject<MachineCollection>(apiJson);
+                    apiResult = JsonSerializer.Deserialize<ResponseCollection<Machine>>(apiJson);
                     break;
 
             }
