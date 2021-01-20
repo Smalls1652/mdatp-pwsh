@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Management.Automation;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,6 +17,8 @@ namespace MdatpPwsh.Cmdlets
     [Cmdlet(VerbsCommunications.Connect, "DatpGraph")]
     public class ConnectDatpGraph : DatpCmdlet
     {
+
+        private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         protected override void BeginProcessing()
         {
             base.BeginProcessing();
@@ -68,17 +71,31 @@ namespace MdatpPwsh.Cmdlets
                 };
 
             AuthenticationResult result = null;
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
             try
             {
-                result = TokenFlow.StartAcquire(scopes).GetAwaiter().GetResult();
+                Console.CancelKeyPress += new ConsoleCancelEventHandler(cancelHandler);
+                CancellationToken token = cancellationTokenSource.Token;
+
+                result = TokenFlow.GetDeviceCode(scopes, token).GetAwaiter().GetResult();
             }
-            catch (System.Exception e)
+            catch (TaskCanceledException e)
             {
-                throw e;
+                cancellationTokenSource.Dispose();
+
+                ErrorRecord psErrorRecordObj = new ErrorRecord(
+                    e,
+                    "LoginCancelled",
+                    ErrorCategory.CloseError,
+                    result
+                );
+
+                ThrowTerminatingError(psErrorRecordObj);
             }
-            cancellationTokenSource = null;
+            finally
+            {
+                cancellationTokenSource.Dispose();
+            }
 
             DatpSessionClient sessionClient = new DatpSessionClient(new Uri("https://api.securitycenter.microsoft.com/api/v1.0/"), result, app);
 
@@ -89,6 +106,12 @@ namespace MdatpPwsh.Cmdlets
         protected override void EndProcessing()
         {
             base.EndProcessing();
+        }
+
+        protected void cancelHandler(object sender, ConsoleCancelEventArgs args)
+        {
+            cancellationTokenSource.Cancel();
+            args.Cancel = true;
         }
     }
 }
