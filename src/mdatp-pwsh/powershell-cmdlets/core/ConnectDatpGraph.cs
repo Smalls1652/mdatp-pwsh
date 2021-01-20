@@ -100,7 +100,7 @@ namespace MdatpPwsh.Cmdlets
             DatpSessionClient sessionClient = new DatpSessionClient(new Uri("https://api.securitycenter.microsoft.com/api/v1.0/"), result, app);
 
             SessionState.PSVariable.Set(new PSVariable("DatpSessionClient", sessionClient, ScopedItemOptions.Private));
-            WriteObject("You are now connected to the Defender ATP API.");
+            WriteObject("You are now connected to the Defender for Endpoint API.");
         }
 
         protected override void EndProcessing()
