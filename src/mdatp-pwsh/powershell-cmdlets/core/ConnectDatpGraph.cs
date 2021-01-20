@@ -71,16 +71,18 @@ namespace MdatpPwsh.Cmdlets
                 };
 
             AuthenticationResult result = null;
+            ConsoleCancelEventHandler cancelEventHandler = new ConsoleCancelEventHandler(cancelHandler);
 
             try
             {
-                Console.CancelKeyPress += new ConsoleCancelEventHandler(cancelHandler);
+                Console.CancelKeyPress += cancelEventHandler;
                 CancellationToken token = cancellationTokenSource.Token;
 
                 result = TokenFlow.GetDeviceCode(scopes, token).GetAwaiter().GetResult();
             }
             catch (TaskCanceledException e)
             {
+                Console.CancelKeyPress -= cancelEventHandler;
                 cancellationTokenSource.Dispose();
 
                 ErrorRecord psErrorRecordObj = new ErrorRecord(
@@ -94,6 +96,7 @@ namespace MdatpPwsh.Cmdlets
             }
             finally
             {
+                Console.CancelKeyPress -= cancelEventHandler;
                 cancellationTokenSource.Dispose();
             }
 
