@@ -70,7 +70,11 @@ namespace MdatpPwsh.Cmdlets
                     }
                     break;
             }
+        }
 
+        protected override void EndProcessing()
+        {
+            base.EndProcessing();
         }
     }
 }
