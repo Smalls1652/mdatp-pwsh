@@ -17,12 +17,12 @@ namespace MdatpPwsh.Cmdlets
             Position = 0,
             ValueFromPipelineByPropertyName = true
         )]
-        public List<string> IpAddress
+        public string[] IpAddress
         {
             get { return ipAddress; }
             set { ipAddress = value; }
         }
-        private List<string> ipAddress;
+        private string[] ipAddress;
 
         public DateTime TimeStamp
         {

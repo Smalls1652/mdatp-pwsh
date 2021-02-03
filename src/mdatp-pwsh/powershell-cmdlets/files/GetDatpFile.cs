@@ -17,13 +17,13 @@ namespace MdatpPwsh.Cmdlets
             Position = 0,
             Mandatory = true
         )]
-        public List<string> FileIdentifier
+        public string[] FileIdentifier
         {
             get { return fileIdentifier; }
             set { fileIdentifier = value; }
         }
 
-        private List<string> fileIdentifier;
+        private string[] fileIdentifier;
 
         protected override void BeginProcessing()
         {

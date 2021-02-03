@@ -17,12 +17,12 @@ namespace MdatpPwsh.Cmdlets
             Position = 0,
             Mandatory = true
         )]
-        public List<string> UserName
+        public string[] UserName
         {
             get { return userName; }
             set { userName = value; }
         }
-        private List<string> userName;
+        private string[] userName;
 
         protected override void BeginProcessing()
         {

@@ -20,12 +20,12 @@ namespace MdatpPwsh.Cmdlets
             ParameterSetName = "SingleMachine",
             ValueFromPipelineByPropertyName = true
         )]
-        public List<string> MachineId
+        public string[] MachineId
         {
             get { return machineId; }
             set { machineId = value; }
         }
-        private List<string> machineId;
+        private string[] machineId;
 
         [Parameter(
             Position = 1,
