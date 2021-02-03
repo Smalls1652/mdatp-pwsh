@@ -29,10 +29,17 @@ Get an alert or all alerts of a specific status from the Defender for Endpoint A
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-DatpAlert -AlertId "da123456789123456_1234567890"
 ```
 
-{{ Add example description here }}
+Get an alert by a specific AlertID.
+
+### Example 2
+```powershell
+PS C:\> Get-DatpAlert -AlertStatus "New"
+```
+
+Get all alerts with the status of "New".
 
 ## PARAMETERS
 

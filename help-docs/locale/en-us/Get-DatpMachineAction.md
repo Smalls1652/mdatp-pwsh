@@ -29,10 +29,17 @@ Get the status and details about an action that was performed on a machine throu
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-DatpMachineAction -ActivityId "460e2875-7f91-4c32-8add-4a7b78f13254"
 ```
 
-{{ Add example description here }}
+Get details of a specific action performed on a machine.
+
+### Example 2
+```powershell
+PS C:\> Get-DatpMachineAction -AllActivities
+```
+
+Get all machine actions performed.
 
 ## PARAMETERS
 

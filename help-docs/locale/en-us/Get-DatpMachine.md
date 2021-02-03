@@ -29,10 +29,17 @@ Get a machine or all machines that have been onboarded to Defender for Endpoint.
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-DatpMachine -MachineId "comp-01.contoso.com"
 ```
 
-{{ Add example description here }}
+Get a machine by using it's fully qualified domain name (FQDN).
+
+### Example 2
+```powershell
+PS C:\> Get-DatpMachine -AllMachines
+```
+
+Get all machines onboarded to your environment.
 
 ## PARAMETERS
 

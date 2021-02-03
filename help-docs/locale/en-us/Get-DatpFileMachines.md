@@ -23,10 +23,10 @@ Get machines that have been registered to have seen a file's SHA1 or SHA256 hash
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-DatpFileMachines -FileIdentifier "eec6ebcbd8f725cfbd38240197f6b8e03d9d6139"
 ```
 
-{{ Add example description here }}
+Get machines that have seen the file with the SHA1 file hash of "eec6ebcbd8f725cfbd38240197f6b8e03d9d6139".
 
 ## PARAMETERS
 

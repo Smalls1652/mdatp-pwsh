@@ -23,10 +23,10 @@ Get machines a user has logged into.
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-DatpUserMachines -UserName "contoso\jwinger01"
 ```
 
-{{ Add example description here }}
+Get all of the machines a specific user has logged into.
 
 ## PARAMETERS
 

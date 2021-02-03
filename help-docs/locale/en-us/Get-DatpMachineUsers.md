@@ -23,10 +23,10 @@ Get all of the user who have logged onto a machine interactively or through the 
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-DatpMachineUsers -MachineId "comp-01.contoso.com"
 ```
 
-{{ Add example description here }}
+Get all of the users for a specific machine.
 
 ## PARAMETERS
 

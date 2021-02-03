@@ -23,10 +23,10 @@ Get alerts triggered by a user.
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-DatpUserAlerts -UserName "contoso\jwinger01"
 ```
 
-{{ Add example description here }}
+Get all alerts that were triggered by a specific user.
 
 ## PARAMETERS
 

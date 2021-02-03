@@ -23,10 +23,10 @@ Get alerts triggered by a machine.
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-DatpMachineAlerts -MachineId "comp-01.contoso.edu"
 ```
 
-{{ Add example description here }}
+Get alerts triggered on a specific machine.
 
 ## PARAMETERS
 
