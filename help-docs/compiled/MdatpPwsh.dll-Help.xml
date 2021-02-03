@@ -253,9 +253,16 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-DatpAlert -AlertId "da123456789123456_1234567890"</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Get an alert by a specific AlertID.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-DatpAlert -AlertStatus "New"</dev:code>
+        <dev:remarks>
+          <maml:para>Get all alerts with the status of "New".</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -518,7 +525,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-DatpFile -FileIdentifier "36A4CC191027E30EC32618FF454F33B87F5C46A765C6AC3F151165AD7508DCD2"</dev:code>
         <dev:remarks>
           <maml:para>{{ Add example description here }}</maml:para>
         </dev:remarks>
@@ -597,9 +604,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-DatpFileAlerts -FileIdentifier "eec6ebcbd8f725cfbd38240197f6b8e03d9d6139"</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Getting alerts triggered by the SHA1 file hash of "eec6ebcbd8f725cfbd38240197f6b8e03d9d6139".</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -676,9 +683,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-DatpFileMachines -FileIdentifier "eec6ebcbd8f725cfbd38240197f6b8e03d9d6139"</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Get machines that have seen the file with the SHA1 file hash of "eec6ebcbd8f725cfbd38240197f6b8e03d9d6139".</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -868,9 +875,16 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-DatpMachine -MachineId "comp-01.contoso.com"</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Get a machine by using it's fully qualified domain name (FQDN).</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-DatpMachine -AllMachines</dev:code>
+        <dev:remarks>
+          <maml:para>Get all machines onboarded to your environment.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -981,9 +995,16 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-DatpMachineAction -ActivityId "460e2875-7f91-4c32-8add-4a7b78f13254"</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Get details of a specific action performed on a machine.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-DatpMachineAction -AllActivities</dev:code>
+        <dev:remarks>
+          <maml:para>Get all machine actions performed.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1068,9 +1089,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-DatpMachineAlerts -MachineId "comp-01.contoso.edu"</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Get alerts triggered on a specific machine.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1242,9 +1263,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-DatpMachineUsers -MachineId "comp-01.contoso.com"</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Get all of the users for a specific machine.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1383,9 +1404,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-DatpUserAlerts -UserName "contoso\jwinger01"</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Get all alerts that were triggered by a specific user.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1462,9 +1483,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-DatpUserMachines -UserName "contoso\jwinger01"</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Get all of the machines a specific user has logged into.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
