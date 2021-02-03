@@ -10,6 +10,7 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpDomainRelated")]
+    [OutputType(typeof(Machine[]))]
     public class GetDatpDomainRelated : DatpCmdlet
     {
         [Parameter(

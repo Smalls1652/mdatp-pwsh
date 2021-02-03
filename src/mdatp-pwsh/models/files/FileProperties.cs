@@ -28,25 +28,7 @@ namespace MdatpPwsh.Models
         public string FileType { get; set; }
 
         [JsonPropertyName("isPeFile")]
-        public dynamic IsPeFile
-        {
-            get { return isPeFile; }
-            set
-            {
-                switch (null == value)
-                {
-                    case true:
-                        isPeFile = false;
-                        break;
-
-                    default:
-                        isPeFile = true;
-                        break;
-
-                }
-            }
-        }
-        private dynamic isPeFile;
+        public bool IsPeFile { get; set; }
 
         [JsonPropertyName("globalPrevalence")]
         public Int64 GlobalPrevalence { get; set; }
@@ -67,24 +49,6 @@ namespace MdatpPwsh.Models
         public string SignerHash { get; set; }
 
         [JsonPropertyName("isValidCertificate")]
-        public dynamic IsValidCertificate
-        {
-            get { return isValidCertificate; }
-            set
-            {
-                switch (null == value)
-                {
-                    case true:
-                        isValidCertificate = false;
-                        break;
-
-                    default:
-                        isValidCertificate = true;
-                        break;
-
-                }
-            }
-        }
-        private dynamic isValidCertificate;
+        public Nullable<bool> IsValidCertificate { get; set; }
     }
 }

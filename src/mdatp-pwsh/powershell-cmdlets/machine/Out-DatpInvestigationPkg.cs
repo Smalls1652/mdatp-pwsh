@@ -11,6 +11,7 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsData.Out, "DatpInvestigationPkg")]
+    [OutputType(typeof(FileInfo))]
     public class OutDatpInvestigationPkg : DatpCmdlet
     {
 

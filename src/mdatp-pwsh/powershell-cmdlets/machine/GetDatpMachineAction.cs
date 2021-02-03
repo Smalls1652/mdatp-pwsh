@@ -11,6 +11,10 @@ namespace MdatpPwsh.Cmdlets
 
     [Cmdlet(VerbsCommon.Get, "DatpMachineAction")]
     [CmdletBinding(DefaultParameterSetName = "AllActivities")]
+    [OutputType(
+        typeof(ActivityResponse),
+        typeof(ActivityResponse[])
+    )]
     public class GetDatpMachineAction : DatpCmdlet
     {
         [Parameter(

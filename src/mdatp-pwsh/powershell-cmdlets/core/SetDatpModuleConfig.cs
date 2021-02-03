@@ -8,6 +8,7 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Models.Core;
 
     [Cmdlet(VerbsCommon.Set, "DatpModuleConfig")]
+    [OutputType(typeof(DatpModuleConfig))]
     public class SetDatpModuleConfig : PSCmdlet
     {
         [Parameter(

@@ -11,6 +11,7 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpFile")]
+    [OutputType(typeof(FileProperties))]
     public class GetDatpFile : DatpCmdlet
     {
         [Parameter(

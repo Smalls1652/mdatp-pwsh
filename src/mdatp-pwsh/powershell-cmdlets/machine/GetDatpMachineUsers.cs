@@ -11,6 +11,10 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpMachineUsers")]
+    [OutputType(
+        typeof(User),
+        typeof(User[])
+    )]
     public class GetDatpMachineUsers : DatpCmdlet
     {
         [Parameter(

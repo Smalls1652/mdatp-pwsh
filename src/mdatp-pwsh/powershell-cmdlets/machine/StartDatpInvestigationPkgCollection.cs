@@ -11,6 +11,7 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsLifecycle.Start, "DatpInvestigationPkgCollection")]
+    [OutputType(typeof(ActivityResponse))]
     public class StartDatpInvestigationPkgCollection : DatpCmdlet
     {
         [Parameter(

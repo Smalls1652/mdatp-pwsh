@@ -11,6 +11,10 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpUserAlerts")]
+    [OutputType(
+        typeof(Alert),
+        typeof(Alert[])
+    )]
     public class GetDatpUserAlerts : DatpCmdlet
     {
         [Parameter(

@@ -12,6 +12,7 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Add, "DatpMachineTag")]
+    [OutputType(typeof(Machine))]
     public class AddDatpMachineTag : DatpCmdlet
     {
         [Parameter(

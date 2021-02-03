@@ -11,6 +11,7 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Remove, "DatpMachineTag")]
+    [OutputType(typeof(Machine))]
     public class RemoveDatpMachineTag : DatpCmdlet
     {
         [Parameter(

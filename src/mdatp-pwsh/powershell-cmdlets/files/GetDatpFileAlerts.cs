@@ -10,6 +10,7 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpFileAlerts")]
+    [OutputType(typeof(Alert[]))]
     public class GetDatpFileAlerts : DatpCmdlet
     {
         [Parameter(
