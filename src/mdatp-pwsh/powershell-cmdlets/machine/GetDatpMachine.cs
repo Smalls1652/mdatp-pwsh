@@ -13,6 +13,10 @@ namespace MdatpPwsh.Cmdlets
 
     [Cmdlet(VerbsCommon.Get, "DatpMachine")]
     [CmdletBinding(DefaultParameterSetName = "AllMachines")]
+    [OutputType(
+        typeof(Machine),
+        typeof(Machine[])
+    )]
     public class GetDatpMachine : DatpCmdlet
     {
         [Parameter(

@@ -75,7 +75,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### MdatpPwsh.Models.Machine
+
+### MdatpPwsh.Models.Machine[]
+
 ## NOTES
 
 ## RELATED LINKS

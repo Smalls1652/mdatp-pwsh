@@ -11,6 +11,7 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsLifecycle.Start, "DatpMachineScan")]
+    [OutputType(typeof(ActivityResponse))]
     public class StartDatpMachineScan : DatpCmdlet
     {
         [Parameter(

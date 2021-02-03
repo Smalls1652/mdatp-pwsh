@@ -11,6 +11,10 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpMachineByIp")]
+    [OutputType(
+        typeof(Machine),
+        typeof(Machine[])
+    )]
     public class GetDatpMachineByIp : DatpCmdlet
     {
         [Parameter(

@@ -6,6 +6,7 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Session;
 
     [Cmdlet(VerbsCommon.Get, "DatpSessionClient")]
+    [OutputType(typeof(DatpSessionClient))]
     public class GetDatpSessionClient : DatpCmdlet
     {
         protected override void BeginProcessing()

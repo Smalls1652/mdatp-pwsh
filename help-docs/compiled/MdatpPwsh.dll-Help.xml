@@ -80,7 +80,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.Machine</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -238,7 +238,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.Alert[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -345,7 +345,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.Machine[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -424,7 +424,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.DomainStats</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -503,7 +503,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.FileProperties</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -532,11 +532,11 @@
       <command:verb>Get</command:verb>
       <command:noun>DatpFileAlerts</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Get alerts related to a file identifier.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Get alerts seen in your organization related to a file's SHA1 or SHA256 hash.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -582,7 +582,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.Alert[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -611,11 +611,11 @@
       <command:verb>Get</command:verb>
       <command:noun>DatpFileMachines</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Get machines that have seen a file.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Get machines that have been registered to have seen a file's SHA1 or SHA256 hash.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -661,7 +661,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.Machine[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -690,11 +690,11 @@
       <command:verb>Get</command:verb>
       <command:noun>DatpFileStats</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Get the stats of a file.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Get stats on a file with how much it has been seen in your organization and worldwide.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -740,7 +740,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.FileStats</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -769,11 +769,11 @@
       <command:verb>Get</command:verb>
       <command:noun>DatpMachine</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Get a machine from Defender for Endpoint.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Get a machine or all machines that have been onboarded to Defender for Endpoint.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -845,7 +845,15 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.Machine</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>MdatpPwsh.Models.Machine[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -874,11 +882,11 @@
       <command:verb>Get</command:verb>
       <command:noun>DatpMachineAction</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Get the status of an action performed on a machine.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Get the status and details about an action that was performed on a machine through Defender for Endpoint.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -950,7 +958,15 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.ActivityResponse</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>MdatpPwsh.Models.ActivityResponse[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -979,11 +995,11 @@
       <command:verb>Get</command:verb>
       <command:noun>DatpMachineAlerts</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Get alerts triggered by a machine.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Get alerts triggered by a machine.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1029,7 +1045,15 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.Alert</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>MdatpPwsh.Models.Alert[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1058,11 +1082,11 @@
       <command:verb>Get</command:verb>
       <command:noun>DatpMachineByIp</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Get a machine by their last IP address.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Get a machine by their last IP address.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1108,7 +1132,15 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.Machine</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>MdatpPwsh.Models.Machine[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1137,11 +1169,11 @@
       <command:verb>Get</command:verb>
       <command:noun>DatpMachineUsers</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Get users that have logged onto a machine.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Get all of the user who have logged onto a machine interactively or through the network.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1187,7 +1219,15 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.User</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>MdatpPwsh.Models.User[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1216,11 +1256,11 @@
       <command:verb>Get</command:verb>
       <command:noun>DatpSessionClient</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Get the raw client used for sending API calls.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Get the client that has been stored in your session for sending API calls. This client can be used to send custom API calls and can also be used for troubleshooting issues with the cmdlets.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1241,7 +1281,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Session.DatpSessionClient</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1270,11 +1310,11 @@
       <command:verb>Get</command:verb>
       <command:noun>DatpUserAlerts</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Get alerts triggered by a user.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Get alerts triggered by a user.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1320,7 +1360,15 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.Alert</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>MdatpPwsh.Models.Alert[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1349,11 +1397,11 @@
       <command:verb>Get</command:verb>
       <command:noun>DatpUserMachines</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Get machines a user has logged into.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Get machines a user has logged into.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1399,7 +1447,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.Machine[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1428,11 +1476,11 @@
       <command:verb>Out</command:verb>
       <command:noun>DatpInvestigationPkg</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Save an investigation package.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Save an investigation package that has been collected through Defender for Endpoint.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1502,7 +1550,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>System.IO.FileInfo</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1531,11 +1579,11 @@
       <command:verb>Remove</command:verb>
       <command:noun>DatpMachineTag</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Remove a tag from a machine.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Remove a tag from a machine.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1605,7 +1653,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.Machine</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1634,11 +1682,11 @@
       <command:verb>Set</command:verb>
       <command:noun>DatpMachineIsolation</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Set a machine to be isolated or to be released from isolation.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Set a machine to be isolated with a full or selective isolation or release a machine from isolation.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1737,7 +1785,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.ActivityResponse</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1766,11 +1814,11 @@
       <command:verb>Set</command:verb>
       <command:noun>DatpModuleConfig</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Set the configuration for the module to use for authentication.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Set the configuration for the module to use for authentication. This will require information related to your Azure AD tenant.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1840,7 +1888,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.Core.DatpModuleConfig</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1869,11 +1917,11 @@
       <command:verb>Start</command:verb>
       <command:noun>DatpInvestigationPkgCollection</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Start the investigation package collection process on a machine.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Start the investigation package collection process on a machine.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1943,7 +1991,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.ActivityResponse</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1972,11 +2020,11 @@
       <command:verb>Start</command:verb>
       <command:noun>DatpMachineScan</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Start a scan on a machine.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Start a quick or full scan on a machine.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2074,7 +2122,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>MdatpPwsh.Models.ActivityResponse</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>

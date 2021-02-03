@@ -11,6 +11,7 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Set, "DatpMachineIsolation")]
+    [OutputType(typeof(ActivityResponse))]
     public class SetDatpMachineIsolation : DatpCmdlet
     {
         [Parameter(

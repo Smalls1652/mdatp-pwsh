@@ -10,6 +10,7 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpDomainStats")]
+    [OutputType(typeof(DomainStats))]
     public class GetDatpDomainStats : DatpCmdlet
     {
         [Parameter(
