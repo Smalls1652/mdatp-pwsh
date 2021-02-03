@@ -8,7 +8,7 @@ schema: 2.0.0
 # Add-DatpMachineTag
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Add a tag to a machine.
 
 ## SYNTAX
 
@@ -17,21 +17,21 @@ Add-DatpMachineTag [-MachineId] <String[]> [-TagName] <String> [<CommonParameter
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Add a tag to a machine in Defender for Endpoint.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Add-DatpMachineTag -MachineId "comp-01.contoso.com" -TagName "TestTag-01"
 ```
 
-{{ Add example description here }}
+Add a tag to the machine 'comp-01.contoso.com' with the name 'TestTag-01'.
 
 ## PARAMETERS
 
 ### -MachineId
-{{ Fill MachineId Description }}
+The ID or the FQDN of the machine.
 
 ```yaml
 Type: String[]
@@ -46,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -TagName
-{{ Fill TagName Description }}
+The name of the tag to add.
 
 ```yaml
 Type: String

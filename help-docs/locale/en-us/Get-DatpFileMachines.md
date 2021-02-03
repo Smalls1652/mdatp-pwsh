@@ -31,7 +31,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -FileIdentifier
-{{ Fill FileIdentifier Description }}
+The SHA1 or SHA256 hash of the file.
 
 ```yaml
 Type: String

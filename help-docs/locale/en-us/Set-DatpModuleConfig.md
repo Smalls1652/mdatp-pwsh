@@ -31,7 +31,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -PublicClientAppId
-{{ Fill PublicClientAppId Description }}
+The ClientID for the registered Azure AD app in your tenant.
 
 ```yaml
 Type: String
@@ -46,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -TenantId
-{{ Fill TenantId Description }}
+The ID for your Azure AD tenant.
 
 ```yaml
 Type: String

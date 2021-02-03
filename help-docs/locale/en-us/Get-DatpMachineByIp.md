@@ -31,7 +31,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -IpAddress
-{{ Fill IpAddress Description }}
+The IP address to search for.
 
 ```yaml
 Type: String[]

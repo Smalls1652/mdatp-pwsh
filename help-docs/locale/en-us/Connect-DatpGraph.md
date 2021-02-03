@@ -8,7 +8,7 @@ schema: 2.0.0
 # Connect-DatpGraph
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Connect to the Defender for Endpoint API.
 
 ## SYNTAX
 
@@ -17,16 +17,7 @@ Connect-DatpGraph [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
-
-## EXAMPLES
-
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
+Initiates the authentication process to connect to the Defender for Endpoint API.
 
 ## PARAMETERS
 

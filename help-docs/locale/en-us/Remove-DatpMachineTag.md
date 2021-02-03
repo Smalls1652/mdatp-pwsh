@@ -31,7 +31,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -MachineId
-{{ Fill MachineId Description }}
+The ID or the FQDN of the machine.
 
 ```yaml
 Type: String[]
@@ -46,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -TagName
-{{ Fill TagName Description }}
+The name of the tag to remove.
 
 ```yaml
 Type: String

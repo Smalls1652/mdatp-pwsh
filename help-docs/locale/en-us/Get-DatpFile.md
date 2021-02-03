@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DatpFile
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get a file seen by Defender for Endpoint.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-DatpFile [-FileIdentifier] <String[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get information about a file that has been by Defender for Endpoint.
 
 ## EXAMPLES
 
@@ -31,7 +31,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -FileIdentifier
-{{ Fill FileIdentifier Description }}
+The SHA1 or SHA256 hash of the file.
 
 ```yaml
 Type: String[]

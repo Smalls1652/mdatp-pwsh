@@ -31,7 +31,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -ActivityId
-{{ Fill ActivityId Description }}
+The Activity ID for the "Collect investigation package" action.
 
 ```yaml
 Type: String

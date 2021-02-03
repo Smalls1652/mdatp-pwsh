@@ -37,7 +37,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -ActivityId
-{{ Fill ActivityId Description }}
+The Activity ID for the action.
 
 ```yaml
 Type: String
@@ -52,7 +52,7 @@ Accept wildcard characters: False
 ```
 
 ### -AllActivities
-{{ Fill AllActivities Description }}
+Get all activities created.
 
 ```yaml
 Type: SwitchParameter

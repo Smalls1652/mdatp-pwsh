@@ -31,7 +31,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -UserName
-{{ Fill UserName Description }}
+The username to search for.
 
 ```yaml
 Type: String[]

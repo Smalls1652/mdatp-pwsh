@@ -31,7 +31,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -MachineId
-{{ Fill MachineId Description }}
+The ID or the FQDN of the machine.
 
 ```yaml
 Type: String[]

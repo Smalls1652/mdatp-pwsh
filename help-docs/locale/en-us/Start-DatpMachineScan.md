@@ -31,7 +31,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -Comment
-{{ Fill Comment Description }}
+A message explaining why the action must be done.
 
 ```yaml
 Type: String
@@ -46,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -MachineId
-{{ Fill MachineId Description }}
+The ID or the FQDN of the machine.
 
 ```yaml
 Type: String[]
@@ -61,7 +61,7 @@ Accept wildcard characters: False
 ```
 
 ### -ScanType
-{{ Fill ScanType Description }}
+The type of scan to perform.
 
 ```yaml
 Type: String

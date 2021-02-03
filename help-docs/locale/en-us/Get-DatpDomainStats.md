@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DatpDomainStats
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get the stats of a domain in Defender for Endpoint.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-DatpDomainStats [-DomainName] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get the stats of a domain in Defender for Endpoint with how often it has been seen in your organization and worldwide.
 
 ## EXAMPLES
 
@@ -31,7 +31,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -DomainName
-{{ Fill DomainName Description }}
+The domain name to get stats for.
 
 ```yaml
 Type: String
