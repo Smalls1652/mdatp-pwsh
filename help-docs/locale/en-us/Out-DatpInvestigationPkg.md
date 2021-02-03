@@ -8,7 +8,7 @@ schema: 2.0.0
 # Out-DatpInvestigationPkg
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Save an investigation package.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Out-DatpInvestigationPkg [-ActivityId] <String> [-FolderPath] <DirectoryInfo> [<
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Save an investigation package that has been collected through Defender for Endpoint.
 
 ## EXAMPLES
 

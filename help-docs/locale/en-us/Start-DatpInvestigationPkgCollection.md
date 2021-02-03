@@ -8,7 +8,7 @@ schema: 2.0.0
 # Start-DatpInvestigationPkgCollection
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Start the investigation package collection process on a machine.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Start-DatpInvestigationPkgCollection [-MachineId] <String[]> [-Comment] <String>
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Start the investigation package collection process on a machine.
 
 ## EXAMPLES
 

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-DatpMachineIsolation
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Set a machine to be isolated or to be released from isolation.
 
 ## SYNTAX
 
@@ -18,7 +18,7 @@ Set-DatpMachineIsolation [-MachineId] <String[]> [-Comment] <String> [-Isolation
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Set a machine to be isolated with a full or selective isolation or release a machine from isolation.
 
 ## EXAMPLES
 

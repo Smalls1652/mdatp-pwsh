@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DatpUserAlerts
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get alerts triggered by a user.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-DatpUserAlerts [-UserName] <String[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get alerts triggered by a user.
 
 ## EXAMPLES
 

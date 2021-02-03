@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DatpMachine
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get a machine from Defender for Endpoint.
 
 ## SYNTAX
 
@@ -23,7 +23,7 @@ Get-DatpMachine [-AllMachines] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get a machine or all machines that have been onboarded to Defender for Endpoint.
 
 ## EXAMPLES
 

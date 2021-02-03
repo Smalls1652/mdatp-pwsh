@@ -8,7 +8,7 @@ schema: 2.0.0
 # Start-DatpMachineScan
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Start a scan on a machine.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Start-DatpMachineScan [-MachineId] <String[]> [[-ScanType] <String>] [-Comment] 
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Start a quick or full scan on a machine.
 
 ## EXAMPLES
 

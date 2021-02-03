@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DatpUserMachines
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get machines a user has logged into.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-DatpUserMachines [-UserName] <String[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get machines a user has logged into.
 
 ## EXAMPLES
 

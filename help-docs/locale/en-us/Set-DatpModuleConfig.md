@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-DatpModuleConfig
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Set the configuration for the module to use for authentication.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Set-DatpModuleConfig [-PublicClientAppId] <String> [-TenantId] <String> [<Common
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Set the configuration for the module to use for authentication. This will require information related to your Azure AD tenant.
 
 ## EXAMPLES
 

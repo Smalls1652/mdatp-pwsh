@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DatpMachineAlerts
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get alerts triggered by a machine.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-DatpMachineAlerts [-MachineId] <String[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get alerts triggered by a machine.
 
 ## EXAMPLES
 

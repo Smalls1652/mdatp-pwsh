@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DatpFileStats
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get the stats of a file.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-DatpFileStats [-FileIdentifier] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get stats on a file with how much it has been seen in your organization and worldwide.
 
 ## EXAMPLES
 

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DatpFileAlerts
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get alerts related to a file identifier.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-DatpFileAlerts [-FileIdentifier] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get alerts seen in your organization related to a file's SHA1 or SHA256 hash.
 
 ## EXAMPLES
 

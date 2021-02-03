@@ -8,7 +8,7 @@ schema: 2.0.0
 # Remove-DatpMachineTag
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Remove a tag from a machine.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Remove-DatpMachineTag [-MachineId] <String[]> [-TagName] <String> [<CommonParame
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Remove a tag from a machine.
 
 ## EXAMPLES
 

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DatpSessionClient
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get the raw client used for sending API calls.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-DatpSessionClient [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get the client that has been stored in your session for sending API calls. This client can be used to send custom API calls and can also be used for troubleshooting issues with the cmdlets.
 
 ## EXAMPLES
 

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DatpMachineUsers
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get users that have logged onto a machine.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-DatpMachineUsers [-MachineId] <String[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get all of the user who have logged onto a machine interactively or through the network.
 
 ## EXAMPLES
 

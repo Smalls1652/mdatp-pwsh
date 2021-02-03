@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DatpMachineAction
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get the status of an action performed on a machine.
 
 ## SYNTAX
 
@@ -23,7 +23,7 @@ Get-DatpMachineAction [-AllActivities] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get the status and details about an action that was performed on a machine through Defender for Endpoint.
 
 ## EXAMPLES
 

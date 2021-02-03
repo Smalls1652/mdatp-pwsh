@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DatpFileMachines
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get machines that have seen a file.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-DatpFileMachines [-FileIdentifier] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get machines that have been registered to have seen a file's SHA1 or SHA256 hash.
 
 ## EXAMPLES
 

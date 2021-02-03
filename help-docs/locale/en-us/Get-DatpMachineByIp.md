@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DatpMachineByIp
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get a machine by their last IP address.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-DatpMachineByIp [[-IpAddress] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get a machine by their last IP address.
 
 ## EXAMPLES
 
