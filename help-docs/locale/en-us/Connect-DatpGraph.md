@@ -19,6 +19,8 @@ Connect-DatpGraph [<CommonParameters>]
 ## DESCRIPTION
 Initiates the authentication process to connect to the Defender for Endpoint API.
 
+## EXAMPLES
+
 ## PARAMETERS
 
 ### CommonParameters
