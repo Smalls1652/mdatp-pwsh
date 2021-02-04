@@ -15,7 +15,8 @@ namespace MdatpPwsh.Cmdlets
     {
         [Parameter(
             Position = 0,
-            Mandatory = true
+            Mandatory = true,
+            ValueFromPipelineByPropertyName = true
         )]
         public string AlertId
         {
