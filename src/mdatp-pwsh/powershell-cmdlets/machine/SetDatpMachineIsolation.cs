@@ -11,6 +11,7 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Set, "DatpMachineIsolation")]
+    [OutputType(typeof(ActivityResponse))]
     public class SetDatpMachineIsolation : DatpCmdlet
     {
         [Parameter(
@@ -18,12 +19,12 @@ namespace MdatpPwsh.Cmdlets
             Mandatory = true,
             ValueFromPipelineByPropertyName = true
         )]
-        public List<string> MachineId
+        public string[] MachineId
         {
             get { return machineId; }
             set { machineId = value; }
         }
-        private List<string> machineId;
+        private string[] machineId;
 
         [Parameter(
             Position = 1,

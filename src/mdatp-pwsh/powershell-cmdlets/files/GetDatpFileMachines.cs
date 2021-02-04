@@ -10,6 +10,7 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpFileMachines")]
+    [OutputType(typeof(Machine[]))]
     public class GetDatpFileMachines : DatpCmdlet
     {
         [Parameter(

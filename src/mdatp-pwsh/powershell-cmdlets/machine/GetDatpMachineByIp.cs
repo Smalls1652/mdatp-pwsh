@@ -11,18 +11,22 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpMachineByIp")]
+    [OutputType(
+        typeof(Machine),
+        typeof(Machine[])
+    )]
     public class GetDatpMachineByIp : DatpCmdlet
     {
         [Parameter(
             Position = 0,
             ValueFromPipelineByPropertyName = true
         )]
-        public List<string> IpAddress
+        public string[] IpAddress
         {
             get { return ipAddress; }
             set { ipAddress = value; }
         }
-        private List<string> ipAddress;
+        private string[] ipAddress;
 
         public DateTime TimeStamp
         {

@@ -12,6 +12,7 @@ namespace MdatpPwsh.Cmdlets
 
     [Cmdlet(VerbsCommon.Get, "DatpAlert")]
     [CmdletBinding(DefaultParameterSetName = "ListAlerts")]
+    [OutputType(typeof(Alert[]))]
     public class GetDatpAlert : DatpCmdlet
     {
         [Parameter(
@@ -26,7 +27,7 @@ namespace MdatpPwsh.Cmdlets
         private AlertStatus alertStatus = AlertStatus.New;
 
         [Parameter(
-            Position = 1,
+            Position = 0,
             ParameterSetName = "GetAlert"
         )]
         public string AlertId

@@ -13,6 +13,10 @@ namespace MdatpPwsh.Cmdlets
 
     [Cmdlet(VerbsCommon.Get, "DatpMachine")]
     [CmdletBinding(DefaultParameterSetName = "AllMachines")]
+    [OutputType(
+        typeof(Machine),
+        typeof(Machine[])
+    )]
     public class GetDatpMachine : DatpCmdlet
     {
         [Parameter(
@@ -20,12 +24,12 @@ namespace MdatpPwsh.Cmdlets
             ParameterSetName = "SingleMachine",
             ValueFromPipelineByPropertyName = true
         )]
-        public List<string> MachineId
+        public string[] MachineId
         {
             get { return machineId; }
             set { machineId = value; }
         }
-        private List<string> machineId;
+        private string[] machineId;
 
         [Parameter(
             Position = 1,

@@ -11,19 +11,20 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpFile")]
+    [OutputType(typeof(FileProperties))]
     public class GetDatpFile : DatpCmdlet
     {
         [Parameter(
             Position = 0,
             Mandatory = true
         )]
-        public List<string> FileIdentifier
+        public string[] FileIdentifier
         {
             get { return fileIdentifier; }
             set { fileIdentifier = value; }
         }
 
-        private List<string> fileIdentifier;
+        private string[] fileIdentifier;
 
         protected override void BeginProcessing()
         {

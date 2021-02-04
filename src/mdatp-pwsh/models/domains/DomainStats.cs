@@ -10,7 +10,7 @@ namespace MdatpPwsh.Models
         public string DomainHost { get; set; }
 
         [JsonPropertyName("orgPrevalence")]
-        public Nullable<Int64> OrgPrevalence { get; set; }
+        public string OrgPrevalence { get; set; }
 
         [JsonPropertyName("orgFirstSeen")]
         public Nullable<DateTime> OrgFirstSeen { get; set; }

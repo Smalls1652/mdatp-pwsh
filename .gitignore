@@ -1,6 +1,8 @@
 build/
 tests/
 
+MdatpPwsh.dll-Help.xml
+
 .DS_Store
 
 # User-specific files

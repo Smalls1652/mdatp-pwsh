@@ -1,7 +1,9 @@
 using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+
 using Microsoft.Identity.Client;
 
 namespace MdatpPwsh
@@ -14,7 +16,7 @@ namespace MdatpPwsh
         }
         private IPublicClientApplication App { get; set; }
 
-        public async Task<AuthenticationResult> StartAcquire(IEnumerable<string> scopes)
+        public async Task<AuthenticationResult> StartAcquire(IEnumerable<string> scopes, CancellationToken token)
         {
             AuthenticationResult result = null;
 
@@ -26,26 +28,42 @@ namespace MdatpPwsh
             }
             else
             {
-                result = await GetDeviceCode(scopes);
+                result = await GetDeviceCode(scopes, token);
             }
 
             return result;
         }
 
-        public async Task<AuthenticationResult> GetDeviceCode(IEnumerable<string> scopes)
+        public async Task<AuthenticationResult> GetDeviceCode(IEnumerable<string> scopes, CancellationToken token)
         {
             AuthenticationResult result = null;
-
             try
             {
-                result = await App.AcquireTokenWithDeviceCode(scopes,
+                result = await App.AcquireTokenWithDeviceCode(
+                    scopes,
                     deviceCodeCallback =>
                     {
                         Console.WriteLine(deviceCodeCallback.Message);
-                        return Task.FromResult(0);
-                    }).ExecuteAsync();
+
+                        Task resultFromTask = null;
+                        if (token.IsCancellationRequested)
+                        {
+                            token.ThrowIfCancellationRequested();
+                        }
+                        else
+                        {
+                            resultFromTask = Task.FromResult(0);
+                        }
+
+                        return resultFromTask;
+                    }
+                ).ExecuteAsync(token);
             }
             catch (MsalServiceException e)
+            {
+                throw e;
+            }
+            catch (OperationCanceledException e)
             {
                 throw e;
             }
