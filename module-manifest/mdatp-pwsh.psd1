@@ -73,7 +73,7 @@
 
     # DscResourcesToExport = @()
     # ModuleList = @()
-    
+
     FileList = @(
         "License.txt",
         "MdatpPwsh.dll",
@@ -86,7 +86,10 @@
 
         PSData = @{
 
-            # Tags = @()
+            Tags = @(
+                "Defender-ATP",
+                "Defender-for-Endpoint"
+            )
 
             LicenseUri = "https://raw.githubusercontent.com/Smalls1652/mdatp-pwsh/stable/license.txt"
 
