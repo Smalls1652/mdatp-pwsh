@@ -40,7 +40,6 @@
         "Get-DatpMachine", 
         "Get-DatpMachineAlerts",
         "Get-DatpMachineUsers",
-        "Get-DatpMachineByIp",
         "Set-DatpMachineIsolation",
         "Add-DatpMachineTag", 
         "Remove-DatpMachineTag",
