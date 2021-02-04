@@ -10,7 +10,10 @@ namespace MdatpPwsh.Cmdlets
     using MdatpPwsh.Helpers;
 
     [Cmdlet(VerbsCommon.Get, "DatpDomainRelated")]
-    [OutputType(typeof(Machine[]))]
+    [OutputType(
+        typeof(Machine[]),
+        typeof(Alert[])
+    )]
     public class GetDatpDomainRelated : DatpCmdlet
     {
         [Parameter(
@@ -64,7 +67,7 @@ namespace MdatpPwsh.Cmdlets
 
             }
 
-            foreach (dynamic obj in apiResult.value)
+            foreach (dynamic obj in apiResult)
             {
                 WriteObject(obj);
             }
