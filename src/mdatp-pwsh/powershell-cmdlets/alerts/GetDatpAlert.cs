@@ -27,7 +27,7 @@ namespace MdatpPwsh.Cmdlets
         private AlertStatus alertStatus = AlertStatus.New;
 
         [Parameter(
-            Position = 1,
+            Position = 0,
             ParameterSetName = "GetAlert"
         )]
         public string AlertId
