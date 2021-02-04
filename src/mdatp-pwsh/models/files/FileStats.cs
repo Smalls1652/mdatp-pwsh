@@ -20,7 +20,7 @@ namespace MdatpPwsh.Models
         public Nullable<DateTime> OrgLastSeen { get; set; }
 
         [JsonPropertyName("globalPrevalence")]
-        public int GlobalPrevalence { get; set; }
+        public string GlobalPrevalence { get; set; }
 
         [JsonPropertyName("globalFirstObserved")]
         public Nullable<DateTime> GlobalFirstObserved { get; set; }
