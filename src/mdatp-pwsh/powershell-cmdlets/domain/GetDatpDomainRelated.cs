@@ -54,24 +54,27 @@ namespace MdatpPwsh.Cmdlets
             WriteVerbose($"Getting related info for domain '{domainName}'.");
             string apiJson = SendApiCall(apiUri, null, HttpMethod.Get);
 
-            dynamic apiResult = null;
             switch (searchType)
             {
                 case "Alerts":
-                    apiResult = new JsonConverter<ResponseCollection<Alert>>(apiJson).Value;
+                    ResponseCollection<Alert> apiResultAlerts = new JsonConverter<ResponseCollection<Alert>>(apiJson).Value;
+
+                    foreach (Alert obj in apiResultAlerts.Value)
+                    {
+                        WriteObject(obj);
+                    }
                     break;
 
                 case "Machines":
-                    apiResult = new JsonConverter<ResponseCollection<Machine>>(apiJson).Value;
+                    ResponseCollection<Machine> apiResultMachines = new JsonConverter<ResponseCollection<Machine>>(apiJson).Value;
+
+                    foreach (Machine obj in apiResultMachines.Value)
+                    {
+                        WriteObject(obj);
+                    }
                     break;
 
             }
-
-            foreach (dynamic obj in apiResult)
-            {
-                WriteObject(obj);
-            }
-
         }
     }
 }
