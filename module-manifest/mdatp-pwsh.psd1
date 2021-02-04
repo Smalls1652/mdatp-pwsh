@@ -10,27 +10,35 @@
 
     RootModule         = "MdatpPwsh.dll"
     ModuleVersion      = "2021.01.00"
-    # CompatiblePSEditions = @()
+
+    CompatiblePSEditions = @(
+        "Desktop",
+        "Core"
+    )
+
     GUID               = "afc0e191-ffe7-4261-ba9e-d59652423d8c"
-    Author             = "Tim Small"
+    Author             = "Timothy Small"
     CompanyName        = "Smalls.Online"
-    Copyright          = "2020"
+    Copyright          = "2021 Timothy Small"
     Description        = "Defender for Endpoint PowerShell Module"
-    # PowerShellVersion = ''
+
+    PowerShellVersion = "5.1"
+    PowerShellHostVersion = "5.1"
     # PowerShellHostName = ''
-    # PowerShellHostVersion = ''
     # DotNetFrameworkVersion = ''
     # ClrVersion = ''
     # ProcessorArchitecture = ''
     # RequiredModules = @()
+
     RequiredAssemblies = @(
-        "Microsoft.Identity.Client.dll"
+        "Microsoft.Identity.Client.dll",
+        "System.Text.Json.dll"
     )
+
     # ScriptsToProcess = @()
     # TypesToProcess = @()
     # FormatsToProcess = @()
     # NestedModules = @()
-
     # FunctionsToExport  = "*"
 
     CmdletsToExport    = @(
@@ -65,7 +73,14 @@
 
     # DscResourcesToExport = @()
     # ModuleList = @()
-    # FileList = @()
+    
+    FileList = @(
+        "License.txt",
+        "MdatpPwsh.dll",
+        "MdatpPwsh.dll-Help.xml",
+        "Microsoft.Identity.Client.dll",
+        "System.Text.Json.dll"
+    )
 
     PrivateData        = @{
 
@@ -73,15 +88,15 @@
 
             # Tags = @()
 
-            LicenseUri = "https://raw.githubusercontent.com/Smalls1652/mdatp-pwsh/master/license.txt"
+            LicenseUri = "https://raw.githubusercontent.com/Smalls1652/mdatp-pwsh/stable/license.txt"
 
-            ProjectUri = "https://github.com/smalls1652/mdatp-pwsh"
+            ProjectUri = "https://github.com/Smalls1652/mdatp-pwsh"
 
             # IconUri = ''
 
             # ReleaseNotes = ''
 
-            Prerelease = "alpha01"
+            # Prerelease = ""
 
             RequireLicenseAcceptance = $false
 
