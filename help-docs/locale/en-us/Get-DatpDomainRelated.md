@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DatpDomainRelated
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get machines or alerts that have interacted with a web domain.
 
 ## SYNTAX
 
@@ -17,21 +17,21 @@ Get-DatpDomainRelated [-DomainName] <String> [[-Type] <String>] [<CommonParamete
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get machines or alerts that have interacted with a web domain.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-DatpDomainRelated -DomainName "www.reddit.com" -Type Machines
 ```
 
-{{ Add example description here }}
+Get all machines that have made contact with 'www.reddit.com'.
 
 ## PARAMETERS
 
 ### -DomainName
-{{ Fill DomainName Description }}
+The web domain name to search for.
 
 ```yaml
 Type: String
@@ -46,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-{{ Fill Type Description }}
+The type of objects to return.
 
 ```yaml
 Type: String

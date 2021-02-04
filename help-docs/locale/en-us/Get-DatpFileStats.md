@@ -23,15 +23,15 @@ Get stats on a file with how much it has been seen in your organization and worl
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-DatpFileStats -FileIdentifier "eec6ebcbd8f725cfbd38240197f6b8e03d9d6139"
 ```
 
-{{ Add example description here }}
+Get stats about a file with a SHA1 hash of 'eec6ebcbd8f725cfbd38240197f6b8e03d9d6139'.
 
 ## PARAMETERS
 
 ### -FileIdentifier
-The SHA1 or SHA256 hash of the file.
+The SHA1 hash of the file.
 
 ```yaml
 Type: String
@@ -57,5 +57,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### MdatpPwsh.Models.FileStats
 
 ## NOTES
+
+SHA256 hashes are not supported in the 'FileIdentifier' parameter.
 
 ## RELATED LINKS

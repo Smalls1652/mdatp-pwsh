@@ -24,10 +24,17 @@ Set a machine to be isolated with a full or selective isolation or release a mac
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Set-DatpMachineIsolation -MachineId "comp-01.contoso.com" -IsolationType "Full Isolation" -Comment "Laterally moving malware was found on this machine."
 ```
 
-{{ Add example description here }}
+Set the machine 'comp-01.contoso.com' to be in a "Full Isolation" mode.
+
+### Example 2
+```powershell
+PS C:\> Set-DatpMachineIsolation -MachineId "employee-comp-00.contoso.com" -IsolationType "Release Isolation" -Comment "Machine has been fully investigated. No malicious indicators were found."
+```
+
+Set the machine 'employee-comp-00.contoso.com' to be released from isolation.
 
 ## PARAMETERS
 

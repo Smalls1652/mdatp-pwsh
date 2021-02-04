@@ -23,10 +23,10 @@ Get the stats of a domain in Defender for Endpoint with how often it has been se
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-DatpDomainStats -DomainName "www.reddit.com"
 ```
 
-{{ Add example description here }}
+Get the stats of how prevalent 'www.reddit.com' is.
 
 ## PARAMETERS
 

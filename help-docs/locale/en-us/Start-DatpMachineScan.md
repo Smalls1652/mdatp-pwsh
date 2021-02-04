@@ -23,10 +23,19 @@ Start a quick or full scan on a machine.
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Start-DatpMachineScan -MachineId "comp-01.constoso.com" -ScanType Quick -Comment "Running quick scan on machine"
 ```
 
-{{ Add example description here }}
+Start a quick scan on a machine.
+
+### Example 2
+```powershell
+PS C:\> $scanAction = Start-DatpMachineScan -MachineId "comp-01.constoso.com" -ScanType Full -Comment "Running a full scan on machine"
+
+PS C:\> $scanAction | Get-DatpMachineAction
+```
+
+Start a full scan on a machine and save the action object to a variable. Then use that action object as a pipeline input to 'Get-DatpMachineAction' to monitor the progress of the scan.
 
 ## PARAMETERS
 

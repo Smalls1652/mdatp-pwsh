@@ -8,7 +8,7 @@ schema: 2.0.0
 # Update-DatpAlert
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Update an alert.
 
 ## SYNTAX
 
@@ -19,21 +19,23 @@ Update-DatpAlert [-AlertId] <String> [-Status] <AlertStatus> [-AssignedTo] <Stri
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Update an alert with details in Defender for Endpoint.
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> $alert = Get-DatpAlert -AlertId "da123456789123456_1234567890"
+
+PS C:\> $alert | Update-DatpAlert -Status Resolved -AssignedTo "bperry@contoso.com" -Classification FalsePositive -Determination Other -Comment "Blaming A Bridge Collapse On A School Is Like Me Blaming Owls For How Much I Suck At Analogies."
 ```
 
-{{ Add example description here }}
+Get an alert and pipe it into 'Update-DatpAlert' to set the status to resolved, assign it to 'bperry@contoso.com', classify it as a false positive, set the determination to other, and add a comment to the alert.
 
 ## PARAMETERS
 
 ### -AlertId
-{{ Fill AlertId Description }}
+The ID of the alert.
 
 ```yaml
 Type: String
@@ -48,7 +50,7 @@ Accept wildcard characters: False
 ```
 
 ### -AssignedTo
-{{ Fill AssignedTo Description }}
+The UserPrincipalName (UPN) of the security personnel assigned to the alert.
 
 ```yaml
 Type: String
@@ -63,7 +65,7 @@ Accept wildcard characters: False
 ```
 
 ### -Classification
-{{ Fill Classification Description }}
+The classification of the alert.
 
 ```yaml
 Type: AlertClassification
@@ -79,7 +81,7 @@ Accept wildcard characters: False
 ```
 
 ### -Comment
-{{ Fill Comment Description }}
+A message describing why the alert was updated.
 
 ```yaml
 Type: String
@@ -94,7 +96,7 @@ Accept wildcard characters: False
 ```
 
 ### -Determination
-{{ Fill Determination Description }}
+The determination reason for why an alert was updated.
 
 ```yaml
 Type: AlertDetermination
@@ -110,7 +112,7 @@ Accept wildcard characters: False
 ```
 
 ### -Status
-{{ Fill Status Description }}
+The status of the alert.
 
 ```yaml
 Type: AlertStatus

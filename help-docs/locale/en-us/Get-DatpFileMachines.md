@@ -17,7 +17,7 @@ Get-DatpFileMachines [-FileIdentifier] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Get machines that have been registered to have seen a file's SHA1 or SHA256 hash.
+Get machines that have been registered to have seen a file's SHA1 hash.
 
 ## EXAMPLES
 
@@ -31,7 +31,7 @@ Get machines that have seen the file with the SHA1 file hash of "eec6ebcbd8f725c
 ## PARAMETERS
 
 ### -FileIdentifier
-The SHA1 or SHA256 hash of the file.
+The SHA1 hash of the file.
 
 ```yaml
 Type: String
@@ -57,5 +57,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### MdatpPwsh.Models.Machine[]
 
 ## NOTES
+
+SHA256 hashes are not supported in the 'FileIdentifier' parameter.
 
 ## RELATED LINKS

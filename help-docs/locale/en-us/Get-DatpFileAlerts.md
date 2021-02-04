@@ -17,7 +17,7 @@ Get-DatpFileAlerts [-FileIdentifier] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Get alerts seen in your organization related to a file's SHA1 or SHA256 hash.
+Get alerts seen in your organization related to a file's SHA1 hash.
 
 ## EXAMPLES
 
@@ -31,7 +31,7 @@ Getting alerts triggered by the SHA1 file hash of "eec6ebcbd8f725cfbd38240197f6b
 ## PARAMETERS
 
 ### -FileIdentifier
-The SHA1 or SHA256 hash of the file.
+The SHA1 hash of the file.
 
 ```yaml
 Type: String
@@ -57,5 +57,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### MdatpPwsh.Models.Alert[]
 
 ## NOTES
+
+SHA256 hashes are not supported in the 'FileIdentifier' parameter.
 
 ## RELATED LINKS

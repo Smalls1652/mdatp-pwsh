@@ -23,10 +23,12 @@ Save an investigation package that has been collected through Defender for Endpo
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> $pkgCollection = Start-DatpInvestigationPkgCollection -MachineId "comp-01.contoso.com" -Comment "Collecting investigation package."
+
+PS C:\> Out-DatpInvestigationPkg -ActivityId $pkgCollection.ActivityId -FolderPath ".\"
 ```
 
-{{ Add example description here }}
+Start a package collection on a machine and then save it to your local machine.
 
 ## PARAMETERS
 
@@ -46,7 +48,7 @@ Accept wildcard characters: False
 ```
 
 ### -FolderPath
-{{ Fill FolderPath Description }}
+The folder path to save the package to.
 
 ```yaml
 Type: DirectoryInfo

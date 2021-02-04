@@ -23,10 +23,10 @@ Start the investigation package collection process on a machine.
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Start-DatpInvestigationPkgCollection -MachineId "comp-01.contoso.com" -Comment "Collecting investigation package."
 ```
 
-{{ Add example description here }}
+Start a package collection on a machine.
 
 ## PARAMETERS
 

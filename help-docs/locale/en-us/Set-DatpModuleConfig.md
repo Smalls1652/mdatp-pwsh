@@ -23,10 +23,10 @@ Set the configuration for the module to use for authentication. This will requir
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Set-DatpModuleConfig -PublicClientAppID "02f0f9c2-73a5-4952-895b-86e518c14dbf" -TenantId "e51020fe-9fbc-4a4b-9e8d-16dac9fcd6b4"
 ```
 
-{{ Add example description here }}
+Set the module config to use the specified app and tenant ID for Azure AD.
 
 ## PARAMETERS
 

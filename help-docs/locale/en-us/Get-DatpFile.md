@@ -26,7 +26,7 @@ Get information about a file that has been by Defender for Endpoint.
 PS C:\> Get-DatpFile -FileIdentifier "36A4CC191027E30EC32618FF454F33B87F5C46A765C6AC3F151165AD7508DCD2"
 ```
 
-{{ Add example description here }}
+Get information about a file with a SHA256 hash of '36A4CC191027E30EC32618FF454F33B87F5C46A765C6AC3F151165AD7508DCD2'.
 
 ## PARAMETERS
 

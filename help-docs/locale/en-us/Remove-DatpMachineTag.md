@@ -23,10 +23,10 @@ Remove a tag from a machine.
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Remove-DatpMachineTag -MachineId "comp-01.contoso.com" -TagName "TestTag-01"
 ```
 
-{{ Add example description here }}
+Remove a tag from the machine 'comp-01.contoso.com' with the name 'TestTag-01'.
 
 ## PARAMETERS
 
