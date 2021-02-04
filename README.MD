@@ -1,8 +1,6 @@
 # Microsoft Defender for Endpoint PowerShell Module
 
-**⚠️ This module is not affiliated with Microsoft and is a purely community-built resource. It is not an official module. ⚠️**
-
-**This module is still a work in progress. Documentation is not fully created and unknown errors may occur while using.**
+**⚠️ This module is not affiliated with Microsoft and is a purely community-built resource. ⚠️**
 
 This module is for interacting with the Defender for Endpoint Graph API using delegated permissions. The primary goal of this project was to create a cross-platform module that works on Windows, macOS, and Linux. To keep it simple for cross-platform use, the authentication mechanism is using the *device code flow* in the **Microsoft Authentication Library**.
 
@@ -10,7 +8,13 @@ This module is for interacting with the Defender for Endpoint Graph API using de
 
 ### PowerShell Gallery
 
-**Note: The PowerShell Gallery module, while it does exist, has not been updated for some time since this is an on-going development.**
+```powershell
+Install-Module -Name "mdatp-pwsh"
+```
+
+#### Links
+
+- [PowerShell Gallery](https://www.powershellgallery.com/packages/mdatp-pwsh)
 
 ### Building from source
 
@@ -98,23 +102,52 @@ This will prompt the **Device Code Flow** with a code you must enter on the [Mic
 
 ### Cmdlets Available
 
+#### Core / Authentication
+
 - `Connect-DatpGraph`
+- `Get-DatpSessionClient`
 - `Set-DatpModuleConfig`
-- `Get-DatpMachine`
-- `Get-DatpMachineAlerts`
-- `Get-DatpMachineUsers`
-- `Set-DatpMachineIsolation`
-- `Add-DatpMachineTag`
-- `Remove-DatpMachineTag`
-- `Start-DatpMachineScan`
-- `Get-DatpUserMachines`
-- `Get-DatpMachineAction`
-- `Start-DatpInvestigationPkgCollection`
+
+#### Alerts
+
+- `Get-DatpAlert`
+- `Update-DatpAlert`
+
+#### Domains
+
 - `Get-DatpDomainStats`
 - `Get-DatpDomainRelated`
+
+#### Files
+
+- `Get-DatpFile`
+- `Get-DatpFileAlerts`
+- `Get-DatpFileMachines`
+- `Get-DatpFileStats`
+
+#### Machines
+
+- `Add-DatpMachineTag`
+- `Get-DatpMachine`
+- `Get-DatpMachineAction`
+- `Get-DatpMachineAlerts`
+- `Get-DatpMachineUsers`
+- `Out-DatpInvestigationPkg`
+- `Remove-DatpMachineTag`
+- `Set-DatpMachineIsolation`
+- `Start-DatpMachineScan`
+- `Start-DatpInvestigationPkgCollection`
+
+#### Users
+
+- `Get-DatpUserAlerts`
+- `Get-DatpUserMachines`
 
 ## Project Dependencies
 
 - **MSAL for .NET**
-  - GitHub - [Link](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet)
-  - Nuget - [Link](https://www.nuget.org/packages/Microsoft.Identity.Client)
+   - GitHub - [Link](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet)
+   - Nuget - [Link](https://www.nuget.org/packages/Microsoft.Identity.Client)
+
+- **System.Text.Json**
+   - Nuget - [Link](https://www.nuget.org/packages/System.Text.Json)
