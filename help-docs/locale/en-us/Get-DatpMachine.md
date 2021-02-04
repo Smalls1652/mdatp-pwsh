@@ -79,13 +79,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String[]
-
 ## OUTPUTS
 
 ### MdatpPwsh.Models.Machine
-
 ### MdatpPwsh.Models.Machine[]
-
 ## NOTES
 
 ## RELATED LINKS

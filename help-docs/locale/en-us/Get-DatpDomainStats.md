@@ -51,11 +51,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### MdatpPwsh.Models.DomainStats
-
 ## NOTES
 
 ## RELATED LINKS

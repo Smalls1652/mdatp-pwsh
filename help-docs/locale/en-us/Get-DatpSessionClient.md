@@ -29,11 +29,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### MdatpPwsh.Session.DatpSessionClient
-
 ## NOTES
 
 ## RELATED LINKS

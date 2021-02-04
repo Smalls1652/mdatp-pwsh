@@ -66,11 +66,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### MdatpPwsh.Models.Core.DatpModuleConfig
-
 ## NOTES
 
 ## RELATED LINKS
