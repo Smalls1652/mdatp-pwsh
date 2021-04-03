@@ -22,9 +22,7 @@ jobs:
         uses: actions/setup-dotnet@v1.7.2
         
       - name: Run build script
-        uses: Amadevus/pwsh-script@v2.0.1
-        with:
-          script: BuildModule.ps1
+        run: ./BuildModule.ps1
           
       - name: Upload build artifact
         uses: actions/upload-artifact@v2
