@@ -1,3 +1,4 @@
+#Requires -Module "platyPS"
 [CmdletBinding()]
 param(
 
@@ -6,7 +7,7 @@ param(
 $ScriptLocation = $PSScriptRoot
 
 $csProjectDir = [System.IO.Path]::Combine($ScriptLocation, "src\")
-$csProjectPublishDir = [System.IO.Path]::Combine($csProjectDir, "bin\", "Debug\", "netstandard2.1\", "publish\")
+$csProjectPublishDir = [System.IO.Path]::Combine($csProjectDir, "bin\", "Debug\", "net5.0\", "publish\")
 
 $helpDocsDir = [System.IO.Path]::Combine($ScriptLocation, "help-docs\")
 $enusHelpDocs = [System.IO.Path]::Combine($helpDocsDir, "locale\", "en-us\")
