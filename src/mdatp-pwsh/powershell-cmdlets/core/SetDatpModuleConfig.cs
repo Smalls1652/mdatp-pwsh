@@ -40,9 +40,10 @@ namespace MdatpPwsh.Cmdlets
 
         protected override void ProcessRecord()
         {
-            DatpModuleConfig configObj = new DatpModuleConfig();
-            configObj.PublicClientAppId = publicClientAppId;
-            configObj.TenantId = tenantId;
+            DatpModuleConfig configObj = new DatpModuleConfig(
+                PublicClientAppId = publicClientAppId,
+                TenantId = tenantId
+            );
 
             string configContents = JsonSerializer.Serialize<DatpModuleConfig>(configObj);
 
