@@ -35,21 +35,22 @@ namespace MdatpPwsh.Session
         public string SendApiCall(string endpoint, string apiPostBody, HttpMethod httpMethod)
         {
             HttpRequestMessage requestMessage = new HttpRequestMessage(httpMethod, endpoint);
-            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", GraphToken.AccessToken);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", GraphToken.AccessToken); //Add the 'Bearer' property to the Authorization header.
 
             switch (String.IsNullOrEmpty(apiPostBody))
             {
-                case false:
+                case false: //If apiPostBody isn't null, then set the requestMessage with the contents of the string.
                     requestMessage.Content = new StringContent(apiPostBody);
                     break;
 
-                default:
+                default: //If apiPostBody is null, then do nothing.
                     break;
             }
 
-            HttpResponseMessage responseMessage = GraphClient.SendAsync(requestMessage).GetAwaiter().GetResult();
+            //Send the request and return the contents as a string.
+            HttpResponseMessage responseMessage = GraphClient.SendAsync(requestMessage).GetAwaiter().GetResult(); //Need to handle the async method differently
             new ErrorHandler().ParseApiResponse(responseMessage);
-            string responseMessageString = responseMessage.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            string responseMessageString = responseMessage.Content.ReadAsStringAsync().GetAwaiter().GetResult(); //Need to handle the async method differently
 
             return responseMessageString;
         }

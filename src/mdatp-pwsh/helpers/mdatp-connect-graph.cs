@@ -21,14 +21,14 @@ namespace MdatpPwsh
             AuthenticationResult result = null;
 
             var accounts = await App.GetAccountsAsync();
-            if (accounts.Any())
+            if (accounts.Any()) //This step currently doesn't work as expected. TokenCache is not configured for this module yet.
             {
                 result = await App.AcquireTokenSilent(scopes, accounts.FirstOrDefault())
                     .ExecuteAsync();
             }
             else
             {
-                result = await GetDeviceCode(scopes, token);
+                result = await GetDeviceCode(scopes, token); //Run the device code flow
             }
 
             return result;
@@ -43,19 +43,19 @@ namespace MdatpPwsh
                     scopes,
                     deviceCodeCallback =>
                     {
-                        Console.WriteLine(deviceCodeCallback.Message);
+                        Console.WriteLine(deviceCodeCallback.Message); //Write the device code message to the console
 
                         Task resultFromTask = null;
                         if (token.IsCancellationRequested)
                         {
-                            token.ThrowIfCancellationRequested();
+                            token.ThrowIfCancellationRequested(); //Cancel the token acquisition process if the 'cancel' signal is sent.
                         }
                         else
                         {
-                            resultFromTask = Task.FromResult(0);
+                            resultFromTask = Task.FromResult(0); //Set the result from the task
                         }
 
-                        return resultFromTask;
+                        return resultFromTask; //End the callback and return with the token acquired
                     }
                 ).ExecuteAsync(token);
             }

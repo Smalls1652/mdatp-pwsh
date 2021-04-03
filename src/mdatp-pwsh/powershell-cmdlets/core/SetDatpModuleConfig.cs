@@ -45,12 +45,13 @@ namespace MdatpPwsh.Cmdlets
                 TenantId = tenantId
             );
 
-            string configContents = JsonSerializer.Serialize<DatpModuleConfig>(configObj);
+            string configContents = JsonSerializer.Serialize<DatpModuleConfig>(configObj); //Serialize the config as a JSON
 
+            //Get the user profile path
             string userProfilePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
-
             DirectoryInfo userProfile = new DirectoryInfo(userProfilePath);
 
+            //Check to see if the settings folder needs to be created or not.
             DirectoryInfo configFolder = null;
             try
             {
@@ -61,8 +62,10 @@ namespace MdatpPwsh.Cmdlets
                 WriteVerbose("Settings folder already exists.");
             }
 
+            //Build the full path to where the config file will be.
             string configFile = Path.Combine(configFolder.FullName, "config.json");
 
+            //Create the config file, if necessary.
             try
             {
                 File.Create(configFile).Close();
@@ -72,10 +75,9 @@ namespace MdatpPwsh.Cmdlets
                 WriteVerbose("Config file already exists.");
             }
 
+            //Write the contents of the config file
             StreamWriter configWriter = new StreamWriter(configFile);
-
             configWriter.Write(configContents);
-
             configWriter.Close();
 
             WriteObject(configObj);
