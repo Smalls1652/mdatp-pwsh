@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Build Module:
+  Build_Module:
     runs-on: windows-latest
 
     steps:
