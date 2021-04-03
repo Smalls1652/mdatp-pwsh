@@ -1,0 +1,33 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Run Weekly Dev Build
+ 
+on:
+  schedule:
+  - cron: "0 0 * * 6"
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Dev Branch
+        uses: actions/checkout@v2.3.4
+        with:
+          ref: development
+        
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1.7.2
+        
+      - name: Run build script
+        uses: Amadevus/pwsh-script@v2.0.1
+        with:
+          script: BuildModule.ps1
+          
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: mdatp-pwsh-dev
+          path: /build/mdatp-pwsh
