@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  Build Module:
     runs-on: windows-latest
 
     steps:
@@ -33,4 +33,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: mdatp-pwsh-dev
-          path: ./build/mdatp-pwsh
+          path: ./build/
